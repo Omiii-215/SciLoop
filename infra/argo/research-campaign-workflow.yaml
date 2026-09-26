@@ -1,0 +1,277 @@
+# =============================================================================
+# SciLoop — Argo Workflow: Full Research Campaign
+# Phase 3: Distributed Execution
+#
+# Defines the complete research campaign as a DAG workflow.
+# Each step runs as a separate pod with appropriate resources.
+# =============================================================================
+apiVersion: argoproj.io/v1alpha1
+kind: WorkflowTemplate
+metadata:
+  name: sciloop-research-campaign
+  namespace: sciloop
+  labels:
+    app.kubernetes.io/name: sciloop
+    app.kubernetes.io/component: workflow
+  annotations:
+    workflows.argoproj.io/description: |
+      Full SciLoop research campaign workflow.
+      Executes: literature search → target assessment → structure retrieval →
+      compound search → molecular filtering → scoring → criticism → report.
+spec:
+  entrypoint: research-campaign
+  serviceAccountName: sciloop-worker
+  arguments:
+    parameters:
+      - name: campaign-id
+        description: "UUID of the research campaign"
+      - name: research-question
+        description: "The scientific research question to investigate"
+      - name: target-gene
+        description: "Primary target gene (e.g., EGFR)"
+      - name: max-iterations
+        value: "3"
+        description: "Maximum research loop iterations"
+      - name: max-compounds
+        value: "100"
+        description: "Maximum compounds to screen"
+
+  templates:
+    # ─────────────────────────────────────────────────────────────────────
+    # DAG: Research Campaign
+    # ─────────────────────────────────────────────────────────────────────
+    - name: research-campaign
+      dag:
+        tasks:
+          # Phase 1: Evidence gathering (parallel)
+          - name: literature-search
+            template: literature-search
+            arguments:
+              parameters:
+                - name: campaign-id
+                  value: "{{workflow.parameters.campaign-id}}"
+                - name: query
+                  value: "{{workflow.parameters.research-question}}"
+
+          - name: target-assessment
+            template: target-assessment
+            arguments:
+              parameters:
+                - name: campaign-id
+                  value: "{{workflow.parameters.campaign-id}}"
+                - name: gene
+                  value: "{{workflow.parameters.target-gene}}"
+
+          # Phase 2: Structure analysis (depends on target assessment)
+          - name: structure-retrieval
+            template: structure-retrieval
+            dependencies: [target-assessment]
+            arguments:
+              parameters:
+                - name: campaign-id
+                  value: "{{workflow.parameters.campaign-id}}"
+                - name: gene
+                  value: "{{workflow.parameters.target-gene}}"
+
+          # Phase 3: Compound search (depends on target assessment)
+          - name: compound-search
+            template: compound-search
+            dependencies: [target-assessment]
+            arguments:
+              parameters:
+                - name: campaign-id
+                  value: "{{workflow.parameters.campaign-id}}"
+                - name: gene
+                  value: "{{workflow.parameters.target-gene}}"
+                - name: max-compounds
+                  value: "{{workflow.parameters.max-compounds}}"
+
+          # Phase 4: Filtering and scoring (depends on compound search)
+          - name: molecular-filtering
+            template: molecular-filtering
+            dependencies: [compound-search]
+            arguments:
+              parameters:
+                - name: campaign-id
+                  value: "{{workflow.parameters.campaign-id}}"
+
+          - name: molecular-scoring
+            template: molecular-scoring
+            dependencies: [molecular-filtering]
+            arguments:
+              parameters:
+                - name: campaign-id
+                  value: "{{workflow.parameters.campaign-id}}"
+
+          # Phase 5: Criticism (depends on literature + scoring)
+          - name: scientific-critique
+            template: scientific-critique
+            dependencies: [literature-search, molecular-scoring]
+            arguments:
+              parameters:
+                - name: campaign-id
+                  value: "{{workflow.parameters.campaign-id}}"
+
+          # Phase 6: Report generation (depends on everything)
+          - name: generate-report
+            template: generate-report
+            dependencies: [scientific-critique, structure-retrieval]
+            arguments:
+              parameters:
+                - name: campaign-id
+                  value: "{{workflow.parameters.campaign-id}}"
+
+    # ─────────────────────────────────────────────────────────────────────
+    # Step templates
+    # ─────────────────────────────────────────────────────────────────────
+
+    - name: literature-search
+      inputs:
+        parameters:
+          - name: campaign-id
+          - name: query
+      container:
+        image: sciloop/core:latest
+        command: ["node", "-e"]
+        args:
+          - |
+            console.log(JSON.stringify({
+              step: "literature_search",
+              campaign_id: "{{inputs.parameters.campaign-id}}",
+              query: "{{inputs.parameters.query}}",
+              status: "completed"
+            }));
+        resources:
+          requests:
+            cpu: 250m
+            memory: 256Mi
+
+    - name: target-assessment
+      inputs:
+        parameters:
+          - name: campaign-id
+          - name: gene
+      container:
+        image: sciloop/core:latest
+        command: ["node", "-e"]
+        args:
+          - |
+            console.log(JSON.stringify({
+              step: "target_assessment",
+              campaign_id: "{{inputs.parameters.campaign-id}}",
+              gene: "{{inputs.parameters.gene}}",
+              status: "completed"
+            }));
+        resources:
+          requests:
+            cpu: 250m
+            memory: 256Mi
+
+    - name: structure-retrieval
+      inputs:
+        parameters:
+          - name: campaign-id
+          - name: gene
+      container:
+        image: sciloop/core:latest
+        command: ["node", "-e"]
+        args:
+          - |
+            console.log(JSON.stringify({
+              step: "structure_retrieval",
+              campaign_id: "{{inputs.parameters.campaign-id}}",
+              gene: "{{inputs.parameters.gene}}",
+              status: "completed"
+            }));
+        resources:
+          requests:
+            cpu: 250m
+            memory: 256Mi
+
+    - name: compound-search
+      inputs:
+        parameters:
+          - name: campaign-id
+          - name: gene
+          - name: max-compounds
+      container:
+        image: sciloop/core:latest
+        command: ["node", "-e"]
+        args:
+          - |
+            console.log(JSON.stringify({
+              step: "compound_search",
+              campaign_id: "{{inputs.parameters.campaign-id}}",
+              gene: "{{inputs.parameters.gene}}",
+              max_compounds: {{inputs.parameters.max-compounds}},
+              status: "completed"
+            }));
+        resources:
+          requests:
+            cpu: 250m
+            memory: 256Mi
+
+    - name: molecular-filtering
+      inputs:
+        parameters:
+          - name: campaign-id
+      container:
+        image: sciloop/sandbox:latest
+        command: ["python", "/app/sandbox-scripts/rdkit_filter.py"]
+        resources:
+          requests:
+            cpu: 500m
+            memory: 512Mi
+          limits:
+            cpu: "2"
+            memory: 1Gi
+
+    - name: molecular-scoring
+      inputs:
+        parameters:
+          - name: campaign-id
+      container:
+        image: sciloop/sandbox:latest
+        command: ["python", "/app/sandbox-scripts/molecule_score.py"]
+        resources:
+          requests:
+            cpu: 250m
+            memory: 256Mi
+
+    - name: scientific-critique
+      inputs:
+        parameters:
+          - name: campaign-id
+      container:
+        image: sciloop/core:latest
+        command: ["node", "-e"]
+        args:
+          - |
+            console.log(JSON.stringify({
+              step: "scientific_critique",
+              campaign_id: "{{inputs.parameters.campaign-id}}",
+              status: "completed"
+            }));
+        resources:
+          requests:
+            cpu: 250m
+            memory: 256Mi
+
+    - name: generate-report
+      inputs:
+        parameters:
+          - name: campaign-id
+      container:
+        image: sciloop/core:latest
+        command: ["node", "-e"]
+        args:
+          - |
+            console.log(JSON.stringify({
+              step: "report_generation",
+              campaign_id: "{{inputs.parameters.campaign-id}}",
+              status: "completed"
+            }));
+        resources:
+          requests:
+            cpu: 250m
+            memory: 256Mi

@@ -1,0 +1,13 @@
+# =============================================================================
+# SciLoop — Kubernetes Namespace
+# =============================================================================
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: sciloop
+  labels:
+    app.kubernetes.io/name: sciloop
+    app.kubernetes.io/part-of: sciloop
+    app.kubernetes.io/managed-by: kubectl
+  annotations:
+    description: "SciLoop autonomous scientific research platform"

@@ -1,0 +1,239 @@
+# =============================================================================
+# SciLoop — Kubernetes Batch Job Templates
+# Used for parallel execution of molecule filtering and scoring
+# =============================================================================
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Batch Molecular Filtering Job
+# Runs rdkit_filter.py on a batch of SMILES in the sandbox container
+# ─────────────────────────────────────────────────────────────────────────────
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: sciloop-filter-batch
+  namespace: sciloop
+  labels:
+    app.kubernetes.io/name: sciloop-filter
+    app.kubernetes.io/component: batch-job
+    app.kubernetes.io/part-of: sciloop
+    sciloop.io/job-type: molecular-filtering
+spec:
+  parallelism: 5         # Up to 5 pods in parallel
+  completions: 5         # Total batches to process
+  backoffLimit: 3        # Retry failed pods up to 3 times
+  ttlSecondsAfterFinished: 3600  # Clean up 1 hour after completion
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: sciloop-filter
+        app.kubernetes.io/component: batch-job
+    spec:
+      serviceAccountName: sciloop-worker
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1001
+        runAsGroup: 1001
+      containers:
+        - name: filter
+          image: sciloop/sandbox:latest
+          command:
+            - python
+            - /app/sandbox-scripts/rdkit_filter.py
+          env:
+            - name: BATCH_INDEX
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.annotations['batch.kubernetes.io/job-completion-index']
+            - name: REDIS_URL
+              valueFrom:
+                secretKeyRef:
+                  name: sciloop-secrets
+                  key: redis-url
+            - name: MINIO_ENDPOINT
+              valueFrom:
+                configMapKeyRef:
+                  name: sciloop-config
+                  key: minio-endpoint
+          resources:
+            requests:
+              cpu: 500m
+              memory: 512Mi
+            limits:
+              cpu: "2"
+              memory: 1Gi
+          volumeMounts:
+            - name: tmp
+              mountPath: /tmp
+      volumes:
+        - name: tmp
+          emptyDir:
+            sizeLimit: 256Mi
+      restartPolicy: OnFailure
+
+---
+# ─────────────────────────────────────────────────────────────────────────────
+# Batch Molecular Scoring Job
+# Runs molecule_score.py on filtered candidates
+# ─────────────────────────────────────────────────────────────────────────────
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: sciloop-score-batch
+  namespace: sciloop
+  labels:
+    app.kubernetes.io/name: sciloop-score
+    app.kubernetes.io/component: batch-job
+    sciloop.io/job-type: molecular-scoring
+spec:
+  parallelism: 3
+  completions: 3
+  backoffLimit: 2
+  ttlSecondsAfterFinished: 3600
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: sciloop-score
+        app.kubernetes.io/component: batch-job
+    spec:
+      serviceAccountName: sciloop-worker
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1001
+      containers:
+        - name: scorer
+          image: sciloop/sandbox:latest
+          command:
+            - python
+            - /app/sandbox-scripts/molecule_score.py
+          env:
+            - name: BATCH_INDEX
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.annotations['batch.kubernetes.io/job-completion-index']
+            - name: REDIS_URL
+              valueFrom:
+                secretKeyRef:
+                  name: sciloop-secrets
+                  key: redis-url
+          resources:
+            requests:
+              cpu: 250m
+              memory: 256Mi
+            limits:
+              cpu: "1"
+              memory: 512Mi
+      restartPolicy: OnFailure
+
+---
+# ─────────────────────────────────────────────────────────────────────────────
+# ConfigMap and Secrets
+# ─────────────────────────────────────────────────────────────────────────────
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sciloop-config
+  namespace: sciloop
+data:
+  minio-endpoint: "sciloop-minio.sciloop.svc.cluster.local"
+  minio-port: "9000"
+  worker-concurrency: "3"
+  max-campaign-iterations: "5"
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: sciloop-secrets
+  namespace: sciloop
+type: Opaque
+stringData:
+  # IMPORTANT: Replace these with real credentials in production
+  redis-url: "redis://sciloop-redis.sciloop.svc.cluster.local:6379"
+  database-url: "postgresql://sciloop:CHANGE_ME@sciloop-postgres.sciloop.svc.cluster.local:5432/sciloop"
+  minio-access-key: "sciloop"
+  minio-secret-key: "CHANGE_ME_IN_PRODUCTION"
+
+---
+# ─────────────────────────────────────────────────────────────────────────────
+# ServiceAccount for workers
+# ─────────────────────────────────────────────────────────────────────────────
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: sciloop-worker
+  namespace: sciloop
+  labels:
+    app.kubernetes.io/component: worker
+
+---
+# ─────────────────────────────────────────────────────────────────────────────
+# RBAC — Workers can only create/watch Jobs in sciloop namespace
+# ─────────────────────────────────────────────────────────────────────────────
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: sciloop-worker-role
+  namespace: sciloop
+rules:
+  - apiGroups: ["batch"]
+    resources: ["jobs"]
+    verbs: ["create", "get", "list", "watch", "delete"]
+  - apiGroups: [""]
+    resources: ["pods", "pods/log"]
+    verbs: ["get", "list", "watch"]
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: sciloop-worker-binding
+  namespace: sciloop
+subjects:
+  - kind: ServiceAccount
+    name: sciloop-worker
+    namespace: sciloop
+roleRef:
+  kind: Role
+  name: sciloop-worker-role
+  apiGroup: rbac.authorization.k8s.io
+
+---
+# ─────────────────────────────────────────────────────────────────────────────
+# NetworkPolicy — Restrict pod communication
+# ─────────────────────────────────────────────────────────────────────────────
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: sciloop-network-policy
+  namespace: sciloop
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/part-of: sciloop
+  policyTypes:
+    - Ingress
+    - Egress
+  ingress:
+    # Allow intra-namespace communication
+    - from:
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/part-of: sciloop
+  egress:
+    # Allow DNS resolution
+    - to: []
+      ports:
+        - port: 53
+          protocol: UDP
+        - port: 53
+          protocol: TCP
+    # Allow HTTPS to external APIs (PubMed, PDB, ChEMBL, UniProt)
+    - to: []
+      ports:
+        - port: 443
+          protocol: TCP
+    # Allow intra-namespace communication
+    - to:
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/part-of: sciloop

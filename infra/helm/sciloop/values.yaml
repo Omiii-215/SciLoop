@@ -1,0 +1,207 @@
+# =============================================================================
+# SciLoop Helm Chart — Default Values
+# Override per-environment via values-dev.yaml, values-staging.yaml, etc.
+# =============================================================================
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Global
+# ─────────────────────────────────────────────────────────────────────────────
+global:
+  imageRegistry: ""
+  imagePullSecrets: []
+  storageClass: ""
+
+namespace: sciloop
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Worker (Task Queue Consumer)
+# ─────────────────────────────────────────────────────────────────────────────
+worker:
+  enabled: true
+  replicaCount: 2
+  image:
+    repository: sciloop/core
+    tag: latest
+    pullPolicy: IfNotPresent
+  command: ["node", "workers/task-queue.js"]
+  env:
+    WORKER_CONCURRENCY: "3"
+  resources:
+    requests:
+      cpu: 250m
+      memory: 256Mi
+    limits:
+      cpu: "1"
+      memory: 512Mi
+  autoscaling:
+    enabled: false
+    minReplicas: 1
+    maxReplicas: 10
+    targetCPUUtilizationPercentage: 70
+
+# ─────────────────────────────────────────────────────────────────────────────
+# MCP Servers
+# ─────────────────────────────────────────────────────────────────────────────
+mcpServers:
+  pubmed:
+    enabled: true
+    image:
+      repository: sciloop/mcp-pubmed
+      tag: latest
+    replicaCount: 1
+    resources:
+      requests:
+        cpu: 100m
+        memory: 128Mi
+      limits:
+        cpu: 500m
+        memory: 256Mi
+
+  protein:
+    enabled: true
+    image:
+      repository: sciloop/mcp-protein
+      tag: latest
+    replicaCount: 1
+    resources:
+      requests:
+        cpu: 100m
+        memory: 128Mi
+      limits:
+        cpu: 500m
+        memory: 256Mi
+
+  chembl:
+    enabled: true
+    image:
+      repository: sciloop/mcp-chembl
+      tag: latest
+    replicaCount: 1
+    resources:
+      requests:
+        cpu: 100m
+        memory: 128Mi
+      limits:
+        cpu: 500m
+        memory: 256Mi
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Sandbox (Scientific Python Environment)
+# ─────────────────────────────────────────────────────────────────────────────
+sandbox:
+  enabled: true
+  image:
+    repository: sciloop/sandbox
+    tag: latest
+  resources:
+    requests:
+      cpu: 500m
+      memory: 512Mi
+    limits:
+      cpu: "2"
+      memory: 1Gi
+  securityContext:
+    readOnlyRootFilesystem: true
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop: ["ALL"]
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Batch Jobs (Argo Workflows)
+# ─────────────────────────────────────────────────────────────────────────────
+batchJobs:
+  filtering:
+    parallelism: 5
+    completions: 5
+    backoffLimit: 3
+    ttlSecondsAfterFinished: 3600
+    resources:
+      requests:
+        cpu: 500m
+        memory: 512Mi
+      limits:
+        cpu: "2"
+        memory: 1Gi
+
+  scoring:
+    parallelism: 3
+    completions: 3
+    backoffLimit: 2
+    ttlSecondsAfterFinished: 3600
+    resources:
+      requests:
+        cpu: 250m
+        memory: 256Mi
+      limits:
+        cpu: "1"
+        memory: 512Mi
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Campaign Policy Defaults
+# ─────────────────────────────────────────────────────────────────────────────
+campaignDefaults:
+  maxIterations: 5
+  maxLiteratureQueries: 50
+  maxDatabaseQueries: 100
+  maxSandboxExecutions: 20
+  maxDurationSeconds: 3600
+  confidenceThreshold: 0.9
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Security
+# ─────────────────────────────────────────────────────────────────────────────
+security:
+  podSecurityContext:
+    runAsNonRoot: true
+    runAsUser: 1001
+    runAsGroup: 1001
+    fsGroup: 1001
+  networkPolicy:
+    enabled: true
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Observability
+# ─────────────────────────────────────────────────────────────────────────────
+observability:
+  prometheus:
+    enabled: true
+    scrapeInterval: 30s
+  grafana:
+    enabled: true
+    dashboards: true
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Dependencies (Bitnami sub-charts)
+# ─────────────────────────────────────────────────────────────────────────────
+postgresql:
+  enabled: true
+  auth:
+    database: sciloop
+    username: sciloop
+    existingSecret: sciloop-db-secret
+  primary:
+    persistence:
+      size: 10Gi
+    initdb:
+      scriptsConfigMap: sciloop-initdb
+
+redis:
+  enabled: true
+  architecture: standalone
+  auth:
+    enabled: false
+  master:
+    persistence:
+      size: 2Gi
+    resources:
+      requests:
+        cpu: 100m
+        memory: 128Mi
+
+minio:
+  enabled: true
+  auth:
+    existingSecret: sciloop-minio-secret
+  defaultBuckets: "structures,molecules,reports,logs,artifacts"
+  persistence:
+    size: 20Gi

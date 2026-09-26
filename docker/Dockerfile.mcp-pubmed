@@ -1,0 +1,35 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# SciLoop — PubMed MCP Server Dockerfile
+# Lightweight Node.js container wrapping PubMed E-utilities API
+# ─────────────────────────────────────────────────────────────────────────────
+FROM node:22-alpine AS builder
+
+WORKDIR /app
+
+# Copy package files and install dependencies
+COPY mcp-servers/pubmed-server/package.json mcp-servers/pubmed-server/package-lock.json ./
+RUN npm ci --production
+
+# Copy application code
+COPY mcp-servers/pubmed-server/index.js ./
+
+# ─────────────────────────────────────────────────────────────────────────────
+FROM node:22-alpine
+
+LABEL org.opencontainers.image.title="sciloop-pubmed-mcp"
+LABEL org.opencontainers.image.description="MCP server wrapping PubMed E-utilities for SciLoop"
+LABEL org.opencontainers.image.version="1.0.0"
+
+# Run as non-root user for security
+RUN addgroup -g 1001 sciloop && adduser -u 1001 -G sciloop -s /bin/sh -D sciloop
+
+WORKDIR /app
+COPY --from=builder --chown=sciloop:sciloop /app /app
+
+USER sciloop
+
+# Health check — MCP servers use stdio, but we can check the process
+HEALTHCHECK --interval=30s --timeout=5s --retries=3 \
+  CMD pgrep -f "node index.js" || exit 1
+
+ENTRYPOINT ["node", "index.js"]

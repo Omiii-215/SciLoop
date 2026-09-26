@@ -1,0 +1,50 @@
+{{- if .Values.worker.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "sciloop.fullname" . }}-worker
+  namespace: {{ .Values.namespace }}
+  labels:
+    {{- include "sciloop.labels" . | nindent 4 }}
+    app.kubernetes.io/component: worker
+spec:
+  replicas: {{ .Values.worker.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "sciloop.selectorLabels" . | nindent 6 }}
+      app.kubernetes.io/component: worker
+  template:
+    metadata:
+      labels:
+        {{- include "sciloop.selectorLabels" . | nindent 8 }}
+        app.kubernetes.io/component: worker
+    spec:
+      securityContext:
+        {{- include "sciloop.podSecurityContext" . | nindent 8 }}
+      containers:
+        - name: worker
+          image: "{{ .Values.worker.image.repository }}:{{ .Values.worker.image.tag }}"
+          imagePullPolicy: {{ .Values.worker.image.pullPolicy }}
+          command: {{ toJson .Values.worker.command }}
+          env:
+            - name: REDIS_URL
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "sciloop.fullname" . }}-secrets
+                  key: redis-url
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "sciloop.fullname" . }}-secrets
+                  key: database-url
+            - name: WORKER_CONCURRENCY
+              value: {{ .Values.worker.env.WORKER_CONCURRENCY | quote }}
+          resources:
+            {{- toYaml .Values.worker.resources | nindent 12 }}
+          livenessProbe:
+            exec:
+              command: ["pgrep", "-f", "task-queue"]
+            initialDelaySeconds: 10
+            periodSeconds: 30
+      restartPolicy: Always
+{{- end }}
