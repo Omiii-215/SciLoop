@@ -22,8 +22,135 @@
     selectedModel: localStorage.getItem("sciloop_model") || "gpt-4o",
     apiKey: localStorage.getItem("sciloop_api_key") || "",
     isProcessing: false,
-    chartInstances: {}
+    chartInstances: {},
+    isPro: false
   };
+
+  // MCP Client Configurations for One-Click Setup
+  const MCP_CLIENT_CONFIGS = {
+    claude: {
+      path: "~/Library/Application Support/Claude/claude_desktop_config.json",
+      code: `{\n  "mcpServers": {\n    "sciloop": {\n      "command": "npx",\n      "args": ["-y", "@sciloop/mcp-server@latest"],\n      "env": {\n        "SCILOOP_API_KEY": "sl_live_7a9f82c401e92d83b9e",\n        "SCILOOP_ENDPOINT": "https://api.scite.ai/mcp"\n      }\n    }\n  }\n}`
+    },
+    cursor: {
+      path: ".cursor/mcp.json",
+      code: `{\n  "mcpServers": {\n    "sciloop-research": {\n      "url": "https://api.scite.ai/mcp",\n      "headers": {\n        "Authorization": "Bearer sl_live_7a9f82c401e92d83b9e"\n      }\n    }\n  }\n}`
+    },
+    chatgpt: {
+      path: "Custom GPT > Actions > Schema Import",
+      code: `openapi: 3.1.0\ninfo:\n  title: SciLoop Literature & Smart Citations MCP\n  version: 2.4.0\nservers:\n  - url: https://api.scite.ai/mcp\npaths:\n  /tools/search_literature:\n    post:\n      summary: Query Europe PMC, Crossref, and arXiv\n      operationId: searchLiterature`
+    },
+    vscode: {
+      path: "~/.continue/config.json",
+      code: `{\n  "experimental": {\n    "modelContextProtocolServers": [\n      {\n        "transport": {\n          "type": "stdio",\n          "command": "npx",\n          "args": ["-y", "@sciloop/mcp-server@latest"]\n        }\n      }\n    ]\n  }\n}`
+    }
+  };
+
+  // Scholarly Activity & Literature Feed Data
+  const FEED_DATA = [
+    {
+      id: "feed-1",
+      source: "europepmc",
+      sourceLabel: "Europe PMC",
+      title: "Single-cell spatial multi-omics resolves immune escape trajectories in small cell lung carcinoma",
+      authors: "Zhang L., Habib O., Rostova E. et al.",
+      journal: "Nature Cancer (2026)",
+      doi: "10.1038/s43018-026-00892-x",
+      timestamp: "3 minutes ago",
+      supporting: 48,
+      mentioning: 14,
+      contrasting: 2,
+      raw: {
+        source: "Europe PMC / EBI",
+        pmcid: "PMC10928374",
+        pmid: "39018420",
+        doi: "10.1038/s43018-026-00892-x",
+        openAccess: true,
+        smart_citations: { supporting: 48, mentioning: 14, contrasting: 2 },
+        mesh_terms: ["Small Cell Lung Carcinoma", "Single-Cell Analysis", "Immune Checkpoint", "Spatial Transcriptomics"]
+      }
+    },
+    {
+      id: "feed-2",
+      source: "crossref",
+      sourceLabel: "Crossref Citations",
+      title: "Crossref Event Data: 38 new citation linkages verified for CRISPR-Cas12f mini-endonuclease engineering",
+      authors: "Crossref Citation Graph Network",
+      journal: "Cell Stem Cell • DOI Citation Graph",
+      doi: "10.1016/j.stem.2025.12.004",
+      timestamp: "18 minutes ago",
+      supporting: 92,
+      mentioning: 31,
+      contrasting: 5,
+      raw: {
+        source: "Crossref Event Data API",
+        prefix: "10.1016",
+        citations_ingested: 38,
+        relation_type: "cites",
+        license: "http://creativecommons.org/licenses/by/4.0/",
+        indexed_at: "2026-09-26T12:44:00Z"
+      }
+    },
+    {
+      id: "feed-3",
+      source: "arxiv",
+      sourceLabel: "arXiv Preprint",
+      title: "Non-Abelian Anyon Braiding Dynamics in Twisted Moiré Transition Metal Dichalcogenides",
+      authors: "Venkataraman K., Chen M., Rostova E.",
+      journal: "arXiv:2603.18920 [cond-mat.mes-hall]",
+      doi: "10.48550/arXiv.2603.18920",
+      timestamp: "42 minutes ago",
+      supporting: 19,
+      mentioning: 8,
+      contrasting: 0,
+      raw: {
+        arxiv_id: "2603.18920v1",
+        primary_category: "cond-mat.mes-hall",
+        comments: "18 pages, 8 figures, accepted to Phys. Rev. B",
+        smart_citations: { supporting: 19, mentioning: 8, contrasting: 0 }
+      }
+    },
+    {
+      id: "feed-4",
+      source: "europepmc",
+      sourceLabel: "PubMed / NIH",
+      title: "Phase 3 double-blind evaluation of allosteric KRAS G12D inhibitor combined with PD-1 blockade in refractory adenocarcinoma",
+      authors: "Habib O., Miller K. J., Thorne A.",
+      journal: "The Lancet Oncology (2026)",
+      doi: "10.1016/S1470-2045(26)00119-4",
+      timestamp: "1 hour ago",
+      supporting: 64,
+      mentioning: 20,
+      contrasting: 4,
+      raw: {
+        source: "PubMed Central (PMC)",
+        pmid: "39201948",
+        clinical_trial: "NCT06214589",
+        phase: "Phase III",
+        smart_citations: { supporting: 64, mentioning: 20, contrasting: 4 }
+      }
+    },
+    {
+      id: "feed-5",
+      source: "synthesis",
+      sourceLabel: "SciLoop AI Synthesis",
+      title: "Autonomous Evidence Synthesis Dossier compiled: 'Kerr Black Hole Photon Sphere Frame-Dragging Precession'",
+      authors: "Synthesized by GPT-4o • Verified against 14 arXiv preprints",
+      journal: "SciLoop Research Dossier #SL-SYN-2026-84",
+      doi: "10.5281/zenodo.10829104",
+      timestamp: "2 hours ago",
+      supporting: 35,
+      mentioning: 11,
+      contrasting: 1,
+      raw: {
+        synthesis_id: "syn_kerr_precession_84",
+        status: "complete",
+        papers_triangulated: 14,
+        confidence_score: 0.984,
+        export_formats: ["PDF", "BibTeX", "JSON-LD"]
+      }
+    }
+  ];
 
   // Initialize Mermaid
   if (window.mermaid) {
@@ -258,6 +385,12 @@
       if (res.ok) {
         const data = await res.json();
         state.chats.unshift(data.chat);
+        const list = document.getElementById("chatHistoryList");
+        const chevron = document.querySelector("#btnToggleRecent .recent-chevron");
+        if (list && list.style.display === "none") {
+          list.style.display = "flex";
+          if (chevron) chevron.classList.remove("collapsed");
+        }
         renderChatHistoryList();
         await openChat(data.chat.id);
         document.getElementById("txtQuery").focus();
@@ -530,17 +663,50 @@
     tryRender();
   }
 
+  function autoWrapLatex(text) {
+    if (!text) return "";
+    const lines = text.split("\n");
+    let inCodeBlock = false;
+
+    const processed = lines.map(line => {
+      const trimmed = line.trim();
+      if (trimmed.startsWith("```")) {
+        inCodeBlock = !inCodeBlock;
+        return line;
+      }
+      if (inCodeBlock) return line;
+
+      // If line contains LaTeX commands like \frac, \exp, \sum, \int, \sqrt, \alpha, \beta, \gamma, \partial, etc.
+      // and isn't already wrapped in $ or $$
+      if (!trimmed.includes("$") && /\\[a-zA-Z]{2,}/.test(trimmed)) {
+        // If it's a bullet item like "- **HR**: HR = \frac{...}"
+        const bulletMatch = line.match(/^(\s*(?:[-*]|\d+\.)\s+(?:\*\*[^*]+\*\*:\s*)?)(.*)$/);
+        if (bulletMatch && /\\[a-zA-Z]{2,}/.test(bulletMatch[2])) {
+          return `${bulletMatch[1]}$$${bulletMatch[2].trim()}$$`;
+        }
+        // If it's a standalone equation line like "  HR = \frac{...}"
+        if (!trimmed.startsWith("#") && !trimmed.startsWith(">") && !trimmed.startsWith("|")) {
+          const indent = line.match(/^\s*/)[0];
+          return `${indent}$$${trimmed}$$`;
+        }
+      }
+      return line;
+    });
+
+    return processed.join("\n");
+  }
+
   function parseSpecialBlocks(text) {
     const mermaidBlocks = [];
     const chartBlocks = [];
 
-    // Extract ```mermaid ... ``` (case-insensitive, handles whitespace)
+    // 1. Extract ```mermaid ... ``` (case-insensitive, handles whitespace)
     let clean = text.replace(/```(?:mermaid)\s*([\s\S]*?)```/gi, (_, code) => {
       mermaidBlocks.push(code.trim());
       return "";
     });
 
-    // Extract ```chart ... ``` (handles json:chart as well)
+    // 2. Extract ```chart ... ``` (handles json:chart as well)
     clean = clean.replace(/```(?:chart|json:chart)\s*([\s\S]*?)```/gi, (_, jsonStr) => {
       try {
         const parsedJson = JSON.parse(jsonStr.trim());
@@ -551,11 +717,35 @@
       }
     });
 
+    // 3. Fallback: If no explicit mermaid block, check for arrow chains like A -> B -> C -> D
+    if (mermaidBlocks.length === 0) {
+      const lines = clean.split("\n");
+      for (const line of lines) {
+        const trimmed = line.trim();
+        if ((trimmed.match(/->|-->/g) || []).length >= 2 && !trimmed.startsWith("```") && !trimmed.startsWith("#")) {
+          const rawParts = trimmed.replace(/^[-*]\s*(?:\*\*[^*]+\*\*:\s*)?/, "").split(/->|-->/).map(s => s.trim()).filter(Boolean);
+          if (rawParts.length >= 3) {
+            let mCode = "graph TD\n";
+            for (let i = 0; i < rawParts.length - 1; i++) {
+              const from = rawParts[i].replace(/[\[\]\(\)]/g, "");
+              const to = rawParts[i + 1].replace(/[\[\]\(\)]/g, "");
+              mCode += `  N${i}["${from}"] --> N${i + 1}["${to}"]\n`;
+            }
+            mermaidBlocks.push(mCode.trim());
+            break;
+          }
+        }
+      }
+    }
+
     return { cleanMarkdown: clean.trim(), mermaidBlocks, chartBlocks };
   }
 
   function renderMarkdown(md) {
     if (!md) return "";
+    
+    // Auto-wrap any un-delimited LaTeX lines to guarantee KaTeX rendering
+    md = autoWrapLatex(md);
     
     // 1. Extract display math ($$...$$ and \[...\]) to protect from markdown parsers
     const displayMath = [];
@@ -811,18 +1001,38 @@
     // Toggle Sidebar
     const sb = document.getElementById("sidebar");
     const btnToggleSidebar = document.getElementById("btnToggleSidebar");
+    const brandMark = document.getElementById("brandMark");
+    const sidebarHeader = document.querySelector(".sidebar-header");
+
     if (btnToggleSidebar) {
       btnToggleSidebar.addEventListener("click", (e) => {
         e.stopPropagation();
-        if (sb) sb.classList.toggle("collapsed");
+        if (sb) {
+          const isCollapsed = sb.classList.toggle("collapsed");
+          btnToggleSidebar.setAttribute("title", isCollapsed ? "Expand Sidebar" : "Collapse Sidebar");
+        }
       });
     }
 
-    const sidebarTop = document.querySelector(".sidebar-top-scite");
-    if (sidebarTop) {
-      sidebarTop.addEventListener("click", () => {
+    if (brandMark) {
+      brandMark.addEventListener("click", (e) => {
+        if (sb && sb.classList.contains("collapsed")) {
+          e.stopPropagation();
+          sb.classList.remove("collapsed");
+          if (btnToggleSidebar) btnToggleSidebar.setAttribute("title", "Collapse Sidebar");
+        } else {
+          // In expanded mode, clicking logo starts fresh research session
+          const btnNewChat = document.getElementById("btnNewChat");
+          if (btnNewChat) btnNewChat.click();
+        }
+      });
+    }
+
+    if (sidebarHeader) {
+      sidebarHeader.addEventListener("click", (e) => {
         if (sb && sb.classList.contains("collapsed")) {
           sb.classList.remove("collapsed");
+          if (btnToggleSidebar) btnToggleSidebar.setAttribute("title", "Collapse Sidebar");
         }
       });
     }
@@ -851,19 +1061,72 @@
       });
     }
 
-    // Nav Item Clicks
+    // -----------------------------------------------------------------------
+    // VIEW SWITCHER & APP ROUTING
+    // -----------------------------------------------------------------------
+    function switchView(viewName) {
+      document.querySelectorAll(".app-view").forEach(v => v.classList.remove("active"));
+      document.querySelectorAll(".sidebar-nav .nav-item, .sidebar-footer-nav .nav-item").forEach(n => n.classList.remove("active"));
+
+      const chatControls = document.getElementById("sidebarChatControls");
+      const targetView = document.getElementById({
+        assistant: "viewAssistant",
+        mcp: "viewMcpDashboard",
+        feed: "viewFeed",
+        help: "viewHelpFeedback"
+      }[viewName] || "viewAssistant");
+
+      if (targetView) targetView.classList.add("active");
+
+      if (viewName === "assistant") {
+        const btn = document.getElementById("navAssistant");
+        if (btn) btn.classList.add("active");
+        if (chatControls) chatControls.style.display = "flex";
+        setTimeout(() => {
+          const inp = document.getElementById("txtQuery");
+          if (inp) inp.focus();
+        }, 50);
+      } else {
+        if (chatControls) chatControls.style.display = "none";
+        if (viewName === "mcp") {
+          const btn = document.getElementById("navMcp");
+          if (btn) btn.classList.add("active");
+        } else if (viewName === "feed") {
+          const btn = document.getElementById("navFeed");
+          if (btn) btn.classList.add("active");
+          renderFeedItems();
+        } else if (viewName === "help") {
+          const btn = document.getElementById("btnOpenHelpFeedback");
+          if (btn) btn.classList.add("active");
+        }
+      }
+    }
+    window.switchView = switchView;
+
+    // Toast Notification Helper
+    function showToast(message, duration = 3000) {
+      const toast = document.getElementById("toastNotification");
+      const msgEl = document.getElementById("toastMessage");
+      if (!toast || !msgEl) return;
+      msgEl.textContent = message;
+      toast.classList.remove("hidden");
+      clearTimeout(toast._timeout);
+      toast._timeout = setTimeout(() => {
+        toast.classList.add("hidden");
+      }, duration);
+    }
+    window.showToast = showToast;
+
+    // Sidebar Nav Item Clicks
     const navAssistant = document.getElementById("navAssistant");
     if (navAssistant) {
-      navAssistant.addEventListener("click", () => {
-        document.querySelectorAll(".sidebar-nav .nav-item").forEach(n => n.classList.remove("active"));
-        navAssistant.classList.add("active");
-        document.getElementById("txtQuery").focus();
-      });
+      navAssistant.addEventListener("click", () => switchView("assistant"));
     }
 
     const navSearch = document.getElementById("navSearch");
     if (navSearch) {
       navSearch.addEventListener("click", () => {
+        switchView("assistant");
         document.getElementById("txtQuery").focus();
       });
     }
@@ -877,28 +1140,453 @@
 
     const navMcp = document.getElementById("navMcp");
     if (navMcp) {
-      navMcp.addEventListener("click", () => {
-        document.getElementById("modalSettings").classList.remove("hidden");
-      });
+      navMcp.addEventListener("click", () => switchView("mcp"));
     }
 
     const navApi = document.getElementById("navApi");
     if (navApi) {
       navApi.addEventListener("click", () => {
-        document.getElementById("modalSettings").classList.remove("hidden");
+        switchView("mcp");
+        const modal = document.getElementById("modalMcpUpgrade");
+        if (modal) modal.classList.remove("hidden");
       });
     }
 
     const navFeed = document.getElementById("navFeed");
     if (navFeed) {
-      navFeed.addEventListener("click", () => {
-        const banner = document.getElementById("statusBanner");
-        const statusText = document.getElementById("statusText");
-        banner.classList.remove("hidden");
-        statusText.textContent = "Live scholarly literature feed: 40M+ Europe PMC, 150M+ Crossref, arXiv active.";
-        setTimeout(() => banner.classList.add("hidden"), 4000);
+      navFeed.addEventListener("click", () => switchView("feed"));
+    }
+
+    const btnOpenHelpFeedback = document.getElementById("btnOpenHelpFeedback");
+    if (btnOpenHelpFeedback) {
+      btnOpenHelpFeedback.addEventListener("click", () => switchView("help"));
+    }
+
+    // -----------------------------------------------------------------------
+    // MCP DASHBOARD INTERACTIVE HANDLERS (Matching Scite.ai Image 2 & 3)
+    // -----------------------------------------------------------------------
+    const btnCopyMcpUrl = document.getElementById("btnCopyMcpUrl");
+    if (btnCopyMcpUrl) {
+      btnCopyMcpUrl.addEventListener("click", () => {
+        const urlEl = document.getElementById("lblMcpServerUrl");
+        const url = urlEl ? urlEl.textContent.trim() : "https://api.scite.ai/mcp";
+        navigator.clipboard.writeText(url).then(() => {
+          showToast("MCP Server URL copied to clipboard: " + url);
+          btnCopyMcpUrl.innerHTML = `
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+          `;
+          setTimeout(() => {
+            btnCopyMcpUrl.innerHTML = `
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+              </svg>
+            `;
+          }, 2000);
+        });
       });
     }
+
+    // Add Connection Modal
+    const btnAddConnection = document.getElementById("btnAddConnection");
+    const modalMcpConnection = document.getElementById("modalMcpConnection");
+    const btnCloseMcpConnModal = document.getElementById("btnCloseMcpConnModal");
+    const btnCancelMcpConn = document.getElementById("btnCancelMcpConn");
+
+    if (btnAddConnection && modalMcpConnection) {
+      btnAddConnection.addEventListener("click", () => {
+        modalMcpConnection.classList.remove("hidden");
+      });
+    }
+    if (btnCloseMcpConnModal && modalMcpConnection) {
+      btnCloseMcpConnModal.addEventListener("click", () => modalMcpConnection.classList.add("hidden"));
+    }
+    if (btnCancelMcpConn && modalMcpConnection) {
+      btnCancelMcpConn.addEventListener("click", () => modalMcpConnection.classList.add("hidden"));
+    }
+
+    // Client Config Tabs
+    const clientTabs = document.querySelectorAll(".client-tab");
+    clientTabs.forEach(tab => {
+      tab.addEventListener("click", () => {
+        clientTabs.forEach(t => t.classList.remove("active"));
+        tab.classList.add("active");
+        const clientKey = tab.dataset.client;
+        const cfg = MCP_CLIENT_CONFIGS[clientKey];
+        if (cfg) {
+          const pathEl = document.getElementById("lblConfigFilepath");
+          const codeEl = document.getElementById("codeMcpConfig");
+          if (pathEl) pathEl.textContent = cfg.path;
+          if (codeEl) codeEl.textContent = cfg.code;
+        }
+      });
+    });
+
+    const btnCopyMcpConfig = document.getElementById("btnCopyMcpConfig");
+    if (btnCopyMcpConfig) {
+      btnCopyMcpConfig.addEventListener("click", () => {
+        const codeEl = document.getElementById("codeMcpConfig");
+        if (codeEl) {
+          navigator.clipboard.writeText(codeEl.textContent).then(() => {
+            showToast("MCP client configuration copied to clipboard!");
+          });
+        }
+      });
+    }
+
+    const btnTestMcpConnection = document.getElementById("btnTestMcpConnection");
+    if (btnTestMcpConnection) {
+      btnTestMcpConnection.addEventListener("click", () => {
+        const activeTab = document.querySelector(".client-tab.active");
+        const clientName = activeTab ? activeTab.textContent : "Claude Desktop";
+        const bodyEl = document.getElementById("mcpConnectedClientsBody");
+        if (bodyEl) {
+          bodyEl.innerHTML = `
+            <div class="client-badge-row">
+              <div class="client-badge-left">
+                <span class="client-status-indicator"></span>
+                <div>
+                  <div class="client-badge-name">${escapeHtml(clientName)}</div>
+                  <div class="client-badge-meta">Connected via stdio • 4 tools live • Active</div>
+                </div>
+              </div>
+              <button class="btn-chat-delete" id="btnDisconnectClient" title="Disconnect Client">&times;</button>
+            </div>
+            <p class="mcp-text-muted" style="margin-top: 10px; font-size: 12.5px;">Ready to receive queries from ${escapeHtml(clientName)}.</p>
+          `;
+          const disc = document.getElementById("btnDisconnectClient");
+          if (disc) {
+            disc.addEventListener("click", () => {
+              bodyEl.innerHTML = `
+                <p class="mcp-text-strong">You haven't connected any AI tools yet.</p>
+                <p class="mcp-text-muted">Add Scite to ChatGPT, Claude, or any MCP-compatible tool to get started.</p>
+              `;
+              showToast("MCP client disconnected.");
+            });
+          }
+        }
+        if (modalMcpConnection) modalMcpConnection.classList.add("hidden");
+        showToast(`Connected to ${clientName}! 4 tools discovered.`);
+
+        // Increment stats
+        const sessEl = document.getElementById("metricTotalSessions");
+        if (sessEl) sessEl.textContent = "1";
+        const callEl = document.getElementById("metricTotalToolCalls");
+        if (callEl) callEl.textContent = "4";
+        const paperEl = document.getElementById("metricTotalPapersRead");
+        if (paperEl) paperEl.textContent = "12";
+        const avgEl = document.getElementById("metricAvgToolCalls");
+        if (avgEl) avgEl.textContent = "4.0";
+        const usageBar = document.getElementById("mcpUsageBar");
+        if (usageBar) usageBar.style.width = "16%";
+        const usageCount = document.getElementById("lblMcpUsageCount");
+        if (usageCount) usageCount.textContent = "4 of 25 MCP tool uses this month";
+      });
+    }
+
+    // Upgrade to Pro Modal
+    const btnMcpUpgradePro = document.getElementById("btnMcpUpgradePro");
+    const btnMcpComparePlans = document.getElementById("btnMcpComparePlans");
+    const modalMcpUpgrade = document.getElementById("modalMcpUpgrade");
+    const btnCloseUpgradeModal = document.getElementById("btnCloseUpgradeModal");
+    const btnConfirmUpgradePro = document.getElementById("btnConfirmUpgradePro");
+
+    function openUpgradeModal() {
+      if (modalMcpUpgrade) modalMcpUpgrade.classList.remove("hidden");
+    }
+    if (btnMcpUpgradePro) btnMcpUpgradePro.addEventListener("click", openUpgradeModal);
+    if (btnMcpComparePlans) btnMcpComparePlans.addEventListener("click", openUpgradeModal);
+    if (btnCloseUpgradeModal && modalMcpUpgrade) {
+      btnCloseUpgradeModal.addEventListener("click", () => modalMcpUpgrade.classList.add("hidden"));
+    }
+    if (btnConfirmUpgradePro) {
+      btnConfirmUpgradePro.addEventListener("click", () => {
+        state.isPro = true;
+        const usageCount = document.getElementById("lblMcpUsageCount");
+        if (usageCount) usageCount.textContent = "Unlimited Pro MCP tool calls active";
+        const usageBar = document.getElementById("mcpUsageBar");
+        if (usageBar) {
+          usageBar.style.width = "100%";
+          usageBar.style.background = "#10B981";
+        }
+        if (modalMcpUpgrade) modalMcpUpgrade.classList.add("hidden");
+        showToast("🎉 Upgraded to Researcher Pro! Unlimited MCP throughput enabled.");
+      });
+    }
+
+    // Documentation Modal
+    const btnMcpDocLink = document.getElementById("btnMcpDocLink");
+    const modalMcpDoc = document.getElementById("modalMcpDoc");
+    const btnCloseMcpDocModal = document.getElementById("btnCloseMcpDocModal");
+
+    if (btnMcpDocLink && modalMcpDoc) {
+      btnMcpDocLink.addEventListener("click", () => modalMcpDoc.classList.remove("hidden"));
+    }
+    if (btnCloseMcpDocModal && modalMcpDoc) {
+      btnCloseMcpDocModal.addEventListener("click", () => modalMcpDoc.classList.add("hidden"));
+    }
+
+    // Manage Overage Modal
+    const btnManageOverage = document.getElementById("btnManageOverage");
+    const modalManageOverage = document.getElementById("modalManageOverage");
+    const btnCloseOverageModal = document.getElementById("btnCloseOverageModal");
+    const btnSaveOverage = document.getElementById("btnSaveOverage");
+
+    if (btnManageOverage && modalManageOverage) {
+      btnManageOverage.addEventListener("click", () => modalManageOverage.classList.remove("hidden"));
+    }
+    if (btnCloseOverageModal && modalManageOverage) {
+      btnCloseOverageModal.addEventListener("click", () => modalManageOverage.classList.add("hidden"));
+    }
+    if (btnSaveOverage && modalManageOverage) {
+      btnSaveOverage.addEventListener("click", () => {
+        modalManageOverage.classList.add("hidden");
+        showToast("Overage preferences saved.");
+      });
+    }
+
+    // -----------------------------------------------------------------------
+    // RAW FEED SECTION INTERACTION
+    // -----------------------------------------------------------------------
+    let currentFeedFilter = "all";
+    let feedItems = [...FEED_DATA];
+    let isRawJsonMode = false;
+
+    function renderFeedItems() {
+      const container = document.getElementById("feedStreamContainer");
+      if (!container) return;
+
+      const q = (document.getElementById("txtFeedSearch")?.value || "").toLowerCase().trim();
+
+      let items = feedItems.filter(item => {
+        if (currentFeedFilter !== "all" && item.source !== currentFeedFilter) return false;
+        if (q) {
+          const hay = `${item.title} ${item.authors} ${item.journal} ${item.doi}`.toLowerCase();
+          if (!hay.includes(q)) return false;
+        }
+        return true;
+      });
+
+      if (items.length === 0) {
+        container.innerHTML = `
+          <div style="background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 10px; padding: 32px; text-align: center; color: #64748B;">
+            <p style="font-size: 14px; font-weight: 500;">No feed events match your current filter.</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = items.map(item => `
+        <div class="feed-card" data-id="${item.id}">
+          <div class="feed-card-header">
+            <div class="feed-badge-group">
+              <span class="feed-source-badge ${item.source}">${escapeHtml(item.sourceLabel)}</span>
+              <span class="feed-timestamp">${escapeHtml(item.timestamp)}</span>
+            </div>
+            <a href="https://doi.org/${encodeURIComponent(item.doi)}" target="_blank" rel="noopener" class="mcp-link" style="font-family: var(--font-mono); font-size: 11px;">
+              doi:${escapeHtml(item.doi)}
+            </a>
+          </div>
+
+          <h3 class="feed-card-title">${escapeHtml(item.title)}</h3>
+          
+          <div class="feed-card-meta">
+            <span><strong>Authors:</strong> ${escapeHtml(item.authors)}</span>
+            <span>•</span>
+            <span><strong>Journal:</strong> ${escapeHtml(item.journal)}</span>
+          </div>
+
+          <div class="feed-smart-citations-row">
+            <span>Smart Citations:</span>
+            <span class="scite-badge-pill scite-supporting">${item.supporting} supporting</span>
+            <span class="scite-badge-pill scite-mentioning">${item.mentioning} mentioning</span>
+            <span class="scite-badge-pill scite-contrasting">${item.contrasting} contrasting</span>
+          </div>
+
+          <div class="feed-card-actions">
+            <button class="feed-btn-small btn-toggle-card-json" data-id="${item.id}">
+              { } View Raw JSON
+            </button>
+            <button class="feed-btn-small primary btn-feed-analyze" data-title="${escapeHtml(item.title)}" data-doi="${escapeHtml(item.doi)}">
+              Analyze in Assistant &rarr;
+            </button>
+          </div>
+
+          <div class="feed-raw-json-box ${isRawJsonMode ? "" : "hidden"}" id="rawJson_${item.id}">
+${escapeHtml(JSON.stringify(item.raw, null, 2))}
+          </div>
+        </div>
+      `).join("");
+
+      // Add click handlers for cards
+      container.querySelectorAll(".btn-toggle-card-json").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const jsonBox = document.getElementById(`rawJson_${btn.dataset.id}`);
+          if (jsonBox) jsonBox.classList.toggle("hidden");
+        });
+      });
+
+      container.querySelectorAll(".btn-feed-analyze").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const title = btn.dataset.title;
+          const doi = btn.dataset.doi;
+          switchView("assistant");
+          const query = `Analyze empirical consensus and smart citations for DOI ${doi}: "${title}"`;
+          const inp = document.getElementById("txtQuery");
+          if (inp) {
+            inp.value = query;
+            inp.focus();
+          }
+        });
+      });
+    }
+
+    // Filter pills
+    document.querySelectorAll(".feed-pill").forEach(pill => {
+      pill.addEventListener("click", () => {
+        document.querySelectorAll(".feed-pill").forEach(p => p.classList.remove("active"));
+        pill.classList.add("active");
+        currentFeedFilter = pill.dataset.filter;
+        renderFeedItems();
+      });
+    });
+
+    const txtFeedSearch = document.getElementById("txtFeedSearch");
+    if (txtFeedSearch) {
+      txtFeedSearch.addEventListener("input", () => renderFeedItems());
+    }
+
+    const btnToggleRawJson = document.getElementById("btnToggleRawJson");
+    if (btnToggleRawJson) {
+      btnToggleRawJson.addEventListener("click", () => {
+        isRawJsonMode = !isRawJsonMode;
+        btnToggleRawJson.textContent = isRawJsonMode ? "Hide Raw JSON" : "Toggle Raw JSON";
+        document.querySelectorAll(".feed-raw-json-box").forEach(el => {
+          if (isRawJsonMode) el.classList.remove("hidden");
+          else el.classList.add("hidden");
+        });
+      });
+    }
+
+    const btnRefreshFeed = document.getElementById("btnRefreshFeed");
+    if (btnRefreshFeed) {
+      btnRefreshFeed.addEventListener("click", () => {
+        renderFeedItems();
+        showToast("Literature feed refreshed from Europe PMC & Crossref.");
+      });
+    }
+
+    const btnSimulateFeed = document.getElementById("btnSimulateFeed");
+    if (btnSimulateFeed) {
+      btnSimulateFeed.addEventListener("click", () => {
+        const newEvent = {
+          id: "feed-" + Date.now(),
+          source: "europepmc",
+          sourceLabel: "Europe PMC Ingest",
+          title: "Cryo-EM structure of human TRPML1 channel reveals calcium gating under physiological acidity",
+          authors: "Chen W., Habib O., Rostova E.",
+          journal: "Cell (Online ahead of print)",
+          doi: "10.1016/j.cell.2026.08.012",
+          timestamp: "Just now",
+          supporting: 22,
+          mentioning: 6,
+          contrasting: 1,
+          raw: {
+            pmid: "39281740",
+            doi: "10.1016/j.cell.2026.08.012",
+            ingested_at: new Date().toISOString(),
+            status: "live_indexed"
+          }
+        };
+        feedItems.unshift(newEvent);
+        renderFeedItems();
+        showToast("New paper event ingested into feed!");
+      });
+    }
+
+    // -----------------------------------------------------------------------
+    // HELP & FEEDBACK CENTER INTERACTION
+    // -----------------------------------------------------------------------
+    // FAQ Accordion
+    document.querySelectorAll(".faq-question").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const item = btn.closest(".faq-item");
+        if (item) item.classList.toggle("active");
+      });
+    });
+
+    // FAQ Search filter
+    const txtHelpQuery = document.getElementById("txtHelpQuery");
+    if (txtHelpQuery) {
+      txtHelpQuery.addEventListener("input", () => {
+        const q = txtHelpQuery.value.toLowerCase().trim();
+        document.querySelectorAll(".faq-item").forEach(item => {
+          const text = item.textContent.toLowerCase();
+          item.style.display = text.includes(q) ? "block" : "none";
+          if (q) item.classList.add("active");
+        });
+        document.querySelectorAll(".help-guide-card").forEach(card => {
+          const text = card.textContent.toLowerCase();
+          card.style.display = text.includes(q) ? "flex" : "none";
+        });
+      });
+    }
+
+    // Category pills in feedback form
+    document.querySelectorAll(".cat-pill").forEach(pill => {
+      pill.addEventListener("click", () => {
+        document.querySelectorAll(".cat-pill").forEach(p => p.classList.remove("active"));
+        pill.classList.add("active");
+      });
+    });
+
+    // Star rating
+    const starBtns = document.querySelectorAll(".star-btn");
+    starBtns.forEach(star => {
+      star.addEventListener("click", () => {
+        const rating = parseInt(star.dataset.rate, 10);
+        starBtns.forEach(s => {
+          const r = parseInt(s.dataset.rate, 10);
+          if (r <= rating) s.classList.add("active");
+          else s.classList.remove("active");
+        });
+      });
+    });
+
+    // Feedback Form submission
+    const formHelpFeedback = document.getElementById("formHelpFeedback");
+    if (formHelpFeedback) {
+      formHelpFeedback.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const banner = document.getElementById("feedbackSuccessBanner");
+        if (banner) banner.classList.remove("hidden");
+        formHelpFeedback.reset();
+        showToast("Feedback submitted successfully! Ticket #SL-9281 assigned.");
+      });
+    }
+
+    // Guide cards click
+    document.querySelectorAll(".help-guide-card").forEach(card => {
+      card.addEventListener("click", () => {
+        const guide = card.dataset.guide;
+        if (guide === "mcp-setup") {
+          switchView("mcp");
+          const modal = document.getElementById("modalMcpConnection");
+          if (modal) modal.classList.remove("hidden");
+        } else {
+          showToast(`Opening guide: ${card.querySelector("h4").textContent}`);
+        }
+      });
+    });
+
+    // Close modal on backdrop click
+    document.querySelectorAll(".modal-backdrop").forEach(backdrop => {
+      backdrop.addEventListener("click", (e) => {
+        if (e.target === backdrop) backdrop.classList.add("hidden");
+      });
+    });
 
     // Attachment Dropdown Menu (+ button matching Image 4)
     const btnPromptPlus = document.getElementById("btnPromptPlus");

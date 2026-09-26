@@ -1,0 +1,1225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SciLoop | Autonomous Scientific Research Assistant</title>
+  <meta name="description" content="Production-grade AI research assistant for scientists, clinicians, oncologists, physicists, and engineers.">
+
+  <!-- Fonts: Calistoga, Inter, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Calistoga&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- KaTeX for Mathematical Typography -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+
+  <!-- Mermaid for Biological Pathways & Mechanism Diagrams -->
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+
+  <!-- Chart.js for Quantitative Data & Kaplan-Meier Survival Curves -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+  <!-- Marked.js and Highlight.js for Markdown & Code Formatting -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+  <!-- PDF.js for Client-Side Manuscript Parsing -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script>
+    if (window.pdfjsLib) {
+      window.pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+    }
+  </script>
+
+  <!-- html2pdf for Publication Export -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+  <!-- Google Identity Services -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+  <!-- SciLoop Styles -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="sciloop-app">
+
+  <div class="app-layout">
+    <!-- ================================================================= -->
+    <!-- LEFT SIDEBAR: CHAT HISTORY & USER IDENTITY                         -->
+    <!-- ================================================================= -->
+    <aside class="sidebar" id="sidebar">
+      <!-- Top Brand Row (Image 1 & 2) -->
+      <div class="sidebar-header">
+        <div class="brand-row">
+          <div class="brand-mark" id="brandMark" title="SciLoop">
+            <span class="brand-full">sciloop<span class="brand-underscore">_</span></span>
+            <span class="brand-short">s<span class="brand-underscore">_</span></span>
+            <span class="brand-expand-hover" title="Expand Sidebar">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                <line x1="9" y1="3" x2="9" y2="21"/>
+                <polyline points="14 9 17 12 14 15"/>
+              </svg>
+            </span>
+          </div>
+          <button class="btn-sidebar-toggle" id="btnToggleSidebar" title="Collapse Sidebar" aria-label="Collapse Sidebar">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+              <line x1="15" y1="3" x2="15" y2="21"/>
+              <polyline points="10 9 7 12 10 15"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Navigation Menu (Matching scite.ai Image 1 & 2) -->
+      <nav class="sidebar-nav">
+        <button class="nav-item active" id="navAssistant" title="Assistant">
+          <span class="nav-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>
+            </svg>
+          </span>
+          <span class="nav-label">Assistant</span>
+        </button>
+
+        <button class="nav-item" id="navSearch" title="Search Literature">
+          <span class="nav-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+          </span>
+          <span class="nav-label">Search</span>
+        </button>
+
+        <button class="nav-item" id="navCollections" title="Collections">
+          <span class="nav-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="18" height="18" rx="2"/>
+              <line x1="3" y1="12" x2="21" y2="12"/>
+              <line x1="12" y1="3" x2="12" y2="21"/>
+            </svg>
+          </span>
+          <span class="nav-label">Collections</span>
+        </button>
+
+        <button class="nav-item" id="navMcp" title="Model Context Protocol">
+          <span class="nav-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="3" width="20" height="14" rx="2"/>
+              <line x1="8" y1="21" x2="16" y2="21"/>
+              <line x1="12" y1="17" x2="12" y2="21"/>
+              <polyline points="7 8 10 11 7 14"/>
+            </svg>
+          </span>
+          <span class="nav-label">MCP</span>
+        </button>
+
+        <button class="nav-item" id="navApi" title="API">
+          <span class="nav-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="9"/>
+              <circle cx="12" cy="12" r="3"/>
+            </svg>
+          </span>
+          <span class="nav-label">API</span>
+          <span class="badge-pro">PRO</span>
+        </button>
+
+        <button class="nav-item" id="navMore" title="More Options">
+          <span class="nav-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="5" cy="12" r="1.5"/>
+              <circle cx="12" cy="12" r="1.5"/>
+              <circle cx="19" cy="12" r="1.5"/>
+            </svg>
+          </span>
+          <span class="nav-label">More</span>
+          <svg class="chevron-right" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="9 18 15 12 9 6"/>
+          </svg>
+        </button>
+      </nav>
+
+      <!-- Chat Controls Wrapper: Visible in Assistant mode, hidden in MCP / Feed / Help mode -->
+      <div class="sidebar-chat-controls" id="sidebarChatControls">
+        <div class="sidebar-divider"></div>
+
+        <!-- New Chat Button (Speech bubble with plus icon matching scite.ai Image 1) -->
+        <button class="nav-new-chat-btn" id="btnNewChat" title="New Chat">
+          <span class="nav-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+              <line x1="12" y1="8" x2="12" y2="14"/>
+              <line x1="9" y1="11" x2="15" y2="11"/>
+            </svg>
+          </span>
+          <span class="nav-label">New Chat</span>
+        </button>
+
+        <!-- Recent Conversations Header -->
+        <div class="recent-section-header" id="btnToggleRecent">
+          <span class="recent-label">RECENT</span>
+          <svg class="recent-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </div>
+
+        <!-- Scrollable Chat List Partitioned by Date -->
+        <div class="chat-history-container" id="chatHistoryList">
+          <!-- Rendered dynamically per authenticated user -->
+        </div>
+      </div>
+
+      <!-- Bottom Section (Always anchored to bottom) -->
+      <div class="sidebar-bottom-section">
+        <!-- Bottom Utility Nav Items (scite.ai Image 1 & 2) -->
+        <div class="sidebar-footer-nav">
+          <button class="nav-item" id="navFeed" title="Feed">
+            <span class="nav-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+              </svg>
+            </span>
+            <span class="nav-label">Feed</span>
+          </button>
+
+          <button class="nav-item" id="btnOpenHelpFeedback" title="Help & Feedback">
+            <span class="nav-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+                <line x1="12" y1="17" x2="12.01" y2="17"/>
+              </svg>
+            </span>
+            <span class="nav-label">Help & Feedback</span>
+          </button>
+        </div>
+
+        <div class="sidebar-divider"></div>
+
+        <!-- Bottom User Profile Card (scite.ai Image 1 & 2) -->
+        <div class="sidebar-user-section">
+          <div class="user-profile-scite" id="btnOpenUserModal" title="Account & Workspaces">
+            <div class="user-avatar-circle" id="lblUserAvatar">OH</div>
+            <div class="user-name-scite" id="lblUserName">Dr. Om Habib</div>
+            <span id="lblUserEmail" style="display:none;">om.habib@sciloop.org</span>
+            <span id="lblModelInUse" style="display:none;">GPT-4o Connected</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ================================================================= -->
+    <!-- MAIN RESEARCH WORKSPACE                                            -->
+    <!-- ================================================================= -->
+    <main class="main-content">
+      <!-- VIEW 1: ASSISTANT RESEARCH WORKSPACE -->
+      <div class="app-view active" id="viewAssistant">
+        <!-- Top Application Header -->
+        <header class="app-header">
+          <div class="header-left">
+            <button class="btn-icon mobile-menu-btn" id="btnMobileMenu" aria-label="Open Sidebar">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="3" y1="12" x2="21" y2="12"/>
+                <line x1="3" y1="6" x2="21" y2="6"/>
+                <line x1="3" y1="18" x2="21" y2="18"/>
+              </svg>
+            </button>
+            <div class="chat-title-group">
+              <h1 class="active-chat-title" id="txtCurrentChatTitle">New Research Inquiry</h1>
+              <span class="active-chat-meta" id="txtCurrentChatMeta">Europe PMC + Crossref + arXiv Verified</span>
+            </div>
+          </div>
+
+          <div class="header-right">
+            <button class="btn-secondary-action" id="btnExportPdf" title="Export Publication-Grade PDF">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="7 10 12 15 17 10"/>
+                <line x1="12" y1="15" x2="12" y2="3"/>
+              </svg>
+              <span>Download Report (PDF)</span>
+            </button>
+
+            <button class="btn-secondary-action" id="btnOpenSettings" title="Assistant Settings & Citation Style">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="4" y1="21" x2="4" y2="14"/>
+                <line x1="4" y1="10" x2="4" y2="3"/>
+                <line x1="12" y1="21" x2="12" y2="12"/>
+                <line x1="12" y1="8" x2="12" y2="3"/>
+                <line x1="20" y1="21" x2="20" y2="16"/>
+                <line x1="20" y1="12" x2="20" y2="3"/>
+                <line x1="1" y1="14" x2="7" y2="14"/>
+                <line x1="9" y1="8" x2="15" y2="8"/>
+                <line x1="17" y1="16" x2="23" y2="16"/>
+              </svg>
+              <span>Settings</span>
+            </button>
+
+            <button class="btn-icon" id="btnClearChat" title="Clear Conversation" aria-label="Clear Conversation">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="3 6 5 6 21 6"/>
+                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+              </svg>
+            </button>
+          </div>
+        </header>
+
+      <!-- Scrollable Message Stream -->
+      <section class="messages-container" id="messagesContainer">
+        <!-- WELCOME HERO: Minimalist Modern Asymmetric Hero with Living Elements -->
+        <div class="welcome-hero" id="welcomeHero">
+          <!-- Asymmetric 1.15fr / 0.85fr Hero Grid -->
+          <div class="hero-asymmetric-grid">
+            <!-- Left Column: Dominant Copy (1.15fr) -->
+            <div class="hero-copy-column">
+              <div class="section-badge">
+                <span class="pulse-dot"></span>
+                <span>AUTONOMOUS SCIENTIFIC INVESTIGATION</span>
+              </div>
+
+              <h1 class="hero-display-headline">
+                Groundbreaking discoveries begin with <span class="gradient-headline-wrap"><span class="gradient-text">deep synthesis</span><span class="gradient-underline"></span></span>
+              </h1>
+
+              <p class="hero-lead-description">
+                Ground your research across 40+ million peer-reviewed papers in Europe PMC & PubMed, 150+ million Crossref records, and arXiv preprints. Synthesize hypotheses, isolate predictive biomarkers, derive mathematical physics, and generate publication-grade dossiers.
+              </p>
+
+              <div class="hero-stats-strip">
+                <div class="hero-stat-item">
+                  <span class="stat-number">40M+</span>
+                  <span class="stat-label">Peer-Reviewed Papers</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="hero-stat-item">
+                  <span class="stat-number">150M+</span>
+                  <span class="stat-label">Crossref & DOI Records</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="hero-stat-item">
+                  <span class="stat-number">&lt; 1.2s</span>
+                  <span class="stat-label">Verified Retrieval</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Column: Abstract Generative Living Graphic (0.85fr) -->
+            <div class="hero-graphic-column">
+              <div class="abstract-hero-canvas">
+                <!-- Ambient Accent Glow -->
+                <div class="ambient-radial-glow"></div>
+                
+                <!-- Glacial Rotating Outer Dashed Ring (60s linear infinite) -->
+                <div class="decorative-rotating-ring"></div>
+
+                <!-- Decorative 3x3 Dot Grid -->
+                <div class="decorative-dot-matrix"></div>
+
+                <!-- Solid Electric Blue Corner Accent Block -->
+                <div class="accent-corner-block"></div>
+
+                <!-- Floating Card 1: Precision Oncology & Survival -->
+                <div class="floating-hero-card card-float-a">
+                  <div class="floating-card-header">
+                    <span class="pulse-indicator-green"></span>
+                    <span class="floating-badge-text">ONCOLOGY &bull; SURVIVAL ANALYSIS</span>
+                  </div>
+                  <div class="floating-card-title">Small Cell Lung Cancer Biomarkers</div>
+                  <div class="floating-card-meta">
+                    <span class="meta-tag-blue">DLL3 &bull; SLFN11</span>
+                    <span class="meta-citation-tag">18 Supporting Papers</span>
+                  </div>
+                </div>
+
+                <!-- Floating Card 2: Kerr Spacetime Metric -->
+                <div class="floating-hero-card card-float-b">
+                  <div class="floating-card-header">
+                    <span class="pulse-indicator-blue"></span>
+                    <span class="floating-badge-text">THEORETICAL ASTROPHYSICS</span>
+                  </div>
+                  <div class="floating-card-title">Kerr Black Hole Spacetime Precession</div>
+                  <div class="floating-card-meta">
+                    <span class="meta-tensor-code">g_tt = -(1 - 2Mr/ρ²)</span>
+                    <span class="meta-citation-tag">arXiv:2401.8841</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Suggested Scientific Inquiries Section -->
+          <div class="hero-templates-section">
+            <div class="templates-header-row">
+              <div class="section-badge">
+                <span class="pulse-dot"></span>
+                <span>SCHOLARLY INQUIRY TEMPLATES</span>
+              </div>
+              <span class="templates-hint">Select a template or type your specific research question below</span>
+            </div>
+
+            <div class="suggested-prompts-grid">
+              <div class="prompt-card" data-prompt="What biomarkers predict treatment response and survival outcomes in small cell lung cancer?">
+                <div class="prompt-card-header">
+                  <span class="prompt-badge">Oncology & Biomarkers</span>
+                  <svg class="prompt-arrow-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </div>
+                <p class="prompt-text">What biomarkers predict treatment response and survival outcomes in small cell lung cancer?</p>
+              </div>
+
+              <div class="prompt-card" data-prompt="Explain the mechanism of CRISPR-Cas9 off-target cleavage and methods to enhance base-editing fidelity.">
+                <div class="prompt-card-header">
+                  <span class="prompt-badge">Molecular Biology</span>
+                  <svg class="prompt-arrow-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </div>
+                <p class="prompt-text">Explain the mechanism of CRISPR-Cas9 off-target cleavage and methods to enhance base-editing fidelity.</p>
+              </div>
+
+              <div class="prompt-card" data-prompt="Derive the equatorial photon sphere and frame-dragging precession in Kerr black hole spacetime.">
+                <div class="prompt-card-header">
+                  <span class="prompt-badge">Theoretical Physics</span>
+                  <svg class="prompt-arrow-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </div>
+                <p class="prompt-text">Derive the equatorial photon sphere and frame-dragging precession in Kerr black hole spacetime.</p>
+              </div>
+
+              <div class="prompt-card" data-prompt="Formulate Physics-Informed Neural Network (PINN) loss collocation for 2D incompressible Navier-Stokes equations.">
+                <div class="prompt-card-header">
+                  <span class="prompt-badge">Scientific ML</span>
+                  <svg class="prompt-arrow-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </div>
+                <p class="prompt-text">Formulate Physics-Informed Neural Network (PINN) loss collocation for 2D incompressible Navier-Stokes equations.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CONVERSATION THREAD: Appended dynamically -->
+        <div class="conversation-thread-stream" id="conversationStream"></div>
+
+        <!-- Live Research Status Bar -->
+        <div class="research-status-banner hidden" id="statusBanner">
+          <div class="status-pulse-dot"></div>
+          <span class="status-text" id="statusText">Querying Europe PMC (PubMed) & Crossref scholarly indices...</span>
+        </div>
+      </section>
+
+      <!-- Bottom Fixed Input Card -->
+      <footer class="app-prompt-footer">
+        <div class="prompt-input-card" id="promptInputCard">
+          <!-- Attachment Chip -->
+          <div class="attachment-preview-bar hidden" id="attachmentPreviewBar">
+            <div class="attachment-chip">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+              </svg>
+              <span class="att-name" id="lblAttachmentName">manuscript.pdf</span>
+              <span class="att-meta" id="lblAttachmentMeta">(24 KB)</span>
+              <button class="btn-remove-att" id="btnRemoveAttachment" title="Remove Attachment">&times;</button>
+            </div>
+          </div>
+
+          <div class="prompt-input-row">
+            <div class="prompt-attach-container">
+              <button class="btn-prompt-plus" id="btnPromptPlus" title="Add Document or Collection" aria-label="Add Document or Collection">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="12" y1="5" x2="12" y2="19"/>
+                  <line x1="5" y1="12" x2="19" y2="12"/>
+                </svg>
+              </button>
+
+              <!-- Upload / Collection Dropdown Menu (Matching Image 4) -->
+              <div class="prompt-attach-dropdown hidden" id="promptAttachMenu">
+                <button class="attach-dropdown-item" id="btnMenuUseCollection">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="18" height="18" rx="2"/>
+                    <line x1="3" y1="12" x2="21" y2="12"/>
+                    <line x1="12" y1="3" x2="12" y2="21"/>
+                  </svg>
+                  <span>Use Collection</span>
+                </button>
+                <button class="attach-dropdown-item" id="btnMenuUploadDoc">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                    <polyline points="17 8 12 3 7 8"/>
+                    <line x1="12" y1="3" x2="12" y2="15"/>
+                  </svg>
+                  <span>Upload Document</span>
+                </button>
+              </div>
+              <input type="file" id="fileInput" accept=".pdf,.md,.txt,.json" style="display:none">
+              <!-- Legacy hidden button for backwards compatibility -->
+              <button id="btnUploadDoc" style="display:none;"></button>
+            </div>
+
+            <textarea 
+              id="txtQuery" 
+              class="prompt-textarea" 
+              rows="1" 
+              placeholder="Ask a scientific question, formulate a hypothesis, or analyze attached manuscript..."
+            ></textarea>
+
+            <button class="btn-send" id="btnSendQuery" title="Submit Inquiry (Enter)">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <line x1="5" y1="12" x2="19" y2="12"/>
+                <polyline points="12 5 19 12 12 19"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="prompt-disclaimer">
+          <span>SciLoop answers are grounded in real peer-reviewed papers (Europe PMC / Crossref / arXiv). Verify clinical decisions with primary literature.</span>
+        </div>
+      </footer>
+    </div> <!-- end #viewAssistant -->
+
+    <!-- =============================================================== -->
+    <!-- VIEW 2: MCP DASHBOARD (Matching Scite.ai Image 2 & 3)            -->
+    <!-- =============================================================== -->
+    <div class="app-view" id="viewMcpDashboard">
+      <div class="mcp-page-container">
+        <div class="mcp-header">
+          <h1 class="mcp-title">MCP Dashboard</h1>
+          <p class="mcp-subtitle">
+            Connect your AI tools to Scite's Smart Citations and full-text scientific literature, then track how you're using the MCP.
+          </p>
+        </div>
+
+        <!-- Row 1: Two-card Grid (Connected Clients & Server URL) -->
+        <div class="mcp-grid-two">
+          <!-- Card 1: Connected Clients -->
+          <div class="mcp-card">
+            <div class="mcp-card-header">
+              <h3 class="mcp-card-title">Connected Clients</h3>
+              <button class="btn-mcp-primary" id="btnAddConnection">Add a connection</button>
+            </div>
+            <div class="mcp-card-body" id="mcpConnectedClientsBody">
+              <p class="mcp-text-strong">You haven't connected any AI tools yet.</p>
+              <p class="mcp-text-muted">Add Scite to ChatGPT, Claude, or any MCP-compatible tool to get started.</p>
+            </div>
+          </div>
+
+          <!-- Card 2: Your MCP Server URL -->
+          <div class="mcp-card">
+            <div class="mcp-card-header">
+              <h3 class="mcp-card-title">Your MCP Server URL</h3>
+              <a href="javascript:void(0)" class="mcp-link" id="btnMcpDocLink">View documentation &rarr;</a>
+            </div>
+            <div class="mcp-card-body">
+              <p class="mcp-text-muted">Add this URL to any MCP-compatible AI tool, then sign in with your Scite account.</p>
+              <div class="mcp-url-box">
+                <span class="mcp-url-text" id="lblMcpServerUrl">https://api.scite.ai/mcp</span>
+                <button class="btn-copy-url" id="btnCopyMcpUrl" title="Copy MCP URL">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Row 2: Use an API token with MCP -->
+        <div class="mcp-card mcp-mt-20">
+          <h3 class="mcp-card-title">Use an API token with MCP</h3>
+          <p class="mcp-text-muted mcp-mt-6">
+            Minting API keys is a Pro feature. Upgrade to create a token you can use to authenticate MCP clients.
+          </p>
+          <div class="mcp-actions-row mcp-mt-16">
+            <button class="btn-mcp-primary" id="btnMcpUpgradePro">Upgrade to Pro</button>
+            <button class="btn-mcp-link" id="btnMcpComparePlans">Compare plans &rsaquo;</button>
+          </div>
+        </div>
+
+        <!-- Row 3: Your Subscription Usage -->
+        <div class="mcp-card mcp-mt-20">
+          <div class="mcp-card-header">
+            <h3 class="mcp-card-title">Your Subscription Usage</h3>
+            <a href="javascript:void(0)" class="mcp-link" id="btnManageOverage">Manage overage &rarr;</a>
+          </div>
+          <div class="mcp-card-body">
+            <div class="mcp-usage-subhead">My MCP usage</div>
+            <div class="mcp-progress-track">
+              <div class="mcp-progress-fill" id="mcpUsageBar" style="width: 0%;"></div>
+            </div>
+            <p class="mcp-usage-count" id="lblMcpUsageCount">0 of 25 MCP tool uses this month</p>
+            <p class="mcp-usage-reset" id="lblMcpUsageReset">Usage resets on October 1, 2026.</p>
+          </div>
+        </div>
+
+        <!-- Row 4: All-Time Usage -->
+        <div class="mcp-card mcp-mt-20">
+          <h3 class="mcp-card-title">All-Time Usage</h3>
+          <div class="mcp-metrics-grid mcp-mt-16">
+            <div class="mcp-metric-tile">
+              <span class="mcp-metric-val" id="metricTotalSessions">0</span>
+              <span class="mcp-metric-lbl">Total Sessions</span>
+            </div>
+            <div class="mcp-metric-tile">
+              <span class="mcp-metric-val" id="metricTotalToolCalls">0</span>
+              <span class="mcp-metric-lbl">Total Tool Calls</span>
+            </div>
+            <div class="mcp-metric-tile">
+              <span class="mcp-metric-val" id="metricTotalPapersRead">0</span>
+              <span class="mcp-metric-lbl">Total Papers Read</span>
+            </div>
+            <div class="mcp-metric-tile">
+              <span class="mcp-metric-val" id="metricAvgToolCalls">0</span>
+              <span class="mcp-metric-lbl">Avg. Tool Calls / Session</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Row 5: Weekly MCP Usage -->
+        <div class="mcp-card mcp-mt-20">
+          <div class="mcp-card-header">
+            <div>
+              <h3 class="mcp-card-title">Weekly MCP Usage</h3>
+              <p class="mcp-text-muted mcp-mt-2">Tool calls and papers read over the past 14 days.</p>
+            </div>
+            <div class="mcp-legend">
+              <span class="mcp-legend-item">
+                <span class="legend-color-box legend-tool-calls"></span>
+                <span>Tool Calls</span>
+              </span>
+              <span class="mcp-legend-item">
+                <span class="legend-color-box legend-papers-read"></span>
+                <span>Papers Read</span>
+              </span>
+            </div>
+          </div>
+          <div class="mcp-empty-chart" id="mcpChartArea">
+            <p class="mcp-empty-chart-text">No MCP usage yet in the past 14 days.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- =============================================================== -->
+    <!-- VIEW 3: RAW FEED SECTION (Scholarly Activity & Telemetry)       -->
+    <!-- =============================================================== -->
+    <div class="app-view" id="viewFeed">
+      <div class="feed-page-container">
+        <div class="feed-header">
+          <div class="feed-header-left">
+            <div class="feed-live-badge">
+              <span class="pulse-dot"></span>
+              <span>LIVE TELEMETRY STREAM</span>
+            </div>
+            <h1 class="feed-title">Literature &amp; Research Activity Feed</h1>
+            <p class="feed-subtitle">
+              Raw real-time ingestion stream across Europe PMC (40M+ papers), Crossref citation graphs (150M+ DOIs), and arXiv preprints.
+            </p>
+          </div>
+          <div class="feed-header-right">
+            <button class="btn-feed-action" id="btnRefreshFeed">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/>
+              </svg>
+              <span>Refresh</span>
+            </button>
+            <button class="btn-feed-action primary" id="btnSimulateFeed">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="12" y1="5" x2="12" y2="19"/>
+                <line x1="5" y1="12" x2="19" y2="12"/>
+              </svg>
+              <span>Simulate Event</span>
+            </button>
+            <button class="btn-feed-action" id="btnToggleRawJson">
+              <span>Toggle Raw JSON</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Feed Filter Bar -->
+        <div class="feed-filter-bar">
+          <div class="feed-filter-pills" id="feedFilterPills">
+            <button class="feed-pill active" data-filter="all">All Events</button>
+            <button class="feed-pill" data-filter="europepmc">Europe PMC &amp; PubMed</button>
+            <button class="feed-pill" data-filter="crossref">Crossref Citations</button>
+            <button class="feed-pill" data-filter="arxiv">arXiv Preprints</button>
+            <button class="feed-pill" data-filter="synthesis">AI Research Logs</button>
+          </div>
+          <div class="feed-search-wrap">
+            <input type="text" id="txtFeedSearch" class="feed-search-input" placeholder="Filter feed by DOI, title, gene, author...">
+          </div>
+        </div>
+
+        <!-- Live Feed Stream Items List -->
+        <div class="feed-stream-container" id="feedStreamContainer">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+    </div>
+
+    <!-- =============================================================== -->
+    <!-- VIEW 4: SEPARATE HELP & FEEDBACK SECTION                        -->
+    <!-- =============================================================== -->
+    <div class="app-view" id="viewHelpFeedback">
+      <div class="help-page-container">
+        <div class="help-header">
+          <h1 class="help-title">Help &amp; Feedback Center</h1>
+          <p class="help-subtitle">
+            Comprehensive scientific documentation, user manuals, FAQs, and a direct channel to our science engineering team.
+          </p>
+          <div class="help-search-box">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+            <input type="text" id="txtHelpQuery" class="help-search-input" placeholder="Search guides, Smart Citations, MCP connection, FAQs...">
+          </div>
+        </div>
+
+        <div class="help-content-grid">
+          <!-- Left Column: Knowledge Base & Guides & FAQs -->
+          <div class="help-left-col">
+            <h2 class="help-section-title">Knowledge Base &amp; Guides</h2>
+            <div class="help-cards-grid">
+              <div class="help-guide-card" data-guide="smart-citations">
+                <div class="guide-icon-box">📘</div>
+                <h4>Smart Citations System</h4>
+                <p>Learn how SciLoop uses deep learning to classify citations into supporting, mentioning, and contrasting evidence.</p>
+                <span class="guide-read-link">Read guide &rarr;</span>
+              </div>
+
+              <div class="help-guide-card" data-guide="mcp-setup">
+                <div class="guide-icon-box">🔌</div>
+                <h4>MCP Integration Manual</h4>
+                <p>Step-by-step instructions to connect Claude Desktop, Cursor, and ChatGPT with your SciLoop MCP endpoint.</p>
+                <span class="guide-read-link">Read guide &rarr;</span>
+              </div>
+
+              <div class="help-guide-card" data-guide="evidence-sources">
+                <div class="guide-icon-box">🧬</div>
+                <h4>Scholarly Indices &amp; Data</h4>
+                <p>Understanding Europe PMC, Crossref, and arXiv API ingestion, DOI indexing, and citation graphs.</p>
+                <span class="guide-read-link">Read guide &rarr;</span>
+              </div>
+
+              <div class="help-guide-card" data-guide="pdf-export">
+                <div class="guide-icon-box">📄</div>
+                <h4>Publication Reports &amp; PDF</h4>
+                <p>How to generate publication-grade research dossiers, formatted with APA/BibTeX bibliography.</p>
+                <span class="guide-read-link">Read guide &rarr;</span>
+              </div>
+            </div>
+
+            <!-- Frequently Asked Questions Accordion -->
+            <h2 class="help-section-title mcp-mt-24">Frequently Asked Questions</h2>
+            <div class="help-faq-accordion" id="helpFaqAccordion">
+              <div class="faq-item active">
+                <button class="faq-question">
+                  <span>What is the Model Context Protocol (MCP) in SciLoop?</span>
+                  <svg class="faq-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+                <div class="faq-answer">
+                  <p>The Model Context Protocol (MCP) is an open standard created by Anthropic that allows local AI tools (such as Claude Desktop, Cursor, or ChatGPT) to securely access SciLoop's real-time literature databases (Europe PMC, Crossref, arXiv) and Smart Citation analysis directly during reasoning.</p>
+                </div>
+              </div>
+
+              <div class="faq-item">
+                <button class="faq-question">
+                  <span>How does SciLoop ensure literature citations are not hallucinated?</span>
+                  <svg class="faq-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+                <div class="faq-answer">
+                  <p>Every claim generated by SciLoop is verified against live DOI and PubMed identifier (PMID) databases. Citations contain direct DOI links and real snippet excerpts extracted from peer-reviewed publications.</p>
+                </div>
+              </div>
+
+              <div class="faq-item">
+                <button class="faq-question">
+                  <span>How do Smart Citations classify supporting vs contrasting evidence?</span>
+                  <svg class="faq-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+                <div class="faq-answer">
+                  <p>Instead of superficial citation counts, Smart Citations analyze citation statements within papers: <em>Supporting</em> confirms an empirical finding, <em>Contrasting</em> challenges or presents conflicting data, and <em>Mentioning</em> cites the work for background context.</p>
+                </div>
+              </div>
+
+              <div class="faq-item">
+                <button class="faq-question">
+                  <span>Can I use my own custom OpenAI API key?</span>
+                  <svg class="faq-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+                <div class="faq-answer">
+                  <p>Yes! In the Assistant view, click <strong>Settings</strong> to open the Assistant Settings dialog and enter your custom OpenAI API key (sk-proj-...) for higher rate limits or specialized models.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Interactive Feedback & Support Form -->
+          <div class="help-right-col">
+            <div class="help-form-card">
+              <h3 class="help-form-title">Send Us Feedback or Report an Issue</h3>
+              <p class="help-form-subtitle">Your insights directly shape SciLoop's literature indexing and AI synthesis capabilities.</p>
+
+              <form id="formHelpFeedback" class="help-feedback-form">
+                <div class="form-group">
+                  <label>Feedback Category</label>
+                  <div class="feedback-cat-pills" id="feedbackCategoryGroup">
+                    <button type="button" class="cat-pill active" data-cat="feature">Feature Request</button>
+                    <button type="button" class="cat-pill" data-cat="bug">Bug Report</button>
+                    <button type="button" class="cat-pill" data-cat="literature">Citation Data</button>
+                    <button type="button" class="cat-pill" data-cat="mcp">MCP Server</button>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label>How is your research experience?</label>
+                  <div class="feedback-star-rating" id="feedbackStarRating">
+                    <span class="star-btn active" data-rate="1">★</span>
+                    <span class="star-btn active" data-rate="2">★</span>
+                    <span class="star-btn active" data-rate="3">★</span>
+                    <span class="star-btn active" data-rate="4">★</span>
+                    <span class="star-btn active" data-rate="5">★</span>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="inpFeedbackSubject">Subject</label>
+                  <input type="text" id="inpFeedbackSubject" class="form-input" placeholder="Brief summary of your feedback or inquiry..." required>
+                </div>
+
+                <div class="form-group">
+                  <label for="txtFeedbackBody">Detailed Description</label>
+                  <textarea id="txtFeedbackBody" class="form-textarea" rows="4" placeholder="Describe the feature you'd like, papers you'd like to index, or issue encountered..." required></textarea>
+                </div>
+
+                <div class="form-group-checkbox">
+                  <label class="checkbox-label">
+                    <input type="checkbox" id="chkIncludeDiagnostics" checked>
+                    <span>Include diagnostic snapshot (Browser: Mac, Active Model: GPT-4o, MCP: Connected)</span>
+                  </label>
+                </div>
+
+                <button type="submit" class="btn-submit-feedback" id="btnSubmitFeedback">
+                  <span>Submit Feedback</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="22" y1="2" x2="11" y2="13"/>
+                    <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                  </svg>
+                </button>
+              </form>
+
+              <div class="feedback-success-banner hidden" id="feedbackSuccessBanner">
+                <div class="success-icon">✓</div>
+                <div>
+                  <h4>Feedback Received</h4>
+                  <p>Thank you! Ticket <strong>#SL-9281</strong> created. Our engineering team reviews incoming research feedback within 24 hours.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Quick Support & Status Card -->
+            <div class="help-support-card mcp-mt-16">
+              <h4>Direct Contact &amp; System Health</h4>
+              <div class="support-channels">
+                <div class="support-row">
+                  <span class="support-label">Support Email:</span>
+                  <a href="mailto:support@sciloop.org" class="support-val">support@sciloop.org</a>
+                </div>
+                <div class="support-row">
+                  <span class="support-label">API Status:</span>
+                  <span class="support-status-green"><span class="green-dot"></span> All Systems Operational</span>
+                </div>
+                <div class="support-row">
+                  <span class="support-label">Response Time:</span>
+                  <span class="support-val">&lt; 2 hours for Pro researchers</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  </div>
+
+  <!-- =================================================================== -->
+  <!-- MODAL: GOOGLE AUTHENTICATION & MULTI-USER WORKSPACE SWITCHER        -->
+  <!-- =================================================================== -->
+  <div class="modal-backdrop hidden" id="modalAuth">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+            <circle cx="12" cy="7" r="4"/>
+          </svg>
+          <span class="modal-title-text">Google Account & Workspace Isolation</span>
+        </div>
+        <button class="btn-modal-close" id="btnCloseAuthModal">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <p class="modal-description">
+          Each authenticated user has an independent, fully isolated chat workspace, search history, and research document store.
+        </p>
+
+        <!-- Active User Profile -->
+        <div class="active-user-banner">
+          <div class="user-avatar-lg" id="modalActiveAvatar">OH</div>
+          <div class="active-user-details">
+            <span class="active-user-name" id="modalActiveName">Dr. Om Habib</span>
+            <span class="active-user-email" id="modalActiveEmail">om.habib@sciloop.org</span>
+            <span class="active-user-status">Active Workspace (Isolated)</span>
+          </div>
+        </div>
+
+        <!-- Google Sign-In Action -->
+        <div class="google-signin-wrapper" style="display: flex; justify-content: center;">
+          <div id="googleSignInDiv"></div>
+        </div>
+
+        <div class="divider-text-row">
+          <span>or switch local researcher profile</span>
+        </div>
+
+        <!-- Local Researcher Profiles for Rapid Verification -->
+        <div class="user-accounts-list" id="userAccountsList">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =================================================================== -->
+  <!-- MODAL: MODEL & API SETTINGS                                         -->
+  <!-- =================================================================== -->
+  <!-- =================================================================== -->
+  <!-- MODAL: ASSISTANT SETTINGS (Matching scite.ai Image 3)               -->
+  <!-- =================================================================== -->
+  <div class="modal-backdrop hidden" id="modalSettings">
+    <div class="modal-card modal-settings-scite">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <span class="modal-title-text">Assistant Settings</span>
+          <span class="badge-default">Default</span>
+        </div>
+        <button class="btn-modal-close" id="btnCloseSettingsModal">&times;</button>
+      </div>
+
+      <div class="settings-modal-layout">
+        <!-- Left Sidebar Tabs -->
+        <div class="settings-tabs-sidebar">
+          <button class="settings-tab-btn active" data-tab="standard">Standard Settings</button>
+          <button class="settings-tab-btn" data-tab="evidence">Consulted Evidence</button>
+          <button class="settings-tab-btn" data-tab="preferences">Reference Preferences</button>
+          <button class="settings-tab-btn" data-tab="types">Reference Types</button>
+          <button class="settings-tab-btn" data-tab="output">
+            <span>Output Type</span>
+            <span class="tab-dot-yellow"></span>
+          </button>
+          <button class="settings-tab-btn" data-tab="saved">Saved Settings</button>
+        </div>
+
+        <!-- Right Settings Fields Form -->
+        <div class="settings-tab-content">
+          <div class="form-group-scite">
+            <label for="selCitationStyle">Citation Style <span class="info-circle" title="Citation format for referenced literature">ⓘ</span></label>
+            <select id="selCitationStyle" class="form-select-scite">
+              <option value="APA" selected>APA</option>
+              <option value="Nature">Nature</option>
+              <option value="IEEE">IEEE</option>
+              <option value="Vancouver">Vancouver</option>
+              <option value="Harvard">Harvard</option>
+            </select>
+          </div>
+
+          <div class="form-group-scite">
+            <label for="selModel">Model <span class="info-circle" title="Scientific LLM powering reasoning and synthesis">ⓘ</span></label>
+            <select id="selModel" class="form-select-scite">
+              <option value="gpt-4o" selected>OpenAI GPT-4o (Omni - High Scientific Rigor)</option>
+              <option value="gpt-4o-mini">OpenAI GPT-4o Mini (Fast & Efficient)</option>
+            </select>
+          </div>
+
+          <div class="form-group-scite">
+            <label for="selReasoningEffort">Reasoning Effort <span class="info-circle" title="Level of deep verification across paper contexts">ⓘ</span></label>
+            <select id="selReasoningEffort" class="form-select-scite">
+              <option value="minimal" selected>Minimal</option>
+              <option value="standard">Standard</option>
+              <option value="high">High</option>
+            </select>
+          </div>
+
+          <div class="form-group-scite">
+            <label for="selResponseLength">Response Length <span class="info-circle" title="Depth and length of generated explanations">ⓘ</span></label>
+            <select id="selResponseLength" class="form-select-scite">
+              <option value="concise">Concise</option>
+              <option value="medium" selected>Medium</option>
+              <option value="comprehensive">Comprehensive</option>
+            </select>
+          </div>
+
+          <div class="form-group-scite">
+            <label for="selCollections">Collections <span class="info-circle" title="Constrain search context to specific collections">ⓘ</span></label>
+            <select id="selCollections" class="form-select-scite">
+              <option value="" selected>Select...</option>
+              <option value="oncology">Precision Oncology & Survival</option>
+              <option value="physics">Theoretical Physics & Spacetime</option>
+              <option value="genetics">Molecular Genetics & CRISPR</option>
+            </select>
+          </div>
+
+          <div class="form-group-scite" style="margin-top: 6px;">
+            <label for="inpApiKey">Custom OpenAI API Key (Optional):</label>
+            <input type="password" id="inpApiKey" class="form-input-scite" placeholder="sk-proj-...">
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer Action Buttons -->
+      <div class="settings-modal-footer">
+        <button class="btn-text-action" id="btnResetSettings">Reset to default</button>
+        <div class="footer-buttons-right">
+          <button class="btn-secondary-preset" id="btnSavePreset">Save Preset</button>
+          <button class="btn-apply-scite" id="btnSaveSettings">Apply</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =================================================================== -->
+  <!-- MODAL: ADD MCP CLIENT CONNECTION                                    -->
+  <!-- =================================================================== -->
+  <div class="modal-backdrop hidden" id="modalMcpConnection">
+    <div class="modal-card modal-mcp-dialog">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="2" y="3" width="20" height="14" rx="2"/>
+            <line x1="8" y1="21" x2="16" y2="21"/>
+            <line x1="12" y1="17" x2="12" y2="21"/>
+          </svg>
+          <span class="modal-title-text">Add MCP Client Connection</span>
+        </div>
+        <button class="btn-modal-close" id="btnCloseMcpConnModal">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <p class="modal-description">
+          Select your local AI tool to view the exact configuration JSON. SciLoop connects over Model Context Protocol (MCP) using the stdio or SSE transport.
+        </p>
+
+        <!-- Client Tabs -->
+        <div class="mcp-client-tabs" id="mcpClientTabs">
+          <button class="client-tab active" data-client="claude">Claude Desktop</button>
+          <button class="client-tab" data-client="cursor">Cursor IDE</button>
+          <button class="client-tab" data-client="chatgpt">ChatGPT / Custom GPT</button>
+          <button class="client-tab" data-client="vscode">VS Code (Continue / Roo)</button>
+        </div>
+
+        <div class="mcp-config-box">
+          <div class="config-header">
+            <span class="config-filepath" id="lblConfigFilepath">~/Library/Application Support/Claude/claude_desktop_config.json</span>
+            <button class="btn-copy-config" id="btnCopyMcpConfig">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+              </svg>
+              <span>Copy Config</span>
+            </button>
+          </div>
+          <pre class="config-code-view"><code id="codeMcpConfig">{
+  "mcpServers": {
+    "sciloop": {
+      "command": "npx",
+      "args": ["-y", "@sciloop/mcp-server@latest"],
+      "env": {
+        "SCILOOP_API_KEY": "sl_live_7a9f82c401e92d83b9e",
+        "SCILOOP_ENDPOINT": "https://api.scite.ai/mcp"
+      }
+    }
+  }
+}</code></pre>
+        </div>
+
+        <div class="mcp-tool-capabilities">
+          <span class="cap-title">Available Tools via this connection:</span>
+          <div class="cap-badges">
+            <span class="cap-badge">search_literature</span>
+            <span class="cap-badge">smart_citations</span>
+            <span class="cap-badge">fetch_fulltext</span>
+            <span class="cap-badge">synthesize_evidence</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="settings-modal-footer">
+        <button class="btn-text-action" id="btnCancelMcpConn">Close</button>
+        <button class="btn-apply-scite" id="btnTestMcpConnection">Test &amp; Save Connection</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =================================================================== -->
+  <!-- MODAL: UPGRADE TO PRO / COMPARE PLANS                               -->
+  <!-- =================================================================== -->
+  <div class="modal-backdrop hidden" id="modalMcpUpgrade">
+    <div class="modal-card modal-plans-dialog">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0052FF" stroke-width="2">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+          </svg>
+          <span class="modal-title-text">SciLoop Subscription Plans</span>
+        </div>
+        <button class="btn-modal-close" id="btnCloseUpgradeModal">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <p class="modal-description">
+          Empower your scientific workflow with high-frequency literature querying, custom API token minting, and priority model reasoning.
+        </p>
+
+        <div class="plans-comparison-grid">
+          <!-- Free Plan -->
+          <div class="plan-card">
+            <div class="plan-tag">Current Plan</div>
+            <h3 class="plan-name">Free Researcher</h3>
+            <div class="plan-price">$0 <span>/ month</span></div>
+            <ul class="plan-features">
+              <li>✓ 25 MCP tool uses / month</li>
+              <li>✓ Smart Citations synthesis</li>
+              <li>✓ Europe PMC &amp; Crossref indices</li>
+              <li>✓ Export PDF dossiers</li>
+              <li class="disabled">✕ API key token minting</li>
+              <li class="disabled">✕ Unlimited MCP throughput</li>
+            </ul>
+            <button class="btn-plan-action current" disabled>Current Active Plan</button>
+          </div>
+
+          <!-- Pro Plan -->
+          <div class="plan-card featured">
+            <div class="plan-tag featured">Recommended</div>
+            <h3 class="plan-name">Researcher Pro</h3>
+            <div class="plan-price">$19 <span>/ month</span></div>
+            <ul class="plan-features">
+              <li>✓ <strong>Unlimited</strong> MCP tool calls</li>
+              <li>✓ <strong>Custom API token minting</strong> for Claude/Cursor</li>
+              <li>✓ Full-text extraction (Europe PMC + arXiv)</li>
+              <li>✓ Smart Citations deep classification</li>
+              <li>✓ Priority GPT-4o scientific synthesis</li>
+              <li>✓ Direct engineering support</li>
+            </ul>
+            <button class="btn-plan-action primary" id="btnConfirmUpgradePro">Upgrade to Pro Now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =================================================================== -->
+  <!-- MODAL: MCP SERVER DOCUMENTATION                                     -->
+  <!-- =================================================================== -->
+  <div class="modal-backdrop hidden" id="modalMcpDoc">
+    <div class="modal-card modal-doc-dialog">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+          </svg>
+          <span class="modal-title-text">MCP Server Tool Documentation</span>
+        </div>
+        <button class="btn-modal-close" id="btnCloseMcpDocModal">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="doc-tools-list">
+          <div class="doc-tool-item">
+            <div class="tool-signature">
+              <span class="tool-method">TOOL</span>
+              <code>search_literature(query: string, limit?: number)</code>
+            </div>
+            <p class="tool-desc">Queries Europe PMC, Crossref, and arXiv in parallel for relevant peer-reviewed publications and preprints.</p>
+          </div>
+
+          <div class="doc-tool-item">
+            <div class="tool-signature">
+              <span class="tool-method">TOOL</span>
+              <code>smart_citations(doi: string)</code>
+            </div>
+            <p class="tool-desc">Extracts citation statements and counts supporting, mentioning, and contrasting citation contexts.</p>
+          </div>
+
+          <div class="doc-tool-item">
+            <div class="tool-signature">
+              <span class="tool-method">TOOL</span>
+              <code>fetch_fulltext(identifier: string)</code>
+            </div>
+            <p class="tool-desc">Fetches open-access XML/PDF full-text sections, methods, and figures from Europe PMC or arXiv.</p>
+          </div>
+
+          <div class="doc-tool-item">
+            <div class="tool-signature">
+              <span class="tool-method">TOOL</span>
+              <code>synthesize_evidence(hypothesis: string, papers: string[])</code>
+            </div>
+            <p class="tool-desc">Conducts cross-study triangulation, synthesizes empirical consensus, and isolates conflicting findings.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =================================================================== -->
+  <!-- MODAL: MANAGE OVERAGE                                               -->
+  <!-- =================================================================== -->
+  <div class="modal-backdrop hidden" id="modalManageOverage">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <span class="modal-title-text">Manage MCP Overage &amp; Limits</span>
+        </div>
+        <button class="btn-modal-close" id="btnCloseOverageModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p class="modal-description">
+          Free accounts include 25 MCP tool uses every month. Choose your overage behavior below.
+        </p>
+        <div class="overage-options">
+          <label class="overage-radio-card active">
+            <input type="radio" name="overageOpt" value="hard-cap" checked>
+            <div>
+              <strong>Hard Cap (Free Default)</strong>
+              <p>Stop requests after 25 calls to avoid accidental billing. Resets automatically on the 1st of each month.</p>
+            </div>
+          </label>
+          <label class="overage-radio-card">
+            <input type="radio" name="overageOpt" value="pro-upgrade">
+            <div>
+              <strong>Switch to Researcher Pro ($19/mo)</strong>
+              <p>Automatic high-throughput access without monthly hard caps.</p>
+            </div>
+          </label>
+        </div>
+      </div>
+      <div class="settings-modal-footer">
+        <button class="btn-apply-scite" id="btnSaveOverage">Save Settings</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Feedback Container -->
+  <div class="toast-container hidden" id="toastNotification">
+    <span class="toast-message" id="toastMessage">Success</span>
+  </div>
+
+  <!-- Application Logic -->
+  <script src="app.js"></script>
+</body>
+</html>

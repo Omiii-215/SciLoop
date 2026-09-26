@@ -40,7 +40,9 @@ const PORT = parseInt(process.env.PORT || "8085", 10);
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY || "";
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID || "YOUR_GOOGLE_CLIENT_ID";
 const oauth2Client = new OAuth2Client(GOOGLE_CLIENT_ID);
-const STATIC_DIR = path.join(__dirname, "simulation-3d");
+const STATIC_DIR = fs.existsSync(path.join(__dirname, "src"))
+  ? path.join(__dirname, "src")
+  : path.join(__dirname, "simulation-3d");
 const DATA_DIR = path.join(__dirname, "data");
 const STORE_PATH = path.join(DATA_DIR, "user_chats.json");
 
@@ -647,28 +649,16 @@ RULES:
    - Human-Explainable Summary (Directly and simply answer the user's specific prompt in plain, highly understandable language accessible to a non-expert. Do not use heavy jargon here).
    - Research Explanation (A separate section below that delves into the deeper scientific, academic, and research context, tailored to the user's query).
    - Executive Synthesis with inline reference tags [1], [2]
-   - Theoretical & Mathematical Formulations using KaTeX ($...$ for inline, $$...$$ for block math)
+   - Theoretical & Mathematical Formulations: You MUST write actual mathematical equations formatted in KaTeX using $$...$$ for block math and $...$ for inline math. Never output raw LaTeX syntax like \\frac without enclosing it inside $$...$$. Always provide rigorous mathematical formulas relevant to the query (such as Cox Proportional Hazards $$HR = \\frac{h(t \\mid X=1)}{h(t \\mid X=0)} = \\exp(\\beta)$$, Survival Probability $$S(t) = S_0(t)^{\\exp(\\beta X)}$$, differential equations, Bayes posterior, etc.).
    - Domain Attributes and Parameter Table
    - Visual Diagram or Graph:
-     * If the topic involves signaling pathways, biochemical cascades, or analytical workflows, provide a syntactically valid Mermaid.js block:
-       \`\`\`mermaid
-       graph TD
-         A[Input] --> B[Mechanism]
-       \`\`\`
-     * If the topic involves quantitative biomarker distributions, Kaplan-Meier overall survival curves, hazard ratios, or ROC curves, provide a structured Chart JSON block:
-       \`\`\`chart
-       {
-         "type": "line",
-         "title": "Kaplan-Meier Overall Survival Estimate",
-         "xLabel": "Months Post-Treatment",
-         "yLabel": "Overall Survival Probability",
-         "labels": ["0", "6", "12", "18", "24", "30"],
-         "datasets": [
-           { "label": "Biomarker High", "data": [1.0, 0.85, 0.68, 0.52, 0.44, 0.38], "color": "#0252ff" },
-           { "label": "Biomarker Low", "data": [1.0, 0.58, 0.32, 0.18, 0.12, 0.08], "color": "#e11d48" }
-         ]
-       }
-       \`\`\`
+     You MUST ALWAYS output an executable \`\`\`mermaid code block (using graph TD or flowchart TD) or a \`\`\`chart JSON block. Never output plain text arrows (like ->). Provide an illustrative mechanism, pathway, or analytical workflow diagram:
+     \`\`\`mermaid
+     graph TD
+       A[Upstream Target / Input] --> B[Molecular Binding / Intermediate]
+       B --> C[Downstream Signaling / Response]
+       C --> D[Clinical Outcome / Phenotype]
+     \`\`\`
    - Adversarial Scientific Critique: Null Hypothesis (H0), Confounders and Caveats, Falsification Threshold
 5. Verified Citations list with real PMIDs, DOIs, or arXiv IDs matching the retrieved papers. Tag each citation as [Supporting], [Mentioning], or [Contrasting].`;
 

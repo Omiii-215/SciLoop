@@ -54,11 +54,10 @@ SciLoop/
 │                           # - Proxies OpenAI GPT-4o completions (/api/research, /api/chat)
 ├── package.json            # Node.js project manifest ("npm start")
 ├── .env                    # Environment configuration (OPENAI_API_KEY, PORT, MODEL)
-├── simulation-3d/          # Production Research Companion Frontend
-│   ├── index.html          # Scite.ai layout, search hero card, simulation frames
-│   ├── style.css           # Premium Scite design system, KaTeX styling, print rules
-│   ├── app.js              # State machine, PDF.js parser, Three.js 3D viewer, 2D canvases
-│   └── simulation_data.json# 60-frame EGFR kinase MD coordinates & conformations
+├── src/                    # Production Research Companion Frontend
+│   ├── index.html          # Scite.ai layout, Assistant, MCP Dashboard, Feed, Help Center
+│   ├── style.css           # Premium Scite design system, MCP styling, responsive views
+│   └── app.js              # State machine, MCP simulator, literature feed, chat assistant
 └── Doc/
     └── SciLoop Blueprint.md# In-depth system design & mathematical specifications
 ```

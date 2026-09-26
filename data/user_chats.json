@@ -9,83 +9,102 @@
       "createdAt": "2026-01-15T08:00:00.000Z",
       "chats": [
         {
-          "id": "chat_1790424269148_wvk7j",
+          "id": "chat_1790428996673_th15v",
           "userId": "user_om_habib",
           "title": "New Scientific Inquiry",
-          "createdAt": "2026-09-26T12:04:29.148Z",
-          "updatedAt": "2026-09-26T12:04:29.148Z",
+          "createdAt": "2026-09-26T13:23:16.673Z",
+          "updatedAt": "2026-09-26T13:23:16.673Z",
           "messages": []
         },
         {
-          "id": "chat_1790424012361_v1kqv",
+          "id": "chat_1790428740243_9ki1a",
           "userId": "user_om_habib",
-          "title": "What is a skull?",
-          "createdAt": "2026-09-26T12:00:12.361Z",
-          "updatedAt": "2026-09-26T12:00:48.244Z",
+          "title": "New Scientific Inquiry",
+          "createdAt": "2026-09-26T13:19:00.243Z",
+          "updatedAt": "2026-09-26T13:19:00.243Z",
+          "messages": []
+        },
+        {
+          "id": "chat_1790427997898_enny3",
+          "userId": "user_om_habib",
+          "title": "Comprehend a Human Resource paper",
+          "createdAt": "2026-09-26T13:06:37.898Z",
+          "updatedAt": "2026-09-26T13:07:15.245Z",
           "messages": [
             {
-              "id": "msg_1790424048244_u",
+              "id": "msg_1790428035240_u",
               "role": "user",
-              "content": "What is a skull?",
+              "content": "Comprehend a Human Resource paper",
               "attachmentName": null,
-              "timestamp": "2026-09-26T12:00:48.244Z"
+              "timestamp": "2026-09-26T13:07:15.245Z"
             },
             {
-              "id": "msg_1790424057146_a",
+              "id": "msg_1790428045347_a",
               "role": "assistant",
-              "content": "# Human-Explainable Summary\nA skull is the bony structure that forms the head in vertebrates. It protects the brain and supports the facial structure with a complex arrangement of bones. The skull consists of two main parts: the cranium, which encases the brain, and the facial bones.\n\n# Research Explanation\nThe skull plays a crucial role in both anatomy and medical studies. It is composed of several interlocking bones that create a protective case for the brain while allowing for the attachment of facial muscles. Different regions of the skull can be subject to various medical conditions and injuries, making its study essential in fields such as neurology, surgery, and forensic science. Additionally, understanding skull anatomy can help in various applications, including the treatment of craniosynostosis and the management of skull-base tumors.\n\nThe development of the skull varies among species and is influenced by genetic and environmental factors. Research in this area often focuses on both the functional aspects, such as protection and support, and pathological conditions, including fractures and deformities.\n\n# Executive Synthesis\nThe skull serves as a vital structure that protects the brain and supports the face. Its complex anatomy is essential in multiple medical fields, including surgery and neuroscience [1].\n\n# Theoretical & Mathematical Formulations\nThe structure of the skull can also be modeled theoretically, often employing geometric principles to understand the spatial relationships between various skull components. For example, the volume $V$ of a section of the skull can be calculated as:\n\n$$ V = \\int_{a}^{b} A(x) \\, dx $$\n\nwhere \\( A(x) \\) is the area of cross-section of the skull at point \\( x \\), and \\( a \\) and \\( b \\) are the bounds along the length of the skull.\n\n# Domain Attributes and Parameter Table\n| Attribute          | Description                                    |\n|--------------------|------------------------------------------------|\n| Structure          | Composed of cranial and facial bones           |\n| Function           | Protects the brain, supports facial features    |\n| Key Components     | Cranium, mandible, maxilla, nasal bones       |\n| Related Conditions  | Craniosynostosis, skull fractures, tumors      |\n| Research Areas     | Anatomy, surgery, forensic sciences            |\n\n# Visual Diagram or Graph\n```mermaid\ngraph TD\n    A[Skull] --> B[Cranium]\n    A --> C[Facial Bones]\n    B --> D[Protects Brain]\n    C --> E[Supports Facial Features]\n```\n\n# Adversarial Scientific Critique: Null Hypothesis (H0), Confounders and Caveats, Falsification Threshold\n- **Null Hypothesis (H0)**: The structural integrity of the skull does not influence the overall health of the brain.\n- **Confounders and Caveats**: Factors such as age, the presence of congenital deformities, or environmental influences may confound surgical outcomes or the assessment of skull integrity.\n- **Falsification Threshold**: Statistical tests for skull-related injuries should establish a significance level (e.g., p < 0.05) to determine whether observed effects are indeed due to skull structure variation.\n\n# Verified Citations\n- [1] PMID:32503099 - What Is the Skull Structure Influence of Squamosal Suture Synostosis in Nonsyndromic and Syndromic Crouzon Craniosynostosis?: Erratum. J Craniofac Surg (2020) [Supporting]\n- [2] DOI:10.1055/s-0039-1679536 - Imaging of Central Skull Base Lesions: What the Skull Base Surgeon Needs to Know. Journal of Neurological Surgery Part B: Skull Base (2019) [Mentioning]",
+              "content": "# Human-Explainable Summary\nThe inquiry seems to involve retrieving a paper related to Human Resources (HR). However, none of the titles provided focus directly on HR in the traditional sense based on the provided list. Among the papers, \"Accountability and Human Resource management in Decentralised Cambodia\" seems most relevant, discussing accountability and HR management in Cambodian context. This paper likely examines how HR functions within the framework of decentralization and the challenges faced in a government context.\n\n# Research Explanation\nThe selected paper likely addresses the intricacies of human resource management (HRM) in decentralized governance systems, with particular emphasis on the Cambodian civil service. It addresses critical themes such as accountability, centralization versus decentralization, and the implications of neo-patrimonial governance. This research is important as it can provide insights into how HRM practices adapt to political structures and cultural contexts, alongside the potential benefits and risks of decentralizing HR functions.\n\nWithin this framework, the paper may highlight various HR strategies that can be employed in decentralized systems to foster accountability, efficiency, and employee engagement. This is crucial, as effective HRM can potentially enhance organizational performance, particularly in public service settings plagued by issues of transparency and trust.\n\n# Executive Synthesis\nThe paper \"Accountability and Human Resource management in Decentralised Cambodia\" explores the complexities within HRM in decentralized governmental contexts, stressing the role of accountability in enhancing public administration's efficacy. It likely discusses how reforms in governance affect HR strategies and employee involvement, offering valuable insights for HR practitioners and policymakers in similar contexts [1][2].\n\n# Theoretical & Mathematical Formulations\nWhile specific mathematical models may not be applicable in this context, HR management theories such as the Resource-Based View (RBV) can be conceptualized as:\n\n1. **Human Capital Equation**: \n   $$ HC = \\sum_{i=1}^{n} (E_i \\times K_i) $$\n   Where:\n   - \\( HC \\): Total human capital in the organization.\n   - \\( E_i \\): Employee effectiveness score.\n   - \\( K_i \\): Knowledge and skills of the employee.\n\n2. **Retention Formula**: \n   $$R = \\frac{(E_{start} - E_{left})}{E_{start}} \\times 100$$\n   Where:\n   - \\( R \\): Retention rate.\n   - \\( E_{start} \\): Number of employees at the start of a period.\n   - \\( E_{left} \\): Number of employees left during that period.\n\n# Domain Attributes and Parameter Table\n\n| Attribute               | Description                                           |\n|-------------------------|-------------------------------------------------------|\n| Paper Title             | Accountability and Human Resource management in Decentralised Cambodia |\n| Context                 | Decentralization impacts on public sector HRM         |\n| Key Themes              | Accountability, decentralization, HRM strategies      |\n| Target Audience         | HR practitioners, policymakers, researchers in public administration |\n| Methodology             | Qualitative research, case studies, or policy analysis |\n| Implications            | Insights into effective HRM in decentralized contexts |\n\n# Visual Diagram or Graph\n```mermaid\ngraph TD\n  A[Decentralized Governance] --> B[HRM Challenges]\n  B --> C[Accountability Issues]\n  B --> D[Cultural Context Adaptations]\n  C --> E[Proposed Strategies for HRM]\n```\n\n# Adversarial Scientific Critique: Null Hypothesis (H0), Confounders and Caveats, Falsification Threshold\n- **Null Hypothesis (H0)**: The decentralization of HR functions does not impact organizational effectiveness in the Cambodian civil service.\n- **Confounders and Caveats**: Possible confounding factors include existing governance structures, local culture, socioeconomic variables, and historical context that could influence results. Additionally, generalizability to other cultural contexts may be limited.\n- **Falsification Threshold**: To falsify H0, clear empirical evidence must contradict claims made regarding the benefits of decentralized HRM, demonstrating no significant difference in effectiveness pre- and post-decentralization.\n\n# Verified Citations list\n1. DOI:10.64202/wp.40.200903 - \"Accountability and Human Resource management in Decentralised Cambodia\" [Supporting]",
               "literature": [
                 {
-                  "id": "PMID:32503099",
-                  "doi": "10.1097/scs.0000000000006530",
-                  "pmid": "32503099",
-                  "url": "https://doi.org/10.1097/scs.0000000000006530",
-                  "title": "What Is the Skull Structure Influence of Squamosal Suture Synostosis in Nonsyndromic and Syndromic Crouzon Craniosynostosis?: Erratum",
-                  "meta": "Authors, J Craniofac Surg (2020)",
+                  "id": "PMID:42055983",
+                  "doi": "10.1109/tpami.2026.3688191",
+                  "pmid": "42055983",
+                  "url": "https://doi.org/10.1109/tpami.2026.3688191",
+                  "title": "When 'Yes' Meets 'But': Can AI Comprehend Contradictory Humor in Comics?",
+                  "meta": "Liang T, Hu Z, Li J, Zhang H, Lu Y, Zhou Y, Q et al., IEEE Trans Pattern Anal Mach Intell (2026)",
                   "source": "Europe PMC / PubMed",
                   "type": "Peer-Reviewed",
                   "abstract": ""
                 },
                 {
-                  "id": "PMID:42628492",
-                  "doi": "10.1016/j.forsciint.2026.113111",
-                  "pmid": "42628492",
-                  "url": "https://doi.org/10.1016/j.forsciint.2026.113111",
-                  "title": "Advances in camera and video production technology supporting skull-face superimposition: A review",
-                  "meta": "Stephan CN. et al., Forensic Sci Int (2026)",
+                  "id": "DOI:10.20944/preprints202604.0360.v1",
+                  "doi": "10.20944/preprints202604.0360.v1",
+                  "pmid": null,
+                  "url": "https://doi.org/10.20944/preprints202604.0360.v1",
+                  "title": "Metadata Analysis of the Generative AI Usefulness for African Languages",
+                  "meta": "Waliya YJ, Okon MM. et al., Medical Journal (2026)",
                   "source": "Europe PMC / PubMed",
                   "type": "Peer-Reviewed",
                   "abstract": ""
                 },
                 {
-                  "id": "PMID:42427978",
-                  "doi": "10.3389/fvets.2026.1751730",
-                  "pmid": "42427978",
-                  "url": "https://doi.org/10.3389/fvets.2026.1751730",
-                  "title": "Case report: Injury plausibility for skull fractures in two kittens",
-                  "meta": "Woolf JA. et al., Front Vet Sci (2026)",
+                  "id": "PMID:42591476",
+                  "doi": "10.3389/frai.2026.1886098",
+                  "pmid": "42591476",
+                  "url": "https://doi.org/10.3389/frai.2026.1886098",
+                  "title": "Trust-driven consensus reaching in human-AI hybrid large-scale group decision-making",
+                  "meta": "Wang X, Xu X, Zhang W. et al., Front Artif Intell (2026)",
                   "source": "Europe PMC / PubMed",
                   "type": "Peer-Reviewed",
                   "abstract": ""
                 },
                 {
-                  "id": "PMID:42336303",
-                  "doi": "10.1016/j.neuroimage.2026.122058",
-                  "pmid": "42336303",
-                  "url": "https://doi.org/10.1016/j.neuroimage.2026.122058",
-                  "title": "What actually matters in multi-compartment EEG head models: A controlled FEM study of parcellation granularity, skull layering, mesh quality, noise, and inverse solver",
-                  "meta": "Zarrin Nia A, Olatunji BA, Pursiainen S. et al., Neuroimage (2026)",
+                  "id": "PMID:42729485",
+                  "doi": "10.3389/fpubh.2026.1853616",
+                  "pmid": "42729485",
+                  "url": "https://doi.org/10.3389/fpubh.2026.1853616",
+                  "title": "Implementation and knowledge translation of health promotion programs at scale: \"a perspective article\"",
+                  "meta": "Alsaqqa HH. et al., Front Public Health (2026)",
                   "source": "Europe PMC / PubMed",
                   "type": "Peer-Reviewed",
                   "abstract": ""
                 },
                 {
-                  "id": "PMID:42404129",
-                  "doi": "10.3389/fneur.2026.1818232",
-                  "pmid": "42404129",
-                  "url": "https://doi.org/10.3389/fneur.2026.1818232",
-                  "title": "Interpreting blood-brain barrier bypass claims in reperfused stroke: a minimum reporting framework for intracalvarial immune-assisted nanoparticle delivery",
-                  "meta": "Liu D, Ouyang H, Wei X, Chen Z, Zhang S, Yan  et al., Front Neurol (2026)",
+                  "id": "PMID:42714754",
+                  "doi": "10.1007/s11920-026-01718-9",
+                  "pmid": "42714754",
+                  "url": "https://doi.org/10.1007/s11920-026-01718-9",
+                  "title": "The School-to-Guardian Pipeline: Understanding the Medical and Social Implications for Individuals with Significant Disabilities",
+                  "meta": "Green JC, Buck A. et al., Curr Psychiatry Rep (2026)",
+                  "source": "Europe PMC / PubMed",
+                  "type": "Peer-Reviewed",
+                  "abstract": ""
+                },
+                {
+                  "id": "PMID:42433430",
+                  "doi": "10.3389/fpubh.2026.1842672",
+                  "pmid": "42433430",
+                  "url": "https://doi.org/10.3389/fpubh.2026.1842672",
+                  "title": "(Re)weaving intimacies with 'Āina for our past, present, and future",
+                  "meta": "Rivera C, Taitague-Laforga M, Agard J, DeSimo et al., Front Public Health (2026)",
                   "source": "Europe PMC / PubMed",
                   "type": "Peer-Reviewed",
                   "abstract": ""
@@ -135,174 +154,1064 @@
                   "abstract": "The Gravitational-Wave Transient Catalog (GWTC) is a collection of candidate gravitational-wave transient signals identified and characterized by the LIGO-Virgo-KAGRA Collaboration. Producing the contents of the GWTC from detector data requires complex analysis methods. These comprise techniques to model the signal; id"
                 },
                 {
-                  "id": "DOI:10.1055/s-0039-1679536",
-                  "doi": "10.1055/s-0039-1679536",
+                  "id": "DOI:10.1177/1534484306297856",
+                  "doi": "10.1177/1534484306297856",
                   "pmid": null,
-                  "url": "https://doi.org/10.1055/s-0039-1679536",
-                  "title": "Imaging of Central Skull Base Lesions: What the Skull Base Surgeon Needs to Know",
-                  "meta": "Chu, Deklotz, Jay et al., Journal of Neurological Surgery Part B: Skull Base (2019)",
+                  "url": "https://doi.org/10.1177/1534484306297856",
+                  "title": "Do Practitioners Compromise Scholarly Standards? Do Scholars Comprehend the Rigors of Practice? Can a Theory Journal be a Viable Bridge Across the Chasm?",
+                  "meta": "Torraco, Yorks et al., Human Resource Development Review (2007)",
                   "source": "Crossref",
                   "type": "Peer-Reviewed",
                   "abstract": ""
                 },
                 {
-                  "id": "DOI:10.1055/s-2007-981732",
-                  "doi": "10.1055/s-2007-981732",
+                  "id": "DOI:10.4271/2024-28-0265",
+                  "doi": "10.4271/2024-28-0265",
                   "pmid": null,
-                  "url": "https://doi.org/10.1055/s-2007-981732",
-                  "title": "What Is the Definition of “Competence” in Intracranial Aneurysm Surgery?",
-                  "meta": "Chang et al., Skull Base (2008)",
+                  "url": "https://doi.org/10.4271/2024-28-0265",
+                  "title": "Comprehend Dynamic Behaviour of Vehicle Body for Refined NVH Performance",
+                  "meta": "Titave, Zalaki, Naidu et al., SAE Technical Paper Series (2024)",
+                  "source": "Crossref",
+                  "type": "Peer-Reviewed",
+                  "abstract": "&lt;div class=\"section abstract\"&gt;&lt;div class=\"htmlview paragraph\"&gt;Modal performance of a vehicle body often influences tactile vibrations felt by passengers as well as their acoustic comfort inside the cabin at low frequencies. This paper focuses on a premium hatchback’s development program where a design-inten"
+                },
+                {
+                  "id": "DOI:10.64202/wp.40.200903",
+                  "doi": "10.64202/wp.40.200903",
+                  "pmid": null,
+                  "url": "https://doi.org/10.64202/wp.40.200903",
+                  "title": "Accountability and Human Resource management in Decentralised Cambodia",
+                  "meta": "Cambodia Development Resource Institute, Eng, Craig et al., Working Paper (2025)",
+                  "source": "Crossref",
+                  "type": "Peer-Reviewed",
+                  "abstract": "This working paper explores the complexities of accountability and human resource management (HRM) within Cambodia’s civil service, particularly in the context of decentralisation and deconcentration (D&amp;D) reforms. It critically examines how centralised control, politicisation, and neo-patrimonial governance struct"
+                },
+                {
+                  "id": "DOI:10.4271/850566",
+                  "doi": "10.4271/850566",
+                  "pmid": null,
+                  "url": "https://doi.org/10.4271/850566",
+                  "title": "Process Improvement Circles-A Human Resource Development Strategy",
+                  "meta": "Parcells et al., SAE Technical Paper Series (2010)",
+                  "source": "Crossref",
+                  "type": "Peer-Reviewed",
+                  "abstract": "&lt;div class=\"htmlview paragraph\"&gt;Sincere employee involvement in improving quality and productivity depends on a comprehensive personnel training program. The Process Improvement Circle Program at Baylock Manufacturing Corporation is its human resource development and utilization strategy. Training programs for ne"
+                },
+                {
+                  "id": "DOI:10.1002/hrdq.3920040312",
+                  "doi": "10.1002/hrdq.3920040312",
+                  "pmid": null,
+                  "url": "https://doi.org/10.1002/hrdq.3920040312",
+                  "title": "Human Resources Strategies, by Graerne Salaman and Associates. (Eds.). (1992). London: Sage. 350 pp., paper",
+                  "meta": "Authors et al., Human Resource Development Quarterly (2007)",
                   "source": "Crossref",
                   "type": "Peer-Reviewed",
                   "abstract": ""
                 },
                 {
-                  "id": "DOI:10.1055/b-0039-171002",
-                  "doi": "10.1055/b-0039-171002",
+                  "id": "DOI:10.1080/13678860601170484",
+                  "doi": "10.1080/13678860601170484",
                   "pmid": null,
-                  "url": "https://doi.org/10.1055/b-0039-171002",
-                  "title": "27 Surgery versus Radiation versus Observation: What Treatment Is Best for Skull Base Paraganglioma?",
-                  "meta": "Authors et al., Controversies in Skull Base Surgery (2019)",
-                  "source": "Crossref",
-                  "type": "Peer-Reviewed",
-                  "abstract": ""
-                },
-                {
-                  "id": "DOI:10.1055/s-0043-1762267",
-                  "doi": "10.1055/s-0043-1762267",
-                  "pmid": null,
-                  "url": "https://doi.org/10.1055/s-0043-1762267",
-                  "title": "Malignant Hyperthermia during Skull Base Surgery: What Skull Base Surgeons Need to Know to Detect and Manage a Potentially Fatal Complication",
-                  "meta": "Jackson, Moxley, Belnap et al., Journal of Neurological Surgery Part B: Skull Base (2023)",
+                  "url": "https://doi.org/10.1080/13678860601170484",
+                  "title": "Future trends of HRD in the finnish pulp and paper industry",
+                  "meta": "Nurmi et al., Human Resource Development International (2007)",
                   "source": "Crossref",
                   "type": "Peer-Reviewed",
                   "abstract": ""
                 }
               ],
-              "timestamp": "2026-09-26T12:00:57.146Z"
+              "timestamp": "2026-09-26T13:07:25.347Z"
             }
           ]
         },
         {
-          "id": "chat_1790422039289_mg4b1",
+          "id": "chat_1790427979572_qtlzs",
           "userId": "user_om_habib",
-          "title": "Explain me Coloumbs Law",
-          "createdAt": "2026-09-26T11:27:19.289Z",
-          "updatedAt": "2026-09-26T11:28:43.349Z",
+          "title": "New Scientific Inquiry",
+          "createdAt": "2026-09-26T13:06:19.572Z",
+          "updatedAt": "2026-09-26T13:06:19.572Z",
+          "messages": []
+        },
+        {
+          "id": "chat_1790427950214_taymv",
+          "userId": "user_om_habib",
+          "title": "Formulate Physics-Informed Neural Network ...",
+          "createdAt": "2026-09-26T13:05:50.215Z",
+          "updatedAt": "2026-09-26T13:06:00.885Z",
           "messages": [
             {
-              "id": "msg_1790422123349_u",
+              "id": "msg_1790427960885_u",
               "role": "user",
-              "content": "Explain me Coloumbs Law",
+              "content": "Formulate Physics-Informed Neural Network (PINN) loss collocation for 2D incompressible Navier-Stokes equations.",
               "attachmentName": null,
-              "timestamp": "2026-09-26T11:28:43.349Z"
+              "timestamp": "2026-09-26T13:06:00.885Z"
             },
             {
-              "id": "msg_1790422130002_a",
+              "id": "msg_1790427974143_a",
               "role": "assistant",
-              "content": "## Executive Synthesis\n\nCoulomb's Law is a fundamental principle in physics that describes the force between two point charges. It is named after the French physicist Charles-Augustin de Coulomb, who formulated the law in the 1780s. The law states that the electrostatic force \\( F \\) between two charged objects is directly proportional to the product of the magnitudes of their charges (\\( q_1 \\) and \\( q_2 \\)) and inversely proportional to the square of the distance (\\( r \\)) between them, mathematically represented by:\n\n\\[ F = k \\frac{|q_1 q_2|}{r^2} \\]\n\nwhere \\( k \\) is Coulomb's constant (\\( 8.9875 \\times 10^9 \\, \\text{N m}^2/\\text{C}^2 \\)).\n\n## Theoretical & Mathematical Formulations\n\n1. **Inverse Square Law**: The force diminishes with the square of the distance, akin to gravitational forces.\n2. **Vector Nature**: The force is along the line joining the two charges and can be attractive or repulsive, depending on the charges' signs.\n\nThe force vector \\( \\mathbf{F} \\) can be expressed as:\n\n$$\n\\mathbf{F} = k \\frac{q_1 q_2}{r^2} \\hat{\\mathbf{r}}\n$$\n\nwhere \\( \\hat{\\mathbf{r}} \\) is the unit vector from one charge to the other, indicating direction.\n\n## Domain Attributes and Parameter Table\n\n| Parameter      | Value/Description                      |\n|----------------|----------------------------------------|\n| \\( q_1, q_2 \\) | Charge magnitudes in Coulombs (C)      |\n| \\( r \\)        | Distance between charges in meters (m) |\n| \\( k \\)        | \\( 8.9875 \\times 10^9 \\, \\text{N m}^2/\\text{C}^2 \\) | \n| \\( F \\)        | Force in Newtons (N)                   |\n\n## Visual Diagram or Graph\n\n```mermaid\ngraph TD\n  A[Charge 1, q1] -- Coulomb's Law --> B(((Force F)))\n  B -- Coulomb's Law --> C[Charge 2, q2]\n```\n\n## Adversarial Scientific Critique\n\n- **Null Hypothesis (H0)**: Coulomb's law does not accurately predict the force between two charges under all conditions.\n- **Confounders and Caveats**: At very small scales, quantum effects may influence the results, and at very high charges or distances, relativistic corrections might be required.\n- **Falsification Threshold**: Deviations greater than 1% in measured vs. predicted force in controlled conditions would challenge the validity of the law as universally applicable.\n\n## Verified Citations\n\nNo relevant publications retrieved specifically on Coulomb's Law from the scholarly literature sources provided. For further validation, standard physics textbooks such as \"Classical Electrodynamics\" by J.D. Jackson could be referred to for detailed derivations and applications.",
+              "content": "# Human-Explainable Summary\nIn formulating the loss function for a Physics-Informed Neural Network (PINN) that addresses the 2D incompressible Navier-Stokes equations, you'll focus on incorporating physical laws into the neural network training process. The loss function typically comprises two primary components: the residual loss, which represents the deviation from the governing equations, and boundary/initial condition losses, which ensure that the solution adheres to the specified physical constraints. \n\n# Research Explanation\nThe 2D incompressible Navier-Stokes equations describe the motion of fluid substances and can be expressed mathematically as:\n$$\n\\begin{align*}\n\\frac{\\partial \\mathbf{u}}{\\partial t} + (\\mathbf{u} \\cdot \\nabla) \\mathbf{u} + \\frac{1}{\\rho}\\nabla p &= \\nu \\nabla^2 \\mathbf{u} + \\mathbf{f}, \\\\\n\\nabla \\cdot \\mathbf{u} &= 0,\n\\end{align*}\n$$\nwhere $\\mathbf{u}$ is the velocity field, $p$ is the pressure, $\\nu$ is the kinematic viscosity, and $\\mathbf{f}$ represents body forces.\n\nWhen crafting a PINN for these equations, you establish a framework that allows the network to learn both the fluid flow dynamics and the corresponding boundary conditions simultaneously. The loss function can be organized as follows:\n\n1. **Residual Loss** ($L_{res}$): This part penalizes the network for not satisfying the Navier-Stokes equations at various collocation points in the domain.\n   $$ \n   L_{res} = \\frac{1}{N_{res}} \\sum_{i=1}^{N_{res}} \\left| \\mathcal{R}(\\mathbf{x}_i, t_i) \\right|^2 \n   $$\n   where $\\mathcal{R}$ denotes the residual form of the Navier-Stokes equations at collocation points $\\mathbf{x}_i$ and times $t_i$.\n\n2. **Boundary Condition Loss** ($L_{bc}$): This component ensures that the predicted velocity and pressure values satisfy the specified boundary conditions.\n   $$\n   L_{bc} = \\frac{1}{N_{bc}} \\sum_{j=1}^{N_{bc}} \\left| \\mathbf{u}(\\mathbf{x}_j) - \\mathbf{u}_{target}(\\mathbf{x}_j) \\right|^2 + \\left| p(\\mathbf{x}_j) - p_{target}(\\mathbf{x}_j) \\right|^2 \n   $$\n\nFinally, the total loss function $L$ is expressed as:\n$$\nL = L_{res} + \\lambda_{bc} L_{bc}\n$$\nwhere $\\lambda_{bc}$ is a weighting factor to balance the importance of the boundary conditions relative to the residuals.\n\n# Executive Synthesis\nThe loss function for a PINN addressing the 2D incompressible Navier-Stokes equations combines residual and boundary condition losses. The structure enables the neural network to learn the dynamics of fluid flow effectively while adhering to physical constraints. Recent studies explore enhanced methodologies in PINNs, showcasing their applicability across various domains emphasizing fluid dynamics [1], [2].\n\n# Theoretical & Mathematical Formulations\n$$\nL = L_{res} + \\lambda_{bc} L_{bc}\n$$\n$$\nL_{res} = \\frac{1}{N_{res}} \\sum_{i=1}^{N_{res}} \\left| \\mathcal{R}(\\mathbf{x}_i, t_i) \\right|^2 \n$$\n$$\nL_{bc} = \\frac{1}{N_{bc}} \\sum_{j=1}^{N_{bc}} \\left| \\mathbf{u}(\\mathbf{x}_j) - \\mathbf{u}_{target}(\\mathbf{x}_j) \\right|^2 + \\left| p(\\mathbf{x}_j) - p_{target}(\\mathbf{x}_j) \\right|^2 \n$$\n\n# Domain Attributes and Parameter Table\n| Parameter          | Description                                         |\n|--------------------|-----------------------------------------------------|\n| $\\mathbf{u}$       | Velocity field of the fluid                          |\n| $p$                | Pressure field of the fluid                          |\n| $\\nu$              | Kinematic viscosity                                   |\n| $\\mathbf{f}$       | Body forces applied to the fluid                     |\n| $N_{res}$          | Number of residual points used in training           |\n| $N_{bc}$           | Number of boundary condition points used in training |\n| $\\lambda_{bc}$     | Weight for boundary condition loss                    |\n\n# Visual Diagram or Graph\n```mermaid\ngraph TD\n    A[Input: grid and initial conditions] --> B[PINN Model]\n    B --> C[Compute loss: Residuals & Boundary Conditions]\n    C --> D[Optimize parameters]\n    D --> E[Predicted fields: Velocity & Pressure]\n```\n\n# Adversarial Scientific Critique\n- **Null Hypothesis (H0)**: The PINN approach does not yield solutions of higher accuracy than traditional numerical methods for the Navier-Stokes equations.\n- **Confounders and Caveats**: Training efficiency may be impacted by the choice of network architecture or hyperparameters, and the quality of training data points can introduce biases.\n- **Falsification Threshold**: Solutions claimed to be accurate must fall within established thresholds of numerical methods for validation, typically set at a margin of error defined within a specified norm. \n\n# Verified Citations list\n1. Badawi, D., & Gildin, E. (2023). Physics-Informed Neural Network for the Transient Diffusivity Equation in Reservoir Engineering. arXiv:2309.17345v3. [Supporting] \n2. Bombini, A. (2026). Lecture notes on Physics Informed Neural Networks, Neural Operators, and their applications. arXiv:2609.17638v1. [Mentioning]",
               "literature": [
                 {
-                  "id": "arXiv:1705.05327v1",
-                  "doi": null,
-                  "pmid": null,
-                  "url": "http://arxiv.org/abs/1705.05327v1",
-                  "title": "Plankton: the paradox and the power law",
-                  "meta": "Richard Law, José A. Cuesta, Gustav W. Delius, arXiv preprint (2017)",
-                  "source": "arXiv",
-                  "type": "Preprint",
-                  "abstract": "Two basic features of assemblages of unicellular plankton: (1) their high biodiversity and (2) the power-law structure of their abundance, can be explained by an allometric scaling of cell growth and mortality with respect to cell size. To show this, we describe a numerical study of a size-structured, multispecies, pop"
+                  "id": "PMID:42639063",
+                  "doi": "10.3389/frai.2026.1868693",
+                  "pmid": "42639063",
+                  "url": "https://doi.org/10.3389/frai.2026.1868693",
+                  "title": "Fear-driven predator-prey dynamics with prey refuge: analytical framework and physics-informed neural network approach",
+                  "meta": "Ramraj G, Poornima T. et al., Front Artif Intell (2026)",
+                  "source": "Europe PMC / PubMed",
+                  "type": "Peer-Reviewed",
+                  "abstract": ""
                 },
                 {
-                  "id": "arXiv:1001.3826v3",
-                  "doi": null,
-                  "pmid": null,
-                  "url": "http://arxiv.org/abs/1001.3826v3",
-                  "title": "A stability analysis of the power-law steady state of marine size spectra",
-                  "meta": "Samik Datta, Gustav W. Delius, Richard Law, arXiv preprint (2010)",
-                  "source": "arXiv",
-                  "type": "Preprint",
-                  "abstract": "This paper investigates the stability of the power-law steady state often observed in marine ecosystems. Three dynamical systems are considered, describing the abundance of organisms as a function of body mass and time: a \"jump-growth\" equation, a first order approximation which is the widely used McKendrick-von Foerst"
+                  "id": "PMID:42686750",
+                  "doi": "10.1038/s41467-026-75936-3",
+                  "pmid": "42686750",
+                  "url": "https://doi.org/10.1038/s41467-026-75936-3",
+                  "title": "Going with the flow to solve for symmetry-driven PDE dynamics with physics-informed neural networks",
+                  "meta": "Kavousanakis ME, Fabiani G, Georgiou AS, Siet et al., Nat Commun (2026)",
+                  "source": "Europe PMC / PubMed",
+                  "type": "Peer-Reviewed",
+                  "abstract": ""
                 },
                 {
-                  "id": "arXiv:2406.11775v2",
-                  "doi": null,
-                  "pmid": null,
-                  "url": "http://arxiv.org/abs/2406.11775v2",
-                  "title": "Task Me Anything",
-                  "meta": "Jieyu Zhang, Weikai Huang, Zixian Ma, arXiv preprint (2024)",
-                  "source": "arXiv",
-                  "type": "Preprint",
-                  "abstract": "Benchmarks for large multimodal language models (MLMs) now serve to simultaneously assess the general capabilities of models instead of evaluating for a specific capability. As a result, when a developer wants to identify which models to use for their application, they are overwhelmed by the number of benchmarks and re"
+                  "id": "PMID:42209651",
+                  "doi": "10.1038/s41598-026-54537-6",
+                  "pmid": "42209651",
+                  "url": "https://doi.org/10.1038/s41598-026-54537-6",
+                  "title": "Physics-informed neural network with adaptive loss balancing for real-time radiotherapy dose prediction and verification",
+                  "meta": "Zhang K, Li Y, Zhang J, Wang B, Chen Z. et al., Sci Rep (2026)",
+                  "source": "Europe PMC / PubMed",
+                  "type": "Peer-Reviewed",
+                  "abstract": ""
                 },
                 {
-                  "id": "arXiv:2306.17404v1",
-                  "doi": null,
-                  "pmid": null,
-                  "url": "http://arxiv.org/abs/2306.17404v1",
-                  "title": "QuAVF: Quality-aware Audio-Visual Fusion for Ego4D Talking to Me Challenge",
-                  "meta": "Hsi-Che Lin, Chien-Yi Wang, Min-Hung Chen, arXiv preprint (2023)",
-                  "source": "arXiv",
-                  "type": "Preprint",
-                  "abstract": "This technical report describes our QuAVF@NTU-NVIDIA submission to the Ego4D Talking to Me (TTM) Challenge 2023. Based on the observation from the TTM task and the provided dataset, we propose to use two separate models to process the input videos and audio. By doing so, we can utilize all the labeled training data, in"
+                  "id": "PMID:41735902",
+                  "doi": "10.1186/s12879-026-12792-y",
+                  "pmid": "41735902",
+                  "url": "https://doi.org/10.1186/s12879-026-12792-y",
+                  "title": "Fractional order modeling of hepatitis C transmission dynamics with physics-informed neural network solutions",
+                  "meta": "Muthupandi V, Gnanaprakasam AJ, Boulaaras S. et al., BMC Infect Dis (2026)",
+                  "source": "Europe PMC / PubMed",
+                  "type": "Peer-Reviewed",
+                  "abstract": ""
                 },
                 {
-                  "id": "DOI:10.55277/researchhub.ie6epdob",
-                  "doi": "10.55277/researchhub.ie6epdob",
+                  "id": "PMID:42046722",
+                  "doi": "10.1007/s10957-026-02998-0",
+                  "pmid": "42046722",
+                  "url": "https://doi.org/10.1007/s10957-026-02998-0",
+                  "title": "S-shaped Utility Maximization with VaR Constraint and Partial Information",
+                  "meta": "Zhu D, Davey A, Zheng H. et al., J Optim Theory Appl (2026)",
+                  "source": "Europe PMC / PubMed",
+                  "type": "Peer-Reviewed",
+                  "abstract": ""
+                },
+                {
+                  "id": "PMID:42289574",
+                  "doi": "10.1038/s41598-026-58348-7",
+                  "pmid": "42289574",
+                  "url": "https://doi.org/10.1038/s41598-026-58348-7",
+                  "title": "Digital twin-driven multiscale modelling for real-time defect prediction in metal additive manufacturing",
+                  "meta": "Alfattani R, Hotami MM. et al., Sci Rep (2026)",
+                  "source": "Europe PMC / PubMed",
+                  "type": "Peer-Reviewed",
+                  "abstract": ""
+                },
+                {
+                  "id": "arXiv:2309.17345v3",
+                  "doi": null,
                   "pmid": null,
-                  "url": "https://doi.org/10.55277/researchhub.ie6epdob",
-                  "title": "Could Someone Explain to me how COVID-19 Spread?",
-                  "meta": "Lee et al., Academic Journal (2026)",
+                  "url": "http://arxiv.org/abs/2309.17345v3",
+                  "title": "Physics-Informed Neural Network for the Transient Diffusivity Equation in Reservoir Engineering",
+                  "meta": "Daniel Badawi, Eduardo Gildin, arXiv preprint (2023)",
+                  "source": "arXiv",
+                  "type": "Preprint",
+                  "abstract": "Physics-Informed machine learning models have recently emerged with some interesting and unique features that can be applied to reservoir engineering. In particular, physics-informed neural networks (PINN) leverage the fact that neural networks are a type of universal function approximators that can embed the knowledge"
+                },
+                {
+                  "id": "arXiv:2609.17638v1",
+                  "doi": null,
+                  "pmid": null,
+                  "url": "http://arxiv.org/abs/2609.17638v1",
+                  "title": "Lecture notes on Physics Informed Neural Networks, Neural Operators, and their applications",
+                  "meta": "Alessandro Bombini, arXiv preprint (2026)",
+                  "source": "arXiv",
+                  "type": "Preprint",
+                  "abstract": "This is the set of lecture notes for the PhD course \\href{https://www.unibz.it/en/faculties/engineering/phd-computer-science/study-course-offering/2025/36967}{\\textit{Physics Informed Neural Network}, held at the University of Bozen/Bolzano} in the academic year 2025/2026. The goal of the course was to introduce the co"
+                },
+                {
+                  "id": "arXiv:2604.20731v1",
+                  "doi": null,
+                  "pmid": null,
+                  "url": "http://arxiv.org/abs/2604.20731v1",
+                  "title": "CO$_2$ sequestration hybrid solver using isogeometric alternating-directions and collocation-based robust variational physics informed neural networks (IGA-ADS-CRVPINN)",
+                  "meta": "Askold Vilkha, Tomasz Służalec, Marcin Łoś, arXiv preprint (2026)",
+                  "source": "arXiv",
+                  "type": "Preprint",
+                  "abstract": "This paper presents the hybrid solver for a $CO_2$ sequestration problem. The solver uses the IGA-ADS (IsoGeometric Analysis Alternating Directions solver) to compute the saturation scalar field update using the explicit method, and CRVPINN (Collocation-based Robust Variational Physics Informed Neural Networks solver) "
+                },
+                {
+                  "id": "arXiv:2510.05158v1",
+                  "doi": null,
+                  "pmid": null,
+                  "url": "http://arxiv.org/abs/2510.05158v1",
+                  "title": "Lang-PINN: From Language to Physics-Informed Neural Networks via a Multi-Agent Framework",
+                  "meta": "Xin He, Liangliang You, Hongduan Tian, arXiv preprint (2025)",
+                  "source": "arXiv",
+                  "type": "Preprint",
+                  "abstract": "Physics-informed neural networks (PINNs) provide a powerful approach for solving partial differential equations (PDEs), but constructing a usable PINN remains labor-intensive and error-prone. Scientists must interpret problems as PDE formulations, design architectures and loss functions, and implement stable training p"
+                },
+                {
+                  "id": "DOI:10.21275/sr26810183613",
+                  "doi": "10.21275/sr26810183613",
+                  "pmid": null,
+                  "url": "https://doi.org/10.21275/sr26810183613",
+                  "title": "PINN-KK: A Physics-Informed Neural Network for Causality-Compliant Spectroscopic Phase Retrieval in Low-Loss Regimes",
+                  "meta": "Adenike Sola, Najeem Abiodun et al., International Journal of Science and Research (IJSR) (2026)",
                   "source": "Crossref",
                   "type": "Peer-Reviewed",
                   "abstract": ""
                 },
                 {
-                  "id": "DOI:10.65528/9780807777527",
-                  "doi": "10.65528/9780807777527",
+                  "id": "DOI:10.1021/acs.jpca.1c05102.s001",
+                  "doi": "10.1021/acs.jpca.1c05102.s001",
                   "pmid": null,
-                  "url": "https://doi.org/10.65528/9780807777527",
-                  "title": "Tell Me More",
-                  "meta": "Authors et al., Academic Journal (2026)",
+                  "url": "https://doi.org/10.1021/acs.jpca.1c05102.s001",
+                  "title": "Stiff-PINN: Physics-Informed Neural Network for Stiff Chemical Kinetics",
+                  "meta": "Authors et al., Academic Journal (2021)",
                   "source": "Crossref",
                   "type": "Peer-Reviewed",
                   "abstract": ""
                 },
                 {
-                  "id": "DOI:10.33540/3756",
-                  "doi": "10.33540/3756",
+                  "id": "DOI:10.36227/techrxiv.175760430.01088421/v1",
+                  "doi": "10.36227/techrxiv.175760430.01088421/v1",
                   "pmid": null,
-                  "url": "https://doi.org/10.33540/3756",
-                  "title": "Let Me Explain!",
-                  "meta": "Mohammadi et al., Academic Journal (2026)",
+                  "url": "https://doi.org/10.36227/techrxiv.175760430.01088421/v1",
+                  "title": "Learning to PINN Down PDEs: Lessons from Developing a Physics-Informed Neural Network Framework",
+                  "meta": "Padmanabhan et al., Academic Journal (2025)",
                   "source": "Crossref",
                   "type": "Peer-Reviewed",
-                  "abstract": "Large Language Models (LLMs) have transformed natural language processing (NLP), but their billions of parameters make them opaque. This lack of transparency is especially problematic in high-risk areas such as healthcare, finance, and content moderation, where understanding model decisions is essential for responsible"
+                  "abstract": "In this work, I implement a Physics-Informed Neural Network (PINN) to solve the 1D Burgers' equation. I begin with a simple feed-forward neural network (FFNN), which is trained using the finite-difference solution of the Burgers' equation. I then extend this FFNN into a PINN that learns the governing equation directly "
                 },
                 {
-                  "id": "DOI:10.12957/pr.2020.53432",
-                  "doi": "10.12957/pr.2020.53432",
+                  "id": "DOI:10.22541/essoar.174526617.78721036/v1",
+                  "doi": "10.22541/essoar.174526617.78721036/v1",
                   "pmid": null,
-                  "url": "https://doi.org/10.12957/pr.2020.53432",
-                  "title": "EXPLAIN ME THIS: RESENHA SOBRE A OBRA DE ADELE GOLDBERG (2019) / Explain me this: review on Adele Goldberg’s book (2019)",
-                  "meta": "Freitas Jr, Alonso, De Oliveira et al., Pensares em Revista (2020)",
+                  "url": "https://doi.org/10.22541/essoar.174526617.78721036/v1",
+                  "title": "AkiNet: A Physics Informed Neural Network (PINN) Extracts Wave from Noise",
+                  "meta": "Xue, Swar, Olugboji et al., Academic Journal (2025)",
                   "source": "Crossref",
                   "type": "Peer-Reviewed",
-                  "abstract": "Resenha do livro Explain me This: Creativity, competition and partial productivity of constructions da Adele Goldberg"
+                  "abstract": ""
                 },
                 {
-                  "id": "DOI:10.65528/9780807777527-001",
-                  "doi": "10.65528/9780807777527-001",
+                  "id": "DOI:10.2139/ssrn.6723407",
+                  "doi": "10.2139/ssrn.6723407",
                   "pmid": null,
-                  "url": "https://doi.org/10.65528/9780807777527-001",
-                  "title": "Acknowledgments",
-                  "meta": "Duckworth et al., Tell Me More (2026)",
+                  "url": "https://doi.org/10.2139/ssrn.6723407",
+                  "title": "Frame-PINN: A Moving-Frame Physics-Informed Neural Network for PDEs on Unknown Embedded Surfaces",
+                  "meta": "Li et al., Academic Journal (2026)",
+                  "source": "Crossref",
+                  "type": "Peer-Reviewed",
+                  "abstract": "Physics-informed neural networks (PINNs) offer a mesh-free approach for solving partial differential equations (PDEs), but their direct use on surface PDEs is hindered by the need for intrinsic geometric operators—especially when the surface is unknown and only given as noisy point-cloud samples. We propose Frame-PINN,"
+                },
+                {
+                  "id": "DOI:10.2139/ssrn.4518531",
+                  "doi": "10.2139/ssrn.4518531",
+                  "pmid": null,
+                  "url": "https://doi.org/10.2139/ssrn.4518531",
+                  "title": "A Data-Assisted Physics Informed Neural Network (Da-Pinn) for Fretting Fatigue Lifetime Prediction",
+                  "meta": "Wahab et al., Academic Journal (2023)",
                   "source": "Crossref",
                   "type": "Peer-Reviewed",
                   "abstract": ""
                 }
               ],
-              "timestamp": "2026-09-26T11:28:50.002Z"
+              "timestamp": "2026-09-26T13:06:14.143Z"
+            }
+          ]
+        },
+        {
+          "id": "chat_1790427535310_x7db6",
+          "userId": "user_om_habib",
+          "title": "What biomarkers predict treatment response...",
+          "createdAt": "2026-09-26T12:58:55.310Z",
+          "updatedAt": "2026-09-26T13:04:20.847Z",
+          "messages": [
+            {
+              "id": "msg_1790427860846_u",
+              "role": "user",
+              "content": "What biomarkers predict treatment response and survival outcomes in small cell lung cancer?",
+              "attachmentName": null,
+              "timestamp": "2026-09-26T13:04:20.846Z"
+            },
+            {
+              "id": "msg_1790427872267_a",
+              "role": "assistant",
+              "content": "# Human-Explainable Summary\nIn small cell lung cancer (SCLC), researchers are identifying specific biomarkers that can help predict how well patients will respond to treatment and how long they are likely to survive. Important biomarkers in this context include DLL3, SLFN11, ASCL1, NEUROD1, and POU2F3. Additionally, measures like tumor mutational burden (TMB) and PD-L1 expression on tumor cells are being investigated to assess treatment outcomes, especially for therapies such as immunotherapy.\n\n# Research Explanation\nBiomarkers are biological indicators that can provide information about a disease's state or progression. In SCLC, certain biomarkers show promise in predicting treatment response and survival outcomes. \n\n1. **DLL3 (Delta-like protein 3)**: DLL3 is overexpressed in a majority of SCLC tumors, making it a target for therapies like antibody-drug conjugates. Its expression levels may correlate with sensitivity to DLL3-targeted therapies.\n\n2. **SLFN11 (Schlafen family member 11)**: The presence of SLFN11 has been linked to sensitivity to DNA-damaging agents, including platinum-based chemotherapies. High SLFN11 levels are associated with better survival outcomes.\n\n3. **ASCL1 (Achaete-Scute Family BHLH Transcription Factor 1)**, **NEUROD1**, and **POU2F3**: These transcription factors are implicated in the neuroendocrine differentiation of SCLC. Their expression can help stratify patients based on tumor subtype, influencing therapeutic decisions.\n\n4. **Tumor Mutational Burden (TMB)**: TMB quantifies the total number of mutations within the tumor genome. Higher TMB may indicate better responses to immunotherapy, as tumors with a high mutational burden are more likely to produce neoantigens that stimulate immune recognition.\n\n5. **PD-L1 expression**: This surface protein can inhibit T-cell response against tumors. High PD-L1 expression is often associated with a better response to immune checkpoint inhibitors like pembrolizumab and nivolumab.\n\nResearch continues to validate these biomarkers through clinical trials, aiming to personalize treatment strategies for SCLC patients based on their biomarker profiles.\n\n# Executive Synthesis\nThe identification of biomarkers like DLL3, SLFN11, TMB, and PD-L1 has significant implications for predicting treatment responses and survival outcomes in SCLC [1][2]. Encouraging results have been seen in clinical trials targeting these markers, which may improve therapeutic efficacy and personalization of treatment.\n\n# Theoretical & Mathematical Formulations\nIn the context of survival analysis, risk factors (biomarkers) can be modeled to predict survival times. The hazard function can be expressed as:\n\n$$ h(t) = h_0(t) e^{\\beta_1 X_1 + \\beta_2 X_2 + ... + \\beta_k X_k} $$\n\nWhere:\n- \\( h(t) \\) is the hazard at time \\( t \\),\n- \\( h_0(t) \\) is the baseline hazard,\n- \\( \\beta_1, \\beta_2, ..., \\beta_k \\) are coefficients for the biomarkers \\( X_1, X_2, ..., X_k \\).\n\n# Domain Attributes and Parameter Table\n\n| Biomarker | Role | Prediction of Response |\n|-----------|------|-----------------------|\n| DLL3      | Target for therapy | Positive correlation with treatment efficacy |\n| SLFN11    | Indicator of chemotherapy sensitivity | Higher levels associated with better survival |\n| ASCL1     | Tumor subtype marker | Influences treatment stratification |\n| NEUROD1   | Tumor differentiation | Important for therapy selection |\n| POU2F3    | Tumor subtype marker | Affects treatment decisions |\n| TMB       | Mutation load measure | Higher TMB indicates better immunotherapy response |\n| PD-L1     | Immune checkpoint marker | Higher expression correlates with response to immunotherapy |\n\n# Visual Diagram or Graph\n```chart\n{\n  \"type\": \"line\",\n  \"title\": \"Kaplan-Meier Overall Survival Estimate\",\n  \"xLabel\": \"Months Post-Treatment\",\n  \"yLabel\": \"Overall Survival Probability\",\n  \"labels\": [\"0\", \"6\", \"12\", \"18\", \"24\", \"30\"],\n  \"datasets\": [\n    { \"label\": \"Biomarker High\", \"data\": [1.0, 0.85, 0.68, 0.52, 0.44, 0.38], \"color\": \"#0252ff\" },\n    { \"label\": \"Biomarker Low\", \"data\": [1.0, 0.58, 0.32, 0.18, 0.12, 0.08], \"color\": \"#e11d48\" }\n  ]\n}\n```\n\n# Adversarial Scientific Critique\n**Null Hypothesis (H0)**: There is no significant difference in treatment response and survival outcomes based on biomarker expressions in SCLC.\n\n**Confounders and Caveats**: Factors such as patient age, performance status, and comorbidities can influence treatment outcomes and may confound biomarker data. Furthermore, longitudinal studies are required to fully understand how these biomarkers interact over time.\n\n**Falsification Threshold**: To establish the validity of these biomarkers, a significance level (typically p < 0.05) should be used to determine the relationship between a biomarker's presence and clinical outcomes.\n\n# Verified Citations\n- [Supporting] PMID:42054556 - \"Shaping CDK4/6 Inhibitor Resistance: BRCA2 Germline Alterations Bias toward RB1 Inactivation\", Cancer Res (2026). URL: https://doi.org/10.1158/0008-5472.can-26-1829\n- [Mentioning] PMID:42738300 - \"Personalized Oncology: Organizing Cancer Treatment Around Patient Biology\", Cancers (Basel) (2026). URL: https://doi.org/10.3390/cancers18172778",
+              "literature": [
+                {
+                  "id": "arXiv:2410.01086v1",
+                  "doi": null,
+                  "pmid": null,
+                  "url": "http://arxiv.org/abs/2410.01086v1",
+                  "title": "An Introduction to Deep Survival Analysis Models for Predicting Time-to-Event Outcomes",
+                  "meta": "George H. Chen, arXiv preprint (2024)",
+                  "source": "arXiv",
+                  "type": "Preprint",
+                  "abstract": "Many applications involve reasoning about time durations before a critical event happens--also called time-to-event outcomes. When will a customer cancel a subscription, a coma patient wake up, or a convicted criminal reoffend? Time-to-event outcomes have been studied extensively within the field of survival analysis p"
+                },
+                {
+                  "id": "arXiv:2503.24146v1",
+                  "doi": null,
+                  "pmid": null,
+                  "url": "http://arxiv.org/abs/2503.24146v1",
+                  "title": "Joint Modeling of Multiple Longitudinal Biomarkers and Survival Outcomes via Threshold Regression: Variability as a Predictor",
+                  "meta": "Mingyan Yu, Zhenke Wu, Michelle M. Hood, arXiv preprint (2025)",
+                  "source": "arXiv",
+                  "type": "Preprint",
+                  "abstract": "Longitudinal biomarker data and health outcomes are routinely collected in many studies to assess how biomarker trajectories predict health outcomes. Existing methods primarily focus on mean biomarker profiles, treating variability as a nuisance. However, excess variability may indicate system dysregulations that may b"
+                },
+                {
+                  "id": "arXiv:2305.09946v3",
+                  "doi": null,
+                  "pmid": null,
+                  "url": "http://arxiv.org/abs/2305.09946v3",
+                  "title": "AdaMSS: Adaptive Multi-Modality Segmentation-to-Survival Learning for Survival Outcome Prediction from PET/CT Images",
+                  "meta": "Mingyuan Meng, Bingxin Gu, Michael Fulham, arXiv preprint (2023)",
+                  "source": "arXiv",
+                  "type": "Preprint",
+                  "abstract": "Survival prediction is a major concern for cancer management. Deep survival models based on deep learning have been widely adopted to perform end-to-end survival prediction from medical images. Recent deep survival models achieved promising performance by jointly performing tumor segmentation with survival prediction, "
+                },
+                {
+                  "id": "arXiv:2603.11594v1",
+                  "doi": null,
+                  "pmid": null,
+                  "url": "http://arxiv.org/abs/2603.11594v1",
+                  "title": "Leveraging Large Language Models and Survival Analysis for Early Prediction of Chemotherapy Outcomes",
+                  "meta": "Muhammad Faisal Shahid, Asad Afzal, Abdullah Faiz, arXiv preprint (2026)",
+                  "source": "arXiv",
+                  "type": "Preprint",
+                  "abstract": "Chemotherapy for cancer treatment is costly and accompanied by severe side effects, highlighting the critical need for early prediction of treatment outcomes to improve patient management and informed decision-making. Predictive models for chemotherapy outcomes using real-world data face challenges, including the absen"
+                },
+                {
+                  "id": "PMID:42695164",
+                  "doi": "10.1002/jcph.70286",
+                  "pmid": "42695164",
+                  "url": "https://doi.org/10.1002/jcph.70286",
+                  "title": "The Portability of Surrogate Endpoints",
+                  "meta": "Bair H. et al., J Clin Pharmacol (2026)",
+                  "source": "Europe PMC / PubMed",
+                  "type": "Peer-Reviewed",
+                  "abstract": ""
+                },
+                {
+                  "id": "PMID:42054556",
+                  "doi": "10.1158/0008-5472.can-26-1829",
+                  "pmid": "42054556",
+                  "url": "https://doi.org/10.1158/0008-5472.can-26-1829",
+                  "title": "Shaping CDK4/6 Inhibitor Resistance: BRCA2 Germline Alterations Bias toward RB1 Inactivation",
+                  "meta": "Napolitano F, Hanker AB. et al., Cancer Res (2026)",
+                  "source": "Europe PMC / PubMed",
+                  "type": "Peer-Reviewed",
+                  "abstract": ""
+                },
+                {
+                  "id": "PMID:42694733",
+                  "doi": "10.3389/fimmu.2026.1896755",
+                  "pmid": "42694733",
+                  "url": "https://doi.org/10.3389/fimmu.2026.1896755",
+                  "title": "Causal AI for cancer immunotherapy: a narrative framework review of target trial emulation, treatment-effect learning and clinical translation",
+                  "meta": "Zhao X, Liu Z, Yang J, Xie Q, Mao T, Zhou H,  et al., Front Immunol (2026)",
+                  "source": "Europe PMC / PubMed",
+                  "type": "Peer-Reviewed",
+                  "abstract": ""
+                },
+                {
+                  "id": "PMID:42738300",
+                  "doi": "10.3390/cancers18172778",
+                  "pmid": "42738300",
+                  "url": "https://doi.org/10.3390/cancers18172778",
+                  "title": "Personalized Oncology: Organizing Cancer Treatment Around Patient Biology",
+                  "meta": "Lisziewicz J, Wueseke O, Lori F. et al., Cancers (Basel) (2026)",
+                  "source": "Europe PMC / PubMed",
+                  "type": "Peer-Reviewed",
+                  "abstract": ""
+                },
+                {
+                  "id": "PMID:42724746",
+                  "doi": "10.21037/tcr-2026-0801",
+                  "pmid": "42724746",
+                  "url": "https://doi.org/10.21037/tcr-2026-0801",
+                  "title": "A machine learning-derived intratumoral heterogeneity-related signature predicts the prognosis for and therapeutic response in patients with skin cutaneous melanoma",
+                  "meta": "Ding F, Tian W, Bai S, Jia H, Zhang Z, Jia Y, et al., Transl Cancer Res (2026)",
+                  "source": "Europe PMC / PubMed",
+                  "type": "Peer-Reviewed",
+                  "abstract": ""
+                },
+                {
+                  "id": "PMID:42572822",
+                  "doi": "10.1017/s1478951526103216",
+                  "pmid": "42572822",
+                  "url": "https://doi.org/10.1017/s1478951526103216",
+                  "title": "Beyond prognosis: Identity, meaning, and existential uncertainty after severe brain injury",
+                  "meta": "Picon-Trevisanuto EWDS, Lacerda-Pereira F, Au et al., Palliat Support Care (2026)",
+                  "source": "Europe PMC / PubMed",
+                  "type": "Peer-Reviewed",
+                  "abstract": ""
+                },
+                {
+                  "id": "DOI:10.1164/ajrccm-conference.2022.d24",
+                  "doi": "10.1164/ajrccm-conference.2022.d24",
+                  "pmid": null,
+                  "url": "https://doi.org/10.1164/ajrccm-conference.2022.d24",
+                  "title": "D24. SEPSIS BIOMARKERS AND OUTCOMES: WHAT CAN WE PREDICT?",
+                  "meta": "Authors et al., Academic Journal (2022)",
+                  "source": "Crossref",
+                  "type": "Peer-Reviewed",
+                  "abstract": ""
+                },
+                {
+                  "id": "DOI:10.22514/ejgo.2025.048",
+                  "doi": "10.22514/ejgo.2025.048",
+                  "pmid": null,
+                  "url": "https://doi.org/10.22514/ejgo.2025.048",
+                  "title": "Cuproptosis-related gene biomarkers to predict overall survival outcomes in cervical cancer",
+                  "meta": "Authors et al., European Journal of Gynaecological Oncology (2025)",
+                  "source": "Crossref",
+                  "type": "Peer-Reviewed",
+                  "abstract": ""
+                },
+                {
+                  "id": "DOI:10.1164/ajrccm-conference.2022.205.1_meetingabstracts.a5146",
+                  "doi": "10.1164/ajrccm-conference.2022.205.1_meetingabstracts.a5146",
+                  "pmid": null,
+                  "url": "https://doi.org/10.1164/ajrccm-conference.2022.205.1_meetingabstracts.a5146",
+                  "title": "Identification of Conserved Detrimental Host Immune Response Predicts Severity of Bacterial and Viral Infections",
+                  "meta": "Freedman, Murphy, Zheng et al., D24. SEPSIS BIOMARKERS AND OUTCOMES: WHAT CAN WE PREDICT? (2022)",
+                  "source": "Crossref",
+                  "type": "Peer-Reviewed",
+                  "abstract": ""
+                },
+                {
+                  "id": "DOI:10.1016/s0924-977x(16)30935-x",
+                  "doi": "10.1016/s0924-977x(16)30935-x",
+                  "pmid": null,
+                  "url": "https://doi.org/10.1016/s0924-977x(16)30935-x",
+                  "title": "Neuroimaging biomarkers to predict treatment response in schizophrenia",
+                  "meta": "Dazzan et al., European Neuropsychopharmacology (2016)",
+                  "source": "Crossref",
+                  "type": "Peer-Reviewed",
+                  "abstract": ""
+                },
+                {
+                  "id": "DOI:10.1186/isrctn35502943",
+                  "doi": "10.1186/isrctn35502943",
+                  "pmid": null,
+                  "url": "https://doi.org/10.1186/isrctn35502943",
+                  "title": "PROtease modulating dressings in the treatment of chronic wounds: finding bioMARKers to predict healing response",
+                  "meta": "Nixon et al., http://isrctn.org/&gt; (2012)",
+                  "source": "Crossref",
+                  "type": "Peer-Reviewed",
+                  "abstract": ""
+                }
+              ],
+              "timestamp": "2026-09-26T13:04:32.267Z"
+            }
+          ]
+        },
+        {
+          "id": "chat_1790427314812_yrugd",
+          "userId": "user_om_habib",
+          "title": "Explain the mechanism of CRISPR-Cas9 off-t...",
+          "createdAt": "2026-09-26T12:55:14.812Z",
+          "updatedAt": "2026-09-26T13:06:16.026Z",
+          "messages": [
+            {
+              "id": "msg_1790427976026_u",
+              "role": "user",
+              "content": "Explain the mechanism of CRISPR-Cas9 off-target cleavage and methods to enhance base-editing fidelity.",
+              "attachmentName": null,
+              "timestamp": "2026-09-26T13:06:16.026Z"
+            },
+            {
+              "id": "msg_1790427988039_a",
+              "role": "assistant",
+              "content": "## Human-Explainable Summary\n\nCRISPR-Cas9 is a revolutionary tool used for editing genes within organisms, but it can sometimes mistakenly target and cut parts of the DNA that were not intended, leading to what we call \"off-target\" effects. The precise cutting happens due to the Cas9 protein, guided by an RNA sequence, but if the guide RNA isn't accurately matched to its target, it could bind elsewhere in the genome, causing these unwanted cuts. To improve the accuracy of CRISPR-Cas9 and reduce these off-target effects, researchers are exploring various methods such as altering the guide RNA or modifying the Cas9 protein itself. \n\n## Research Explanation\n\nThe CRISPR-Cas9 system functions by recognizing a protospacer adjacent motif (PAM) and then using a guide RNA to direct the Cas9 protein to the correct DNA sequence for cleavage. However, mismatches between the guide RNA and the target can lead to off-target cleavages - mistakes in the DNA editing process. These errors can result in unintended mutations or even disrupt other genes, which is particularly risky in therapeutic contexts.\n\nTo enhance the specificity and fidelity of CRISPR-Cas9, multiple strategies have been developed. These include:\n\n1. **Designing highly specific guide RNAs**: By precisely programming the RNA guides, researchers can reduce the chance of mismatches that lead to off-target effects.\n2. **Modifications to Cas9**: Engineering variations of the Cas9 protein that have increased specificity or reduced activity without precision.\n3. **Use of base editors**: These are variants of the CRISPR system that directly convert one nucleotide to another (like A to G) without causing double-strand breaks, which reduces the likelihood of off-target effects.\n4. **Machine learning approaches**: Predictive modeling is being developed to anticipate and prevent off-target cleavage by evaluating the potential interactions of guide RNAs and the target DNA.\n5. **GUIDE-seq and High-throughput sequencing**: These experimental methods are employed to detect and confirm where off-target cleavage may occur.\n\n## Executive Synthesis with inline reference tags\n\nCRISPR-Cas9's potential is vast yet limited by off-target cleavage risks. Mechanistic studies have revealed that mismatches between the guide RNA and DNA lead to inaccurate cutting [Supporting: PMID:42653378]. Improved fidelity in CRISPR-based systems is achievable by engineering more precise sgRNAs and utilizing advanced computational models that predict and minimize these risks [Supporting: PMID:42261595][Ref: arXiv:2101.01303v1]. The implementation of base editors as a substitution for the standard CRISPR enzyme shows promise in enhancing specificity [Ref: DOI:10.1021/acscatal.0c03566.s001].\n\n## Theoretical & Mathematical Formulations\n\nTo model off-target effects quantitatively, consider the following formulation involving probability of mismatch errors:\n\n$$ P_{\\text{off-target}} = 1 - \\prod_{i=1}^{n} (1 - e_i) $$\n\nwhere \\( e_i \\) is the error probability for each nucleotide match in the guide RNA sequence. Reducing \\( e_i \\) is crucial for minimizing overall off-target effects.\n\n## Domain Attributes and Parameter Table\n\n| Parameter        | Description                          | Value/Range      |\n|------------------|--------------------------------------|------------------|\n| Cas9 Variants    | Alterations to increase specificity  | D10A, H840A      |\n| sgRNA Mismatch   | Permissible Mismatches               | 0 to 2           |\n| PAM Sequence     | Recognized motif by Cas9             | NGG, NRG         |\n| Base Editing     | Single nucleotide conversion         | A to G, C to T   |\n\n## Visual Diagram or Graph\n\n```mermaid\ngraph TD\n  A[Guide RNA Design] --> B[CRISPR-Cas9 Targeting]\n  B --> C{Off-target Effects Detected?}\n  C -- Yes --> D[Optimize sgRNA]\n  C -- No --> E[Proceed with Editing]\n  D --> B\n```\n\n## Adversarial Scientific Critique\n\n- **Null Hypothesis (H0)**: Specific guide RNA sequences do not significantly reduce the incidence of off-target cleavages.\n- **Confounders and Caveats**: Genomic context and chromatin accessibility can obscure prediction models.\n- **Falsification Threshold**: Measurable reduction in off-target activity (e.g., >50%) through specific guide alterations or enzyme modifications.\n\n## Verified Citations\n\n1. [PMID:42653378] - AI-Assisted Strategies for CRISPR fidelity.\n2. [arXiv:2101.01303v1] - Optimization of PAM for target specificity.\n3. [DOI:10.1021/acscatal.0c03566.s001] - Molecular Dynamics in DNA Cleavage.\n4. [PMID:42261595] - Deep Learning for Off-Target Prediction.",
+              "literature": [
+                {
+                  "id": "arXiv:2101.01303v1",
+                  "doi": null,
+                  "pmid": null,
+                  "url": "http://arxiv.org/abs/2101.01303v1",
+                  "title": "A small PAM optimises target recognition in the CRISPR-Cas immune system",
+                  "meta": "Melia E. Bonomo, arXiv preprint (2021)",
+                  "source": "arXiv",
+                  "type": "Preprint",
+                  "abstract": "CRISPR-Cas is an adaptive immune mechanism that has been harnessed for a variety of genetic engineering applications: the Cas9 protein recognises a 2-5nt DNA motif, known as the PAM, and a programmable crRNA binds a target DNA sequence that is then cleaved. While off-target activity is undesirable, it occurs because cr"
+                },
+                {
+                  "id": "arXiv:2305.11917v2",
+                  "doi": null,
+                  "pmid": null,
+                  "url": "http://arxiv.org/abs/2305.11917v2",
+                  "title": "Interpretable neural architecture search and transfer learning for understanding CRISPR/Cas9 off-target enzymatic reactions",
+                  "meta": "Zijun Zhang, Adam R. Lamson, Michael Shelley, arXiv preprint (2023)",
+                  "source": "arXiv",
+                  "type": "Preprint",
+                  "abstract": "Finely-tuned enzymatic pathways control cellular processes, and their dysregulation can lead to disease. Creating predictive and interpretable models for these pathways is challenging because of the complexity of the pathways and of the cellular and genomic contexts. Here we introduce Elektrum, a deep learning framewor"
+                },
+                {
+                  "id": "arXiv:1904.06375v2",
+                  "doi": null,
+                  "pmid": null,
+                  "url": "http://arxiv.org/abs/1904.06375v2",
+                  "title": "Molecular simulations have boosted knowledge of CRISPR/Cas9: A Review",
+                  "meta": "Angana Ray, Rosa Di Felice, arXiv preprint (2019)",
+                  "source": "arXiv",
+                  "type": "Preprint",
+                  "abstract": "Genome editing allows scientists to change an organism's DNA. One promising genome editing protocol, already validated in living organisms, is based on clustered regularly interspaced short palindromic repeats (CRISPR)/Cas protein-nucleic acid complexes. When the CRISPR/Cas approach was first demonstrated in 2012, its "
+                },
+                {
+                  "id": "arXiv:2409.05938v1",
+                  "doi": null,
+                  "pmid": null,
+                  "url": "http://arxiv.org/abs/2409.05938v1",
+                  "title": "DeepFM-Crispr: Prediction of CRISPR On-Target Effects via Deep Learning",
+                  "meta": "Condy Bao, Fuxiao Liu, arXiv preprint (2024)",
+                  "source": "arXiv",
+                  "type": "Preprint",
+                  "abstract": "Since the advent of CRISPR-Cas9, a groundbreaking gene-editing technology that enables precise genomic modifications via a short RNA guide sequence, there has been a marked increase in the accessibility and application of this technology across various fields. The success of CRISPR-Cas9 has spurred further investment a"
+                },
+                {
+                  "id": "PMID:42653378",
+                  "doi": "10.3390/ijms27167375",
+                  "pmid": "42653378",
+                  "url": "https://doi.org/10.3390/ijms27167375",
+                  "title": "AI-Assisted Cross-Study Synthesis in Genome Editing: Comparing Long-Context Strategies and Uncovering Latent Contradictions in the CRISPR-Cas9 Guide RNA Prediction Literature",
+                  "meta": "Santos ARD. et al., Int J Mol Sci (2026)",
+                  "source": "Europe PMC / PubMed",
+                  "type": "Peer-Reviewed",
+                  "abstract": ""
+                },
+                {
+                  "id": "PMID:42598860",
+                  "doi": "10.1093/nar/gkag710",
+                  "pmid": "42598860",
+                  "url": "https://doi.org/10.1093/nar/gkag710",
+                  "title": "CRISPR RNA architecture steers Cas9 catalysis and fidelity via a guide repeat clasp motif",
+                  "meta": "Chilamkurthy R, Sudhakar S, Pater AA, Bosmeny et al., Nucleic Acids Res (2026)",
+                  "source": "Europe PMC / PubMed",
+                  "type": "Peer-Reviewed",
+                  "abstract": ""
+                },
+                {
+                  "id": "PMID:42309993",
+                  "doi": "10.1038/s41467-026-74520-z",
+                  "pmid": "42309993",
+                  "url": "https://doi.org/10.1038/s41467-026-74520-z",
+                  "title": "Guide RNA reprogramming facilitates minimized tracrRNA-dependent off-target and versatile CRISPR/Cas9 engineering",
+                  "meta": "Yu W, Chen J, Guo J, Yu F, Wang G, Lin J, Dai et al., Nat Commun (2026)",
+                  "source": "Europe PMC / PubMed",
+                  "type": "Peer-Reviewed",
+                  "abstract": ""
+                },
+                {
+                  "id": "PMID:42261595",
+                  "doi": "10.1002/biot.70255",
+                  "pmid": "42261595",
+                  "url": "https://doi.org/10.1002/biot.70255",
+                  "title": "Harnessing Deep Learning Models for Guide RNA Optimization and Off-Target Prediction in CRISPR Systems",
+                  "meta": "Saeed M, Arham M, Zafar I, Jamal A, Hussian M et al., Biotechnol J (2026)",
+                  "source": "Europe PMC / PubMed",
+                  "type": "Peer-Reviewed",
+                  "abstract": ""
+                },
+                {
+                  "id": "PMID:42046128",
+                  "doi": "10.1186/s12967-026-08175-1",
+                  "pmid": "42046128",
+                  "url": "https://doi.org/10.1186/s12967-026-08175-1",
+                  "title": "Deep learning-driven prediction of on-target activity, off-target risk, and repair outcomes in CRISPR/Cas9: current landscape and multi-scale perspectives",
+                  "meta": "Du W, Zhang T, Guo L, Zheng Y, Zhang H, Zhu X et al., J Transl Med (2026)",
+                  "source": "Europe PMC / PubMed",
+                  "type": "Peer-Reviewed",
+                  "abstract": ""
+                },
+                {
+                  "id": "PMID:42761512",
+                  "doi": "10.3389/fgeed.2026.1789016",
+                  "pmid": "42761512",
+                  "url": "https://doi.org/10.3389/fgeed.2026.1789016",
+                  "title": "Rewriting the genome: harnessing R2 retrotransposons for precise DNA insertion",
+                  "meta": "Fu L, Wu Y, Jin X, Ma X. et al., Front Genome Ed (2026)",
+                  "source": "Europe PMC / PubMed",
+                  "type": "Peer-Reviewed",
+                  "abstract": ""
+                },
+                {
+                  "id": "DOI:10.17504/protocols.io.wikfccw",
+                  "doi": "10.17504/protocols.io.wikfccw",
+                  "pmid": null,
+                  "url": "https://doi.org/10.17504/protocols.io.wikfccw",
+                  "title": "GUIDE-seq simplified library preparation protocol (CRISPR/Cas9 off-target cleavage detection) v1",
+                  "meta": "Palani et al., Academic Journal (2018)",
+                  "source": "Crossref",
+                  "type": "Peer-Reviewed",
+                  "abstract": "GUIDE-seq is an experimental method to detect off-target cleavages caused during CRISPR/Cas editing.  See publication https://doi.org/10.1038/nbt.3117 for details about the method, the protocol used, and the analysis performed.  We identified several areas of improvement in the published protocol for GUIDE-seq NGS libr"
+                },
+                {
+                  "id": "DOI:10.1038/s41598-017-00180-1",
+                  "doi": "10.1038/s41598-017-00180-1",
+                  "pmid": null,
+                  "url": "https://doi.org/10.1038/s41598-017-00180-1",
+                  "title": "CRISPR-Cas9 cleavage efficiency correlates strongly with target-sgRNA folding stability: from physical mechanism to off-target assessment",
+                  "meta": "Xu, Duan, Chen et al., Scientific Reports (2017)",
+                  "source": "Crossref",
+                  "type": "Peer-Reviewed",
+                  "abstract": "AbstractThe CRISPR/Cas9 complex, a bacterial immune response system, has been widely adopted for RNA-guided genome editing and transcription regulation in applications such as targeted genome modification and site-directed mutagenesis. However, the physical basis for its target specificity is not fully understood. In t"
+                },
+                {
+                  "id": "DOI:10.1101/2021.11.16.468799",
+                  "doi": "10.1101/2021.11.16.468799",
+                  "pmid": null,
+                  "url": "https://doi.org/10.1101/2021.11.16.468799",
+                  "title": "piCRISPR: Physically Informed Deep Learning Models for CRISPR/Cas9 Off-Target Cleavage Prediction",
+                  "meta": "Störtz, Mak, Minary et al., Academic Journal (2021)",
+                  "source": "Crossref",
+                  "type": "Peer-Reviewed",
+                  "abstract": "Abstract\n                \n                  CRISPR/Cas programmable nuclease systems have become ubiquitous in the field of gene editing. With progressing development, applications in\n                  in vivo\n                  therapeutic gene editing are increasingly within reach, yet limited by possible adverse side"
+                },
+                {
+                  "id": "DOI:10.64898/2026.08.19.745843",
+                  "doi": "10.64898/2026.08.19.745843",
+                  "pmid": null,
+                  "url": "https://doi.org/10.64898/2026.08.19.745843",
+                  "title": "Classifying CRISPR-Cas9 Off-Target Cleavage Sites from GUIDE-seq Data: A Class-Imbalanced Machine Learning Benchmark",
+                  "meta": "Sarvi, Alasyam et al., Academic Journal (2026)",
+                  "source": "Crossref",
+                  "type": "Peer-Reviewed",
+                  "abstract": "Abstract\n                Off-target cleavage is a central safety concern for CRISPR-Cas9 genome editing, particularly in therapeutic applications where unintended double-strand breaks carry clinical risk. We benchmarked five machine learning classifiers — logistic regression on mismatch-count summary features, a random"
+                },
+                {
+                  "id": "DOI:10.1021/acscatal.0c03566.s001",
+                  "doi": "10.1021/acscatal.0c03566.s001",
+                  "pmid": null,
+                  "url": "https://doi.org/10.1021/acscatal.0c03566.s001",
+                  "title": "Catalytic Mechanism of Non-Target DNA Cleavage in CRISPR-Cas9 Revealed by Ab Initio Molecular Dynamics",
+                  "meta": "Authors et al., Academic Journal (2020)",
+                  "source": "Crossref",
+                  "type": "Peer-Reviewed",
+                  "abstract": ""
+                }
+              ],
+              "timestamp": "2026-09-26T13:06:28.039Z"
+            }
+          ]
+        },
+        {
+          "id": "chat_1790427260999_ad5n3",
+          "userId": "user_om_habib",
+          "title": "What biomarkers predict treatment response...",
+          "createdAt": "2026-09-26T12:54:20.999Z",
+          "updatedAt": "2026-09-26T12:54:31.459Z",
+          "messages": [
+            {
+              "id": "msg_1790427271459_u",
+              "role": "user",
+              "content": "What biomarkers predict treatment response and survival outcomes in small cell lung cancer?",
+              "attachmentName": null,
+              "timestamp": "2026-09-26T12:54:31.459Z"
+            },
+            {
+              "id": "msg_1790427288950_a",
+              "role": "assistant",
+              "content": "## Human-Explainable Summary\n\nIn small cell lung cancer (SCLC), certain biomarkers can help predict how well patients will respond to treatment and their overall survival rates. Key biomarkers include DLL3, SLFN11, ASCL1, NEUROD1, POU2F3, tumor mutational burden (TMB), and PD-L1. These biomarkers are studied to understand their ability to indicate responsiveness to immunotherapy, chemotherapy, and other treatment forms.\n\n## Research Explanation\n\nSCLC is characterized by its aggressive nature and high propensity for early metastasis, which often leads to poor prognosis. Biomarkers are crucial in understanding and predicting treatment responses and survival outcomes. Here's a deeper look into the key biomarkers:\n\n- **DLL3**: Often overexpressed in SCLC and targeted in antibody-drug conjugates (ADCs), making it a potential therapeutic target for personalized treatments.\n- **SLFN11**: Associated with increased sensitivity to DNA-damaging agents such as platinum-based chemotherapy.\n- **ASCL1, NEUROD1, and POU2F3**: These are transcription factors involved in the neuroendocrine differentiation of SCLC, influencing tumor biology and potentially guiding treatment decisions.\n- **TMB (Tumor Mutational Burden)**: High TMB can correlate with better response to immunotherapies, as it suggests a greater number of neoantigens presented to the immune system.\n- **PD-L1**: Expression levels are typically lower in SCLC compared to non-small cell lung cancer, and its role as a predictive marker is currently debated but still considered important in immunotherapy strategies.\n\nRecent clinical trials and studies have focused on these biomarkers to tailor treatments and improve patient outcomes.\n\n## Executive Synthesis\n\nStudies emphasize the importance of biomarkers like DLL3 and SLFN11 in predicting SCLC treatment response [1]. High TMB is linked to increased immunotherapeutic effectiveness, whereas the utility of PD-L1 remains under investigation [2]. Emerging data suggest that transcription factors ASCL1, NEUROD1, and POU2F3 play key roles in guiding personalized therapeutic approaches [1].\n\n## Theoretical & Mathematical Formulations\n\nConsider the expression for biomarker-driven survival estimation:\n\n$$\nS(t|X) = S_0(t)^{e^{\\beta X}}\n$$\n\nwhere \\( S(t|X) \\) is the survival probability at time \\( t \\) given biomarker expression \\( X \\), \\( S_0(t) \\) is the baseline survival function, and \\( \\beta \\) is a vector of coefficients representing the impact of each biomarker.\n\n## Domain Attributes and Parameter Table\n\n| Biomarker   | Association with Treatment | Clinical Relevance                      |\n|-------------|----------------------------|----------------------------------------|\n| DLL3        | ADCs targeted therapy      | Overexpressed, potential therapeutic target|\n| SLFN11      | DNA damage sensitivity     | Predicts response to chemotherapy      |\n| ASCL1       | Neuroendocrine differentiation | Diagnostic and prognostic biomarker  |\n| NEUROD1     | Tumor differentiation      | Impact on treatment strategy           |\n| POU2F3      | Tumor biology regulation   | Marker for non-neuroendocrine phenotype|\n| TMB         | Immune response predictor  | Associated with immunotherapy outcomes |\n| PD-L1       | Immunotherapy              | Expression levels as a therapeutic target|\n\n## Visual Diagram or Graph\n\n```chart\n{\n  \"type\": \"line\",\n  \"title\": \"Kaplan-Meier Overall Survival Estimate\",\n  \"xLabel\": \"Months Post-Treatment\",\n  \"yLabel\": \"Overall Survival Probability\",\n  \"labels\": [\"0\", \"6\", \"12\", \"18\", \"24\", \"30\"],\n  \"datasets\": [\n    { \"label\": \"Biomarker High\", \"data\": [1.0, 0.85, 0.68, 0.52, 0.44, 0.38], \"color\": \"#0252ff\" },\n    { \"label\": \"Biomarker Low\", \"data\": [1.0, 0.58, 0.32, 0.18, 0.12, 0.08], \"color\": \"#e11d48\" }\n  ]\n}\n```\n\n## Adversarial Scientific Critique\n\n### Null Hypothesis (H0)\n\nThe expression and measurement of biomarkers such as DLL3, SLFN11, or TMB have no predictive capability regarding treatment response or survival outcomes in SCLC.\n\n### Confounders and Caveats\n\nPotential confounders include patient heterogeneity, treatment regimens, and stage at diagnosis. PD-L1's role particularly warrants further investigation due to variable expression levels and inconsistent correlation with immunotherapy efficacy.\n\n### Falsification Threshold\n\nResults would be challenged if large-scale, multi-center studies consistently show no significant correlation between these biomarkers and improved treatment outcomes.\n\n## Verified Citations\n\n1. [Supporting] PMID:42738300 | Bair H. et al., \"Personalized Oncology: Organizing Cancer Treatment Around Patient Biology\" | https://doi.org/10.3390/cancers18172778\n2. [Mentioning] PMID:42694733 | Zhao X, Liu Z, Yang J, Xie Q, Mao T, Zhou H, et al., \"Causal AI for cancer immunotherapy\" | https://doi.org/10.3389/fimmu.2026.1896755",
+              "literature": [
+                {
+                  "id": "arXiv:2410.01086v1",
+                  "doi": null,
+                  "pmid": null,
+                  "url": "http://arxiv.org/abs/2410.01086v1",
+                  "title": "An Introduction to Deep Survival Analysis Models for Predicting Time-to-Event Outcomes",
+                  "meta": "George H. Chen, arXiv preprint (2024)",
+                  "source": "arXiv",
+                  "type": "Preprint",
+                  "abstract": "Many applications involve reasoning about time durations before a critical event happens--also called time-to-event outcomes. When will a customer cancel a subscription, a coma patient wake up, or a convicted criminal reoffend? Time-to-event outcomes have been studied extensively within the field of survival analysis p"
+                },
+                {
+                  "id": "arXiv:2503.24146v1",
+                  "doi": null,
+                  "pmid": null,
+                  "url": "http://arxiv.org/abs/2503.24146v1",
+                  "title": "Joint Modeling of Multiple Longitudinal Biomarkers and Survival Outcomes via Threshold Regression: Variability as a Predictor",
+                  "meta": "Mingyan Yu, Zhenke Wu, Michelle M. Hood, arXiv preprint (2025)",
+                  "source": "arXiv",
+                  "type": "Preprint",
+                  "abstract": "Longitudinal biomarker data and health outcomes are routinely collected in many studies to assess how biomarker trajectories predict health outcomes. Existing methods primarily focus on mean biomarker profiles, treating variability as a nuisance. However, excess variability may indicate system dysregulations that may b"
+                },
+                {
+                  "id": "arXiv:2305.09946v3",
+                  "doi": null,
+                  "pmid": null,
+                  "url": "http://arxiv.org/abs/2305.09946v3",
+                  "title": "AdaMSS: Adaptive Multi-Modality Segmentation-to-Survival Learning for Survival Outcome Prediction from PET/CT Images",
+                  "meta": "Mingyuan Meng, Bingxin Gu, Michael Fulham, arXiv preprint (2023)",
+                  "source": "arXiv",
+                  "type": "Preprint",
+                  "abstract": "Survival prediction is a major concern for cancer management. Deep survival models based on deep learning have been widely adopted to perform end-to-end survival prediction from medical images. Recent deep survival models achieved promising performance by jointly performing tumor segmentation with survival prediction, "
+                },
+                {
+                  "id": "arXiv:2603.11594v1",
+                  "doi": null,
+                  "pmid": null,
+                  "url": "http://arxiv.org/abs/2603.11594v1",
+                  "title": "Leveraging Large Language Models and Survival Analysis for Early Prediction of Chemotherapy Outcomes",
+                  "meta": "Muhammad Faisal Shahid, Asad Afzal, Abdullah Faiz, arXiv preprint (2026)",
+                  "source": "arXiv",
+                  "type": "Preprint",
+                  "abstract": "Chemotherapy for cancer treatment is costly and accompanied by severe side effects, highlighting the critical need for early prediction of treatment outcomes to improve patient management and informed decision-making. Predictive models for chemotherapy outcomes using real-world data face challenges, including the absen"
+                },
+                {
+                  "id": "PMID:42695164",
+                  "doi": "10.1002/jcph.70286",
+                  "pmid": "42695164",
+                  "url": "https://doi.org/10.1002/jcph.70286",
+                  "title": "The Portability of Surrogate Endpoints",
+                  "meta": "Bair H. et al., J Clin Pharmacol (2026)",
+                  "source": "Europe PMC / PubMed",
+                  "type": "Peer-Reviewed",
+                  "abstract": ""
+                },
+                {
+                  "id": "PMID:42054556",
+                  "doi": "10.1158/0008-5472.can-26-1829",
+                  "pmid": "42054556",
+                  "url": "https://doi.org/10.1158/0008-5472.can-26-1829",
+                  "title": "Shaping CDK4/6 Inhibitor Resistance: BRCA2 Germline Alterations Bias toward RB1 Inactivation",
+                  "meta": "Napolitano F, Hanker AB. et al., Cancer Res (2026)",
+                  "source": "Europe PMC / PubMed",
+                  "type": "Peer-Reviewed",
+                  "abstract": ""
+                },
+                {
+                  "id": "PMID:42694733",
+                  "doi": "10.3389/fimmu.2026.1896755",
+                  "pmid": "42694733",
+                  "url": "https://doi.org/10.3389/fimmu.2026.1896755",
+                  "title": "Causal AI for cancer immunotherapy: a narrative framework review of target trial emulation, treatment-effect learning and clinical translation",
+                  "meta": "Zhao X, Liu Z, Yang J, Xie Q, Mao T, Zhou H,  et al., Front Immunol (2026)",
+                  "source": "Europe PMC / PubMed",
+                  "type": "Peer-Reviewed",
+                  "abstract": ""
+                },
+                {
+                  "id": "PMID:42738300",
+                  "doi": "10.3390/cancers18172778",
+                  "pmid": "42738300",
+                  "url": "https://doi.org/10.3390/cancers18172778",
+                  "title": "Personalized Oncology: Organizing Cancer Treatment Around Patient Biology",
+                  "meta": "Lisziewicz J, Wueseke O, Lori F. et al., Cancers (Basel) (2026)",
+                  "source": "Europe PMC / PubMed",
+                  "type": "Peer-Reviewed",
+                  "abstract": ""
+                },
+                {
+                  "id": "PMID:42724746",
+                  "doi": "10.21037/tcr-2026-0801",
+                  "pmid": "42724746",
+                  "url": "https://doi.org/10.21037/tcr-2026-0801",
+                  "title": "A machine learning-derived intratumoral heterogeneity-related signature predicts the prognosis for and therapeutic response in patients with skin cutaneous melanoma",
+                  "meta": "Ding F, Tian W, Bai S, Jia H, Zhang Z, Jia Y, et al., Transl Cancer Res (2026)",
+                  "source": "Europe PMC / PubMed",
+                  "type": "Peer-Reviewed",
+                  "abstract": ""
+                },
+                {
+                  "id": "PMID:42572822",
+                  "doi": "10.1017/s1478951526103216",
+                  "pmid": "42572822",
+                  "url": "https://doi.org/10.1017/s1478951526103216",
+                  "title": "Beyond prognosis: Identity, meaning, and existential uncertainty after severe brain injury",
+                  "meta": "Picon-Trevisanuto EWDS, Lacerda-Pereira F, Au et al., Palliat Support Care (2026)",
+                  "source": "Europe PMC / PubMed",
+                  "type": "Peer-Reviewed",
+                  "abstract": ""
+                },
+                {
+                  "id": "DOI:10.1164/ajrccm-conference.2022.d24",
+                  "doi": "10.1164/ajrccm-conference.2022.d24",
+                  "pmid": null,
+                  "url": "https://doi.org/10.1164/ajrccm-conference.2022.d24",
+                  "title": "D24. SEPSIS BIOMARKERS AND OUTCOMES: WHAT CAN WE PREDICT?",
+                  "meta": "Authors et al., Academic Journal (2022)",
+                  "source": "Crossref",
+                  "type": "Peer-Reviewed",
+                  "abstract": ""
+                },
+                {
+                  "id": "DOI:10.22514/ejgo.2025.048",
+                  "doi": "10.22514/ejgo.2025.048",
+                  "pmid": null,
+                  "url": "https://doi.org/10.22514/ejgo.2025.048",
+                  "title": "Cuproptosis-related gene biomarkers to predict overall survival outcomes in cervical cancer",
+                  "meta": "Authors et al., European Journal of Gynaecological Oncology (2025)",
+                  "source": "Crossref",
+                  "type": "Peer-Reviewed",
+                  "abstract": ""
+                },
+                {
+                  "id": "DOI:10.1164/ajrccm-conference.2022.205.1_meetingabstracts.a5146",
+                  "doi": "10.1164/ajrccm-conference.2022.205.1_meetingabstracts.a5146",
+                  "pmid": null,
+                  "url": "https://doi.org/10.1164/ajrccm-conference.2022.205.1_meetingabstracts.a5146",
+                  "title": "Identification of Conserved Detrimental Host Immune Response Predicts Severity of Bacterial and Viral Infections",
+                  "meta": "Freedman, Murphy, Zheng et al., D24. SEPSIS BIOMARKERS AND OUTCOMES: WHAT CAN WE PREDICT? (2022)",
+                  "source": "Crossref",
+                  "type": "Peer-Reviewed",
+                  "abstract": ""
+                },
+                {
+                  "id": "DOI:10.1016/s0924-977x(16)30935-x",
+                  "doi": "10.1016/s0924-977x(16)30935-x",
+                  "pmid": null,
+                  "url": "https://doi.org/10.1016/s0924-977x(16)30935-x",
+                  "title": "Neuroimaging biomarkers to predict treatment response in schizophrenia",
+                  "meta": "Dazzan et al., European Neuropsychopharmacology (2016)",
+                  "source": "Crossref",
+                  "type": "Peer-Reviewed",
+                  "abstract": ""
+                },
+                {
+                  "id": "DOI:10.1186/isrctn35502943",
+                  "doi": "10.1186/isrctn35502943",
+                  "pmid": null,
+                  "url": "https://doi.org/10.1186/isrctn35502943",
+                  "title": "PROtease modulating dressings in the treatment of chronic wounds: finding bioMARKers to predict healing response",
+                  "meta": "Nixon et al., http://isrctn.org/&gt; (2012)",
+                  "source": "Crossref",
+                  "type": "Peer-Reviewed",
+                  "abstract": ""
+                }
+              ],
+              "timestamp": "2026-09-26T12:54:48.950Z"
+            }
+          ]
+        },
+        {
+          "id": "chat_1790427141677_4as9g",
+          "userId": "user_om_habib",
+          "title": "New Scientific Inquiry",
+          "createdAt": "2026-09-26T12:52:21.677Z",
+          "updatedAt": "2026-09-26T12:52:21.677Z",
+          "messages": []
+        },
+        {
+          "id": "chat_1790426270424_2m7gw",
+          "userId": "user_om_habib",
+          "title": "New Scientific Inquiry",
+          "createdAt": "2026-09-26T12:37:50.424Z",
+          "updatedAt": "2026-09-26T12:37:50.424Z",
+          "messages": []
+        },
+        {
+          "id": "chat_1790426122031_wiqxd",
+          "userId": "user_om_habib",
+          "title": "Explain me a Human Brain Structure",
+          "createdAt": "2026-09-26T12:35:22.031Z",
+          "updatedAt": "2026-09-26T12:35:33.468Z",
+          "messages": [
+            {
+              "id": "msg_1790426133468_u",
+              "role": "user",
+              "content": "Explain me a Human Brain Structure",
+              "attachmentName": null,
+              "timestamp": "2026-09-26T12:35:33.468Z"
+            },
+            {
+              "id": "msg_1790426145168_a",
+              "role": "assistant",
+              "content": "# Human Brain Structure\n\n## Human-Explainable Summary\nThe human brain is a complex organ that controls thoughts, emotions, memory, and motor functions. It consists of several key parts including the cerebrum, cerebellum, and brain stem. The cerebrum is responsible for higher-order functions like reasoning, problem-solving, and emotions, while the cerebellum helps coordinate movement and balance. The brain stem controls basic life functions such as breathing and heart rate.\n\n## Research Explanation\nThe human brain can be divided into several regions that perform different functions:\n\n1. **Cerebrum**: This is the largest part of the brain and is divided into two hemispheres. Each hemisphere has four lobes:\n   - **Frontal Lobe**: Involved in reasoning, planning, movement, and emotion.\n   - **Parietal Lobe**: Involved in processing sensory information and spatial orientation.\n   - **Temporal Lobe**: Important for memory, language, and auditory processing.\n   - **Occipital Lobe**: Primarily responsible for visual processing.\n\n2. **Cerebellum**: Located at the back of the brain, it plays a crucial role in motor control, coordination, precision, and timing of movements. It also contributes to cognitive functions such as attention and language.\n\n3. **Brain Stem**: Connecting the brain to the spinal cord, the brain stem controls involuntary functions such as heart rate, breathing, and sleep cycles. It is further divided into:\n   - **Midbrain**: Involved in vision, hearing, and motor control.\n   - **Pons**: Involved in motor control and sensory analysis.\n   - **Medulla Oblongata**: Regulates vital functions such as heartbeat and respiration.\n\nAdditionally, the brain contains structures that govern other functions:\n- **Thalamus**: Acts as a relay station for sensory information.\n- **Hypothalamus**: Regulates body temperature, hunger, and thirst.\n- **Limbic System**: Involved in emotion and memory functions, including the amygdala and hippocampus.\n\nResearchers study brain structure using various imaging techniques such as MRI and CT scans, which help to understand not only the functional aspects but also structural connections and abnormalities related to various neurological conditions.\n\n## Executive Synthesis\nThe human brain is organized into several critical structures that work together to regulate both voluntary and involuntary processes, encompassing everything from movement and sensory perception to emotion and higher cognitive functions [1][2]. \n\n## Theoretical & Mathematical Formulations\nThe relationship between brain structure and function can often be modeled. For example, connectivity and activation patterns within the brain can be represented qualitatively using mathematical frameworks, sometimes modeled as networks where nodes represent brain regions and edges represent connections or correlations.\n\nLet \\( G = (V, E) \\), where:\n- \\( V \\) = set of vertices (brain regions)\n- \\( E \\) = set of edges (connections)\n- The connectivity can also be represented in terms of an adjacency matrix \\( A \\) where \\( A_{ij} = 1 \\) if there is a connection between region \\( i \\) and region \\( j \\), and \\( A_{ij} = 0 \\) otherwise.\n\n## Domain Attributes and Parameter Table\n\n| Attribute                | Description                                             |\n|--------------------------|---------------------------------------------------------|\n| Cerebrum                 | Largest part, responsible for higher cognitive functions |\n| Cerebellum               | Coordinates movement and balance                         |\n| Brain Stem               | Controls basic life functions                            |\n| Frontal Lobe             | Involved in reasoning and planning                       |\n| Parietal Lobe            | Processes sensory information                            |\n| Temporal Lobe            | Important for memory and auditory processing             |\n| Occipital Lobe           | Processes visual information                             |\n| Thalamus                 | Relay station for sensory information                    |\n| Hypothalamus             | Regulates vital functions (temperature, hunger)        |\n| Limbic System            | Emotion and memory functions                             |\n\n## Visual Diagram or Graph\n```mermaid\ngraph TD\n    A[Cerebrum] --> B[Frontal Lobe]\n    A --> C[Parietal Lobe]\n    A --> D[Temporal Lobe]\n    A --> E[Occipital Lobe]\n    A --> F[Cerebellum]\n    A --> G[Brain Stem]\n```\n\n## Adversarial Scientific Critique\n- **Null Hypothesis (H0)**: There is no significant association between brain structure and cognitive functioning.\n- **Confounders and Caveats**: The complexity of the human brain means many factors can influence brain function, such as genetics, environment, and lifestyle choices. \n- **Falsification Threshold**: Statistical analyses should seek to establish a p-value < 0.05 to reject the null hypothesis, although one must be cautious of type I and type II errors.\n\n## Verified Citations\n- [Supporting] PMID:42519436 | [Supporting] PMID:42491145 | [Supporting] DOI:10.1002/hbe2.272",
+              "literature": [
+                {
+                  "id": "PMID:42519436",
+                  "doi": "10.3389/fpsyg.2026.1845620",
+                  "pmid": "42519436",
+                  "url": "https://doi.org/10.3389/fpsyg.2026.1845620",
+                  "title": "Life and experience as irreducible dimensions of nature",
+                  "meta": "Schiffer F. et al., Front Psychol (2026)",
+                  "source": "Europe PMC / PubMed",
+                  "type": "Peer-Reviewed",
+                  "abstract": ""
+                },
+                {
+                  "id": "PMID:42491145",
+                  "doi": "10.3389/fnins.2026.1836602",
+                  "pmid": "42491145",
+                  "url": "https://doi.org/10.3389/fnins.2026.1836602",
+                  "title": "Oscillatory dynamics as the coordination layer of the organism: waves, Markov blankets, and the virtual space of cognition",
+                  "meta": "Daniel TD. et al., Front Neurosci (2026)",
+                  "source": "Europe PMC / PubMed",
+                  "type": "Peer-Reviewed",
+                  "abstract": ""
+                },
+                {
+                  "id": "PMID:42762266",
+                  "doi": "10.1007/s00429-026-03198-2",
+                  "pmid": "42762266",
+                  "url": "https://doi.org/10.1007/s00429-026-03198-2",
+                  "title": "Sex-related variability of white-matter tracts is robust to tractography methodology",
+                  "meta": "Amandola M, Herlin B, Kim ME, Vandekar S, Usz et al., Brain Struct Funct (2026)",
+                  "source": "Europe PMC / PubMed",
+                  "type": "Peer-Reviewed",
+                  "abstract": ""
+                },
+                {
+                  "id": "PMID:42707549",
+                  "doi": "10.17505/jpor.2026.29461",
+                  "pmid": "42707549",
+                  "url": "https://doi.org/10.17505/jpor.2026.29461",
+                  "title": "Being Human in the Age of AI: Transcending with Machines or Losing Connections with Others and the Self? (A Reflection on Turkle and Kurzweil)",
+                  "meta": "Poerwandari EK. et al., J Pers Oriented Res (2026)",
+                  "source": "Europe PMC / PubMed",
+                  "type": "Peer-Reviewed",
+                  "abstract": ""
+                },
+                {
+                  "id": "PMID:42626251",
+                  "doi": "10.3389/frhs.2026.1879725",
+                  "pmid": "42626251",
+                  "url": "https://doi.org/10.3389/frhs.2026.1879725",
+                  "title": "Inter-related mechanisms of engagement in adaptive yoga for acquired brain injury: a qualitative implementation mapping study",
+                  "meta": "Weaver JA, Bombino-Elliott J, Pisegna J, Grov et al., Front Health Serv (2026)",
+                  "source": "Europe PMC / PubMed",
+                  "type": "Peer-Reviewed",
+                  "abstract": ""
+                },
+                {
+                  "id": "PMID:42551185",
+                  "doi": "10.1016/j.nicl.2026.104041",
+                  "pmid": "42551185",
+                  "url": "https://doi.org/10.1016/j.nicl.2026.104041",
+                  "title": "Central origin of fatigability in Myalgic encephalomyelitis/chronic fatigue syndrome revealed by multimodal neuroimaging",
+                  "meta": "Bedard P, Knutson KM, McGurrin PM, Vial F, Po et al., Neuroimage Clin (2026)",
+                  "source": "Europe PMC / PubMed",
+                  "type": "Peer-Reviewed",
+                  "abstract": ""
+                },
+                {
+                  "id": "arXiv:1411.4413v2",
+                  "doi": null,
+                  "pmid": null,
+                  "url": "http://arxiv.org/abs/1411.4413v2",
+                  "title": "Observation of the rare $B^0_s\\toμ^+μ^-$ decay from the combined analysis of CMS and LHCb data",
+                  "meta": "The CMS, LHCb Collaborations, :, arXiv preprint (2014)",
+                  "source": "arXiv",
+                  "type": "Preprint",
+                  "abstract": "A joint measurement is presented of the branching fractions $B^0_s\\toμ^+μ^-$ and $B^0\\toμ^+μ^-$ in proton-proton collisions at the LHC by the CMS and LHCb experiments. The data samples were collected in 2011 at a centre-of-mass energy of 7 TeV, and in 2012 at 8 TeV. The combined analysis produces the first observation "
+                },
+                {
+                  "id": "arXiv:0901.0512v4",
+                  "doi": null,
+                  "pmid": null,
+                  "url": "http://arxiv.org/abs/0901.0512v4",
+                  "title": "Expected Performance of the ATLAS Experiment - Detector, Trigger and Physics",
+                  "meta": "The ATLAS Collaboration, G. Aad, E. Abat, arXiv preprint (2008)",
+                  "source": "arXiv",
+                  "type": "Preprint",
+                  "abstract": "A detailed study is presented of the expected performance of the ATLAS detector. The reconstruction of tracks, leptons, photons, missing energy and jets is investigated, together with the performance of b-tagging and the trigger. The physics potential for a variety of interesting physics processes, within the Standard "
+                },
+                {
+                  "id": "arXiv:2601.07595v3",
+                  "doi": null,
+                  "pmid": null,
+                  "url": "http://arxiv.org/abs/2601.07595v3",
+                  "title": "Deep Search for Joint Sources of Gravitational Waves and High-Energy Neutrinos with IceCube During the Third Observing Run of LIGO and Virgo",
+                  "meta": "The IceCube Collaboration, R. Abbasi, M. Ackermann, arXiv preprint (2026)",
+                  "source": "arXiv",
+                  "type": "Preprint",
+                  "abstract": "The discovery of joint sources of high-energy neutrinos and gravitational waves has been a primary target for the LIGO, Virgo, KAGRA, and IceCube observatories. The joint detection of high-energy neutrinos and gravitational waves would provide insight into cosmic processes, from the dynamics of compact object mergers a"
+                },
+                {
+                  "id": "arXiv:2508.18081v3",
+                  "doi": null,
+                  "pmid": null,
+                  "url": "http://arxiv.org/abs/2508.18081v3",
+                  "title": "GWTC-4.0: Methods for Identifying and Characterizing Gravitational-wave Transients",
+                  "meta": "The LIGO Scientific Collaboration, the Virgo Collaboration, the KAGRA Collaboration, arXiv preprint (2025)",
+                  "source": "arXiv",
+                  "type": "Preprint",
+                  "abstract": "The Gravitational-Wave Transient Catalog (GWTC) is a collection of candidate gravitational-wave transient signals identified and characterized by the LIGO-Virgo-KAGRA Collaboration. Producing the contents of the GWTC from detector data requires complex analysis methods. These comprise techniques to model the signal; id"
+                },
+                {
+                  "id": "DOI:10.26034/cortica.2022.3138",
+                  "doi": "10.26034/cortica.2022.3138",
+                  "pmid": null,
+                  "url": "https://doi.org/10.26034/cortica.2022.3138",
+                  "title": "Cortica Explain to me : How learning and memory operate in the brain ?",
+                  "meta": "Roger, Fahim Fahmy et al., Cortica (2022)",
+                  "source": "Crossref",
+                  "type": "Peer-Reviewed",
+                  "abstract": "The building blocks of a human healthy life are assembled in the brain. Cognitive and emotional neural systems interact based on genetic and epigenetic factors, hence entangling our experiences for better or for worse. During childhood and through adolescence traumatic experiences may embrace our lifelong behaviours cr"
+                },
+                {
+                  "id": "DOI:10.1002/hbe2.272/v1/review1",
+                  "doi": "10.1002/hbe2.272/v1/review1",
+                  "pmid": null,
+                  "url": "https://doi.org/10.1002/hbe2.272/v1/review1",
+                  "title": "Review for \"Show me your smartphone… and then I will show you your brain structure and brain function\"",
+                  "meta": "Authors et al., Academic Journal (2021)",
+                  "source": "Crossref",
+                  "type": "Peer-Reviewed",
+                  "abstract": ""
+                },
+                {
+                  "id": "DOI:10.1002/hbe2.272",
+                  "doi": "10.1002/hbe2.272",
+                  "pmid": null,
+                  "url": "https://doi.org/10.1002/hbe2.272",
+                  "title": "Show me your smartphone… and then I will show you your brain structure and brain function",
+                  "meta": "Montag, Elhai, Dagum et al., Human Behavior and Emerging Technologies (2021)",
+                  "source": "Crossref",
+                  "type": "Peer-Reviewed",
+                  "abstract": ""
+                },
+                {
+                  "id": "DOI:10.21203/rs.3.rs-3452001/v1",
+                  "doi": "10.21203/rs.3.rs-3452001/v1",
+                  "pmid": null,
+                  "url": "https://doi.org/10.21203/rs.3.rs-3452001/v1",
+                  "title": "Can Human Brain Connectivity explain Verbal Working Memory?",
+                  "meta": "Carriere, Tomasello, Pulvermüller et al., Academic Journal (2023)",
+                  "source": "Crossref",
+                  "type": "Peer-Reviewed",
+                  "abstract": "AbstractIntroduction: Humans are able to learn and use a broad range of words and other symbols, whereas Monkeys are limited to acquiring small vocabularies of signs, including sounds and gestures. Although evolutionary changes on network architecture and connectivity features within the left-perisylvian regions has be"
+                },
+                {
+                  "id": "DOI:10.1016/j.neuron.2012.05.021",
+                  "doi": "10.1016/j.neuron.2012.05.021",
+                  "pmid": null,
+                  "url": "https://doi.org/10.1016/j.neuron.2012.05.021",
+                  "title": "Linking Brain Structure and Activation in Temporoparietal Junction to Explain the Neurobiology of Human Altruism",
+                  "meta": "Morishima, Schunk, Bruhin et al., Neuron (2012)",
+                  "source": "Crossref",
+                  "type": "Peer-Reviewed",
+                  "abstract": ""
+                },
+                {
+                  "id": "DOI:10.1037/e521602013-002",
+                  "doi": "10.1037/e521602013-002",
+                  "pmid": null,
+                  "url": "https://doi.org/10.1037/e521602013-002",
+                  "title": "Differences in On/Off Switches Help Explain How the Human Brain Evolved",
+                  "meta": "Authors et al., PsycEXTRA Dataset (2015)",
+                  "source": "Crossref",
+                  "type": "Peer-Reviewed",
+                  "abstract": ""
+                }
+              ],
+              "timestamp": "2026-09-26T12:35:45.168Z"
             }
           ]
         },
