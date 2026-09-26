@@ -1,0 +1,171 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CampaignPolicy",
+  "description": "Defines the constraints, budget, and rules governing a research campaign. The policy engine enforces these — the planner cannot silently override them.",
+  "type": "object",
+  "required": ["campaign_id"],
+  "properties": {
+    "campaign_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "ID of the campaign this policy governs"
+    },
+    "budget": {
+      "type": "object",
+      "description": "Resource limits for the campaign",
+      "properties": {
+        "max_literature_queries": {
+          "type": "integer",
+          "default": 50,
+          "description": "Maximum PubMed/literature API calls"
+        },
+        "max_database_queries": {
+          "type": "integer",
+          "default": 100,
+          "description": "Maximum database API calls (UniProt, PDB, ChEMBL)"
+        },
+        "max_sandbox_executions": {
+          "type": "integer",
+          "default": 20,
+          "description": "Maximum sandbox script executions"
+        },
+        "max_iterations": {
+          "type": "integer",
+          "default": 5,
+          "description": "Maximum research loop iterations"
+        },
+        "max_duration_seconds": {
+          "type": "integer",
+          "default": 3600,
+          "description": "Maximum wall-clock time for the campaign"
+        }
+      }
+    },
+    "evidence_requirements": {
+      "type": "object",
+      "description": "Minimum evidence thresholds before state transitions",
+      "properties": {
+        "min_evidence_for_support": {
+          "type": "integer",
+          "default": 3,
+          "description": "Minimum pieces of evidence to mark a hypothesis as supported"
+        },
+        "min_confidence_for_support": {
+          "type": "number",
+          "default": 0.7,
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Minimum confidence to transition hypothesis to supported"
+        },
+        "require_contradiction_search": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether the critic must search for contradictory evidence"
+        },
+        "require_literature_evidence": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether at least one literature source is required per hypothesis"
+        }
+      }
+    },
+    "tool_permissions": {
+      "type": "object",
+      "description": "Which tools the agent may use",
+      "properties": {
+        "allowed_tools": {
+          "type": ["array", "null"],
+          "items": { "type": "string" },
+          "description": "Whitelist of allowed tools (null = all allowed)"
+        },
+        "forbidden_tools": {
+          "type": ["array", "null"],
+          "items": { "type": "string" },
+          "description": "Blacklist of forbidden tools (null = none forbidden)"
+        }
+      }
+    },
+    "stopping_criteria": {
+      "type": "object",
+      "description": "Conditions under which the campaign should stop",
+      "properties": {
+        "confidence_threshold": {
+          "type": "number",
+          "default": 0.9,
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Stop when all hypotheses exceed this confidence"
+        },
+        "stop_on_all_resolved": {
+          "type": "boolean",
+          "default": true,
+          "description": "Stop when all hypotheses are supported, refuted, or inconclusive"
+        },
+        "stop_on_budget_exhausted": {
+          "type": "boolean",
+          "default": true,
+          "description": "Stop when any budget limit is reached"
+        },
+        "stop_on_no_improvement": {
+          "type": "boolean",
+          "default": true,
+          "description": "Stop if an iteration produces no confidence improvement"
+        },
+        "min_improvement_delta": {
+          "type": "number",
+          "default": 0.05,
+          "description": "Minimum confidence improvement to justify another iteration"
+        }
+      }
+    },
+    "approval_gates": {
+      "type": "object",
+      "description": "Which decision points require human approval",
+      "properties": {
+        "require_plan_approval": {
+          "type": "boolean",
+          "default": true
+        },
+        "require_candidate_approval": {
+          "type": "boolean",
+          "default": true
+        },
+        "require_report_approval": {
+          "type": "boolean",
+          "default": true
+        },
+        "require_re_plan_approval": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether to require approval when the agent re-plans"
+        }
+      }
+    },
+    "scientific_constraints": {
+      "type": "object",
+      "description": "Hard scientific rules that cannot be overridden",
+      "properties": {
+        "never_claim_predictions_as_facts": {
+          "type": "boolean",
+          "default": true,
+          "description": "IMMUTABLE: Computational predictions must never be presented as validated results"
+        },
+        "require_provenance": {
+          "type": "boolean",
+          "default": true,
+          "description": "IMMUTABLE: Every claim must have a traceable source"
+        },
+        "require_evidence_typing": {
+          "type": "boolean",
+          "default": true,
+          "description": "IMMUTABLE: Every evidence piece must be classified by source type"
+        },
+        "require_uncertainty_labels": {
+          "type": "boolean",
+          "default": true,
+          "description": "IMMUTABLE: Uncertain results must be labeled as such"
+        }
+      }
+    }
+  }
+}

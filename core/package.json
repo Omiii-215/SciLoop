@@ -1,0 +1,22 @@
+{
+  "name": "sciloop-core",
+  "version": "2.0.0",
+  "description": "SciLoop core engines — campaign manager, hypothesis engine, belief updater, experiment selector, policy engine",
+  "type": "module",
+  "main": "campaign-manager.js",
+  "exports": {
+    ".": "./campaign-manager.js",
+    "./campaign-manager": "./campaign-manager.js",
+    "./hypothesis-engine": "./hypothesis-engine.js",
+    "./belief-updater": "./belief-updater.js",
+    "./experiment-selector": "./experiment-selector.js",
+    "./policy-engine": "./policy-engine.js"
+  },
+  "scripts": {
+    "test": "node --test tests/",
+    "lint": "echo 'No linter configured'"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

@@ -1,0 +1,126 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CampaignState",
+  "description": "A snapshot of a research campaign's state at a point in time, enabling replay and evolution tracking",
+  "type": "object",
+  "required": ["id", "campaign_id", "iteration", "phase", "created_at"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier for this state snapshot"
+    },
+    "campaign_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "ID of the parent research campaign"
+    },
+    "iteration": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Which iteration of the research loop this snapshot represents"
+    },
+    "phase": {
+      "type": "string",
+      "enum": [
+        "planning",
+        "evidence_gathering",
+        "target_assessment",
+        "structure_analysis",
+        "candidate_search",
+        "candidate_filtering",
+        "candidate_scoring",
+        "criticism",
+        "awaiting_approval",
+        "re_planning",
+        "report_generation",
+        "completed",
+        "failed"
+      ],
+      "description": "Current phase of the campaign"
+    },
+    "aggregate_counts": {
+      "type": "object",
+      "description": "Summary counts across all campaign entities",
+      "properties": {
+        "total_hypotheses": { "type": "integer", "default": 0 },
+        "supported_hypotheses": { "type": "integer", "default": 0 },
+        "refuted_hypotheses": { "type": "integer", "default": 0 },
+        "inconclusive_hypotheses": { "type": "integer", "default": 0 },
+        "total_evidence": { "type": "integer", "default": 0 },
+        "total_experiments_run": { "type": "integer", "default": 0 },
+        "total_candidates": { "type": "integer", "default": 0 },
+        "candidates_passing_filters": { "type": "integer", "default": 0 }
+      }
+    },
+    "budget_used": {
+      "type": "object",
+      "description": "Resources consumed so far",
+      "properties": {
+        "literature_queries": { "type": "integer", "default": 0 },
+        "database_queries": { "type": "integer", "default": 0 },
+        "sandbox_executions": { "type": "integer", "default": 0 },
+        "total_api_calls": { "type": "integer", "default": 0 },
+        "elapsed_seconds": { "type": "number", "default": 0 }
+      }
+    },
+    "budget_remaining": {
+      "type": "object",
+      "description": "Resources remaining (computed from policy limits - used)",
+      "properties": {
+        "literature_queries": { "type": "integer" },
+        "database_queries": { "type": "integer" },
+        "sandbox_executions": { "type": "integer" },
+        "iterations": { "type": "integer" },
+        "seconds": { "type": "number" }
+      }
+    },
+    "hypothesis_snapshot": {
+      "type": "array",
+      "description": "Current state of all hypotheses",
+      "items": {
+        "type": "object",
+        "properties": {
+          "hypothesis_id": { "type": "string", "format": "uuid" },
+          "statement": { "type": "string" },
+          "status": { "type": "string" },
+          "confidence": { "type": "number" },
+          "evidence_count_for": { "type": "integer" },
+          "evidence_count_against": { "type": "integer" }
+        }
+      }
+    },
+    "next_action": {
+      "type": ["object", "null"],
+      "description": "What the agent decided to do next",
+      "properties": {
+        "action_type": {
+          "type": "string",
+          "enum": [
+            "run_experiment", "request_approval", "re_plan",
+            "generate_report", "stop_campaign", "refine_hypothesis"
+          ]
+        },
+        "experiment_type": { "type": "string" },
+        "reasoning": { "type": "string" },
+        "expected_value": {
+          "type": "number",
+          "description": "Estimated information gain from this action"
+        }
+      }
+    },
+    "stopping_criteria_met": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether any stopping condition has been triggered"
+    },
+    "stopping_reason": {
+      "type": ["string", "null"],
+      "description": "Why the campaign stopped (if it did)"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}
