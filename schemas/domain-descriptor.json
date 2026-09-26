@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sciloop.org/schemas/domain-descriptor.json",
+  "title": "DomainDescriptor",
+  "description": "Schema for registering a pluggable scientific domain in the SciLoop discovery engine",
+  "type": "object",
+  "required": [
+    "id",
+    "name",
+    "version",
+    "candidate_type",
+    "candidate_representation",
+    "hypothesis_types",
+    "evidence_hierarchy"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9_]+$",
+      "description": "Unique machine-readable identifier for the scientific domain"
+    },
+    "name": {
+      "type": "string",
+      "description": "Human-readable name of the domain"
+    },
+    "version": {
+      "type": "string",
+      "description": "Semantic version of the domain descriptor plugin"
+    },
+    "description": {
+      "type": "string",
+      "description": "Detailed explanation of scientific problems and modalities handled"
+    },
+    "candidate_type": {
+      "type": "string",
+      "description": "Physical entity type (e.g. chemical_structure, crystal_structure, nucleic_acid_sequence)"
+    },
+    "candidate_representation": {
+      "type": "string",
+      "description": "Standard notation for candidates (e.g. SMILES, CIF/POSCAR, FASTA/GenBank)"
+    },
+    "hypothesis_types": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1,
+      "description": "Supported scientific hypothesis categories"
+    },
+    "evidence_hierarchy": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["type", "trust_rank", "base_weight"],
+        "properties": {
+          "type": { "type": "string" },
+          "trust_rank": { "type": "integer", "minimum": 1 },
+          "base_weight": { "type": "number", "minimum": 0, "maximum": 1 }
+        }
+      },
+      "minItems": 1,
+      "description": "Evidence types ordered by empirical trust"
+    },
+    "primary_metrics": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Primary quantitative objectives evaluated in this domain"
+    },
+    "tools": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "type"],
+        "properties": {
+          "name": { "type": "string" },
+          "type": { "type": "string", "enum": ["simulator", "evaluator", "generator", "filter"] },
+          "description": { "type": "string" }
+        }
+      }
+    }
+  },
+  "additionalProperties": true
+}
