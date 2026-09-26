@@ -27,6 +27,9 @@ import { CandidateOptimizer } from "./candidate-optimizer.js";
 import { SelectivityEngine } from "./selectivity-engine.js";
 import { AdmetEngine } from "./admet-engine.js";
 import { ParetoFrontier } from "./pareto-frontier.js";
+import { DockingEngine } from "./docking-engine.js";
+import { SimulationEngine } from "./simulation-engine.js";
+import { HypothesisDiscriminator } from "./hypothesis-discriminator.js";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Campaign phases (in typical order, but the loop can revisit any phase)
@@ -42,6 +45,9 @@ const PHASE_ORDER = [
   "selectivity_screening",
   "admet_profiling",
   "candidate_optimization",
+  "molecular_docking",
+  "molecular_simulation",
+  "hypothesis_discrimination",
   "criticism",
   "awaiting_approval",
   "re_planning",
@@ -729,7 +735,9 @@ export class CampaignManager {
       selectivity_screening: "selectivity_screening",
       admet_profiling: "admet_profiling",
       candidate_optimization: "candidate_optimization",
-      pareto_ranking: "candidate_scoring",
+      molecular_docking: "molecular_docking",
+      md_simulation: "molecular_simulation",
+      hypothesis_discrimination: "hypothesis_discrimination",
       scientific_critique: "criticism",
       contradiction_search: "criticism",
       hypothesis_generation: "planning",

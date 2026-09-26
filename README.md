@@ -176,6 +176,30 @@ Research Question
 └────────────────────────────────────────────────────────────────────────┘
 ```
 
+### Phase 5: Simulation & Rich Computational Experiments
+
+```
+┌────────────────────────────────────────────────────────────────────────┐
+│              Simulation & Hypothesis Discrimination Engine             │
+│                                                                        │
+│   ┌─────────────────────┐             ┌────────────────────────────┐   │
+│   │ Docking Engine      │────────────►│ Molecular Dynamics (MD)    │   │
+│   │ - Grid Box Pocket   │ Conformation│ - AMBER99SB / GAFF2        │   │
+│   │ - Binding Affinity  │ Energy Min  │ - NVT/NPT Equilibration    │   │
+│   │ - Ligand Efficiency │             │ - Production Sampling      │   │
+│   └─────────────────────┘             └─────────────┬──────────────┘   │
+│                                                     │ Trajectory       │
+│                                                     │ Metrics          │
+│                                                     ▼                  │
+│   ┌─────────────────────┐             ┌────────────────────────────┐   │
+│   │ Belief Updater &    │◄────────────│ Hypothesis Discriminator   │   │
+│   │ Hypothesis Engine   │ Verdict &   │ - ΔΔG Free Energy (MM-GBSA)│   │
+│   │ (Supported/Refuted) │ Confidence  │ - RMSD Stability & H-bonds │   │
+│   └─────────────────────┘             │ - Mutational Falsification │   │
+│                                       └────────────────────────────┘   │
+└────────────────────────────────────────────────────────────────────────┘
+```
+
 ### Core Engines
 
 | Engine | Purpose |
@@ -191,6 +215,9 @@ Research Question
 | **ParetoFrontier** | Non-dominated sorting (NSGA-II), crowding distance, and trade-offs |
 | **SelectivityEngine** | Evaluates primary target vs antitarget panels (hERG, CYPs, kinases) |
 | **AdmetEngine** | Predicts ADMET profiles, ESOL solubility, and traffic-light safety |
+| **DockingEngine** | Coordinates receptor-ligand docking, pose clustering, and contacts |
+| **SimulationEngine** | Coordinates physics-based MD trajectories and stability metrics |
+| **HypothesisDiscriminator** | Falsifies and discriminates competing hypotheses via simulation |
 
 ## Tech Stack
 
@@ -273,7 +300,7 @@ argo submit infra/argo/research-campaign-workflow.yaml \
 | Phase 2 | Closed-loop Agent | ✅ Complete |
 | Phase 3 | Distributed Execution | ✅ Complete |
 | Phase 4 | Search + Self-improvement | ✅ Complete |
-| Phase 5 | Simulation | ⬜ Planned |
+| Phase 5 | Simulation | ✅ Complete |
 | Phase 6 | Experimental Feedback | ⬜ Planned |
 | Phase 7 | General Scientific Engine | ⬜ Planned |
 

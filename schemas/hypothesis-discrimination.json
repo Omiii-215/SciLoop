@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sciloop.org/schemas/hypothesis-discrimination.json",
+  "title": "HypothesisDiscrimination",
+  "description": "Schema for discriminating between competing scientific hypotheses using simulation and computational experiments as an adversarial instrument.",
+  "type": "object",
+  "required": [
+    "id",
+    "campaign_id",
+    "hypothesis_a_id",
+    "hypothesis_b_id",
+    "discriminating_experiment_type",
+    "discriminating_metric",
+    "effect_size",
+    "confidence",
+    "verdict",
+    "evidence_type",
+    "created_at"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "campaign_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "hypothesis_a_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "hypothesis_b_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "statement_a": {
+      "type": "string"
+    },
+    "statement_b": {
+      "type": "string"
+    },
+    "discriminating_experiment_type": {
+      "type": "string",
+      "enum": ["molecular_docking", "md_simulation", "mmgbsa_free_energy", "mutational_stability_test"]
+    },
+    "discriminating_metric": {
+      "type": "string",
+      "description": "The quantitative metric used to differentiate hypotheses (e.g., 'delta_dG_bind_kcal_mol', 'hinge_hbond_persistence', 'ligand_rmsd')."
+    },
+    "observed_value_a": {
+      "type": "number"
+    },
+    "observed_value_b": {
+      "type": "number"
+    },
+    "effect_size": {
+      "type": "number",
+      "description": "Quantitative difference (e.g. delta delta G or delta persistence)."
+    },
+    "confidence": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "verdict": {
+      "type": "string",
+      "enum": ["FAVORS_HYPOTHESIS_A", "FAVORS_HYPOTHESIS_B", "INCONCLUSIVE", "BOTH_REFUTED"]
+    },
+    "supported_hypothesis_id": {
+      "type": ["string", "null"]
+    },
+    "refuted_hypothesis_id": {
+      "type": ["string", "null"]
+    },
+    "falsification_rationale": {
+      "type": "string",
+      "description": "Scientific explanation of why one hypothesis was refuted and another supported by the simulation data."
+    },
+    "evidence_type": {
+      "type": "string",
+      "const": "computational_experiment"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "additionalProperties": false
+}

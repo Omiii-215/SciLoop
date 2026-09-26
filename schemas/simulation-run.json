@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sciloop.org/schemas/simulation-run.json",
+  "title": "SimulationRun",
+  "description": "Schema for physics-based molecular dynamics simulation setup and execution conditions in SciLoop Phase 5.",
+  "type": "object",
+  "required": [
+    "id",
+    "campaign_id",
+    "system_name",
+    "receptor_pdb_id",
+    "ligand_id",
+    "force_field",
+    "solvent_model",
+    "ensemble",
+    "temperature_kelvin",
+    "duration_ns",
+    "timestep_fs",
+    "status",
+    "evidence_type",
+    "created_at"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "campaign_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "experiment_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "system_name": {
+      "type": "string",
+      "description": "Descriptive name of the simulated protein-ligand system."
+    },
+    "receptor_pdb_id": {
+      "type": "string"
+    },
+    "mutation_state": {
+      "type": "string",
+      "description": "Wild-type or specific mutations (e.g., 'T790M/C797S')."
+    },
+    "ligand_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "ligand_smiles": {
+      "type": "string"
+    },
+    "force_field": {
+      "type": "object",
+      "required": ["protein", "ligand"],
+      "properties": {
+        "protein": { "type": "string", "enum": ["amber99sb-ildn", "charmm36m", "amber14sb"] },
+        "ligand": { "type": "string", "enum": ["gaff2", "openff-2.1.0", "cgenff"] }
+      }
+    },
+    "solvent_model": {
+      "type": "string",
+      "enum": ["tip3p_explicit", "spce_explicit", "gb_obc2_implicit", "vacuum"]
+    },
+    "ensemble": {
+      "type": "string",
+      "enum": ["NVT", "NPT", "NVE"]
+    },
+    "temperature_kelvin": {
+      "type": "number",
+      "default": 300.0
+    },
+    "pressure_bar": {
+      "type": "number",
+      "default": 1.01325
+    },
+    "duration_ns": {
+      "type": "number",
+      "minimum": 0.1,
+      "description": "Length of the production MD simulation trajectory in nanoseconds."
+    },
+    "timestep_fs": {
+      "type": "number",
+      "default": 2.0
+    },
+    "trajectory_frame_count": {
+      "type": "integer"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["pending", "minimizing", "equilibrating", "running_production", "completed", "failed"]
+    },
+    "evidence_type": {
+      "type": "string",
+      "const": "computational_experiment"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "additionalProperties": false
+}

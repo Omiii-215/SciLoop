@@ -142,6 +142,33 @@ const EXPERIMENT_REGISTRY = {
     requires_sandbox: false,
     prerequisite_types: ["molecular_scoring"],
   },
+  molecular_docking: {
+    description: "Dock candidate molecules into target protein binding pocket",
+    cost: 5,
+    tools_required: ["sandbox_execute"],
+    produces: ["docking_runs"],
+    uncertainty_reduction: 0.25,
+    requires_sandbox: true,
+    prerequisite_types: ["structure_retrieval", "molecular_scoring"],
+  },
+  md_simulation: {
+    description: "Run physics-based molecular dynamics to evaluate complex stability and free energy",
+    cost: 8,
+    tools_required: ["sandbox_execute"],
+    produces: ["simulation_runs", "trajectory_analyses"],
+    uncertainty_reduction: 0.35,
+    requires_sandbox: true,
+    prerequisite_types: ["molecular_docking"],
+  },
+  hypothesis_discrimination: {
+    description: "Use comparative simulation metrics to empirically falsify competing hypotheses",
+    cost: 4,
+    tools_required: ["sandbox_execute"],
+    produces: ["hypothesis_discriminations", "belief_updates"],
+    uncertainty_reduction: 0.4,
+    requires_sandbox: false,
+    prerequisite_types: ["md_simulation"],
+  },
 };
 
 export class ExperimentSelector {

@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sciloop.org/schemas/trajectory-analysis.json",
+  "title": "TrajectoryAnalysis",
+  "description": "Schema for physical trajectory analysis, RMSD/RMSF profiles, H-bond persistence, and MM-GBSA binding stability.",
+  "type": "object",
+  "required": [
+    "id",
+    "simulation_id",
+    "protein_rmsd_mean_angstrom",
+    "ligand_rmsd_mean_angstrom",
+    "binding_stability_classification",
+    "key_hbond_persistence",
+    "mmgbsa_dG_bind_kcal_mol",
+    "evidence_type",
+    "created_at"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "simulation_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "protein_rmsd_mean_angstrom": {
+      "type": "number",
+      "description": "Mean RMSD of protein backbone C-alpha atoms across production trajectory."
+    },
+    "protein_rmsd_std_angstrom": {
+      "type": "number"
+    },
+    "ligand_rmsd_mean_angstrom": {
+      "type": "number",
+      "description": "Mean RMSD of ligand heavy atoms relative to the initial docking pose."
+    },
+    "ligand_rmsd_std_angstrom": {
+      "type": "number"
+    },
+    "radius_of_gyration_mean_angstrom": {
+      "type": "number"
+    },
+    "rmsf_key_residues": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["residue_name", "residue_number", "rmsf_angstrom"],
+        "properties": {
+          "residue_name": { "type": "string" },
+          "residue_number": { "type": "integer" },
+          "rmsf_angstrom": { "type": "number" }
+        }
+      }
+    },
+    "key_hbond_persistence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["donor_residue", "acceptor_residue", "persistence_percentage"],
+        "properties": {
+          "donor_residue": { "type": "string" },
+          "acceptor_residue": { "type": "string" },
+          "persistence_percentage": { "type": "number", "minimum": 0, "maximum": 100 },
+          "mean_distance_angstrom": { "type": "number" }
+        }
+      }
+    },
+    "mmgbsa_dG_bind_kcal_mol": {
+      "type": "number",
+      "description": "MM-GBSA approximate binding free energy in kcal/mol."
+    },
+    "binding_stability_classification": {
+      "type": "string",
+      "enum": ["HIGHLY_STABLE", "METASTABLE", "UNSTABLE", "UNBOUND"],
+      "description": "HIGHLY_STABLE (ligand RMSD < 2.0 Å, H-bond > 60%), METASTABLE (RMSD 2.0-3.5 Å), UNSTABLE (RMSD > 3.5 Å), UNBOUND (ligand leaves pocket)."
+    },
+    "evidence_type": {
+      "type": "string",
+      "const": "computational_experiment"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,41 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# SciLoop — Molecular Docking Sandbox Dockerfile
+# Phase 5: Simulation & Rich Computational Experiments
+# Isolated container for receptor preparation, conformer generation, and docking
+# ─────────────────────────────────────────────────────────────────────────────
+FROM python:3.11-slim AS builder
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    libboost-all-dev \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY sandbox-scripts/requirements.txt ./
+RUN pip install --no-cache-dir --user -r requirements.txt numpy scipy
+
+# ─────────────────────────────────────────────────────────────────────────────
+FROM python:3.11-slim
+
+LABEL org.opencontainers.image.title="sciloop-docking"
+LABEL org.opencontainers.image.description="Molecular docking environment with AutoDock Vina / smina and RDKit"
+LABEL org.opencontainers.image.version="5.0.0"
+
+RUN groupadd -g 1001 sciloop && useradd -u 1001 -g sciloop -m sciloop
+
+COPY --from=builder /root/.local /home/sciloop/.local
+COPY --chown=sciloop:sciloop sandbox-scripts/ /app/sandbox-scripts/
+
+WORKDIR /app
+USER sciloop
+
+ENV PATH="/home/sciloop/.local/bin:${PATH}"
+ENV PYTHONPATH="/app"
+ENV PYTHONUNBUFFERED=1
+
+HEALTHCHECK --interval=30s --timeout=5s --retries=3 \
+  CMD python -c "print('docking runner ready')" || exit 1
+
+ENTRYPOINT ["python", "/app/sandbox-scripts/docking_runner.py"]

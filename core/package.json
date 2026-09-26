@@ -14,7 +14,10 @@
     "./pareto-frontier": "./pareto-frontier.js",
     "./selectivity-engine": "./selectivity-engine.js",
     "./admet-engine": "./admet-engine.js",
-    "./candidate-optimizer": "./candidate-optimizer.js"
+    "./candidate-optimizer": "./candidate-optimizer.js",
+    "./docking-engine": "./docking-engine.js",
+    "./simulation-engine": "./simulation-engine.js",
+    "./hypothesis-discriminator": "./hypothesis-discriminator.js"
   },
   "scripts": {
     "test": "node --test tests/",
