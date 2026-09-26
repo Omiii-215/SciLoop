@@ -1,0 +1,72 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ResearchHypothesis",
+  "description": "A testable scientific hypothesis generated during a SciLoop research campaign",
+  "type": "object",
+  "required": ["id", "campaign_id", "statement", "evidence_type", "created_at"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier for this hypothesis"
+    },
+    "campaign_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "ID of the parent research campaign"
+    },
+    "statement": {
+      "type": "string",
+      "description": "The hypothesis statement, phrased as a testable claim"
+    },
+    "evidence_type": {
+      "type": "string",
+      "enum": ["model_hypothesis", "literature", "computational_prediction"],
+      "description": "Source classification — model_hypothesis (agent reasoning, lowest weight), literature (PubMed-backed, medium weight), computational_prediction (RDKit/scoring, must label as prediction)"
+    },
+    "confidence": {
+      "type": "number",
+      "minimum": 0.0,
+      "maximum": 1.0,
+      "description": "Agent's confidence in this hypothesis (0-1). Must decrease when contradictory evidence is found."
+    },
+    "evidence_for": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/evidence_ref" },
+      "description": "Evidence supporting this hypothesis"
+    },
+    "evidence_against": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/evidence_ref" },
+      "description": "Evidence contradicting this hypothesis"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["proposed", "under_investigation", "supported", "refuted", "inconclusive"],
+      "default": "proposed"
+    },
+    "parent_hypothesis_id": {
+      "type": ["string", "null"],
+      "format": "uuid",
+      "description": "If this hypothesis was derived from refining another"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "definitions": {
+    "evidence_ref": {
+      "type": "object",
+      "required": ["evidence_id", "relevance"],
+      "properties": {
+        "evidence_id": { "type": "string", "format": "uuid" },
+        "relevance": { "type": "string", "description": "How this evidence relates to the hypothesis" }
+      }
+    }
+  }
+}

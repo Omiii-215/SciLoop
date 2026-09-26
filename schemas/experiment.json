@@ -1,0 +1,130 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ComputationalExperiment",
+  "description": "A computational experiment executed during a SciLoop research campaign",
+  "type": "object",
+  "required": ["id", "campaign_id", "experiment_type", "status", "created_at"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier for this experiment"
+    },
+    "campaign_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "ID of the parent research campaign"
+    },
+    "hypothesis_id": {
+      "type": ["string", "null"],
+      "format": "uuid",
+      "description": "The hypothesis this experiment aims to test"
+    },
+    "experiment_type": {
+      "type": "string",
+      "enum": [
+        "literature_search",
+        "target_assessment",
+        "structure_retrieval",
+        "compound_search",
+        "molecular_filtering",
+        "molecular_scoring",
+        "scientific_critique"
+      ],
+      "description": "Category of computational experiment"
+    },
+    "description": {
+      "type": "string",
+      "description": "Human-readable description of what this experiment does"
+    },
+    "inputs": {
+      "type": "object",
+      "description": "Input parameters for the experiment",
+      "properties": {
+        "query": { "type": "string" },
+        "target_gene": { "type": "string" },
+        "smiles_list": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "parameters": {
+          "type": "object",
+          "description": "Experiment-specific parameters"
+        }
+      }
+    },
+    "outputs": {
+      "type": "object",
+      "description": "Results produced by the experiment",
+      "properties": {
+        "evidence_ids": {
+          "type": "array",
+          "items": { "type": "string", "format": "uuid" },
+          "description": "Evidence records generated"
+        },
+        "candidate_ids": {
+          "type": "array",
+          "items": { "type": "string", "format": "uuid" },
+          "description": "Candidate records generated or modified"
+        },
+        "summary": {
+          "type": "string",
+          "description": "Agent-generated summary of results"
+        },
+        "metrics": {
+          "type": "object",
+          "description": "Quantitative metrics from the experiment"
+        }
+      }
+    },
+    "execution": {
+      "type": "object",
+      "description": "Execution metadata for reproducibility",
+      "properties": {
+        "tool_name": {
+          "type": "string",
+          "description": "MCP tool or sandbox script used"
+        },
+        "sandbox": {
+          "type": "boolean",
+          "description": "Whether this ran in the Daytona sandbox"
+        },
+        "duration_ms": {
+          "type": "integer",
+          "description": "Execution time in milliseconds"
+        },
+        "started_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "completed_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "status": {
+      "type": "string",
+      "enum": ["planned", "running", "completed", "failed", "cancelled"],
+      "default": "planned"
+    },
+    "requires_approval": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether this experiment requires human approval before proceeding"
+    },
+    "approval": {
+      "type": ["object", "null"],
+      "properties": {
+        "approved": { "type": "boolean" },
+        "approved_by": { "type": "string" },
+        "approved_at": { "type": "string", "format": "date-time" },
+        "notes": { "type": "string" }
+      }
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

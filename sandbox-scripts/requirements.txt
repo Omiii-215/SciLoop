@@ -1,0 +1,5 @@
+# SciLoop — Sandbox Dependencies
+# These are installed inside the Daytona sandbox, NOT on the host machine.
+rdkit-pypi>=2023.9.1
+biopython>=1.82
+numpy>=1.24
