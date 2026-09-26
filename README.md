@@ -1,309 +1,119 @@
-# 🧬 SciLoop
+# 🔬 SciLoop — Autonomous Scientific Research Companion
 
-**Autonomous Scientific Research Campaign Agent** — built with [TrueForge](https://github.com/truefoundry/trueforge)
+**SciLoop** is a full-stack, autonomous scientific research companion and discovery platform inspired by **Scite.ai Assistant**. Engineered for researchers across Theoretical Physics, Oncology, Molecular Biology, Chemistry, Scientific Machine Learning, and Applied Mathematics, SciLoop synthesizes peer-reviewed literature, derives governing mathematical equations, tabulates physical parameters, generates custom computational models, and runs live interactive 2D/3D simulations.
 
-SciLoop is an AI agent that connects to real scientific databases (PubMed, PDB, AlphaFold, ChEMBL, UniProt), generates and executes computational biology experiments inside a sandbox, and stops before irreversible actions to wait for human approval.
+---
 
-## What It Does
+## 🌟 Key Features
 
-Given a research question like *"Investigate EGFR as a therapeutic target for NSCLC"*, SciLoop autonomously:
+### 1. 🤖 Literature-Grounded LLM Intelligence (OpenAI GPT-4o)
+- **Arbitrary Scientific Inquiries**: Accepts high-level research questions, hypotheses, or specialized domain queries.
+- **Full Manuscript Ingestion**: Drag-and-drop or upload PDF research papers, Markdown (`.md`), or plain text files. Extracted in-browser using `pdf.js` and ingested directly into the reasoning context.
+- **Scite-Style Smart Citations**: Automatically tallies and categorizes peer-reviewed literature into:
+  - 🟢 **Supporting Citations**: Confirms or provides empirical evidence for the hypothesis.
+  - 🔵 **Mentioning Citations**: Provides contextual background, methodologies, or related experiments.
+  - 🔴 **Contrasting / Disputing Citations**: Identifies contradictory evidence, differing mechanisms, or falsification arguments.
 
-1. **Searches literature** — queries PubMed for evidence, extracts claims with citations
-2. **Assesses the target** — retrieves protein data from UniProt, structures from PDB/AlphaFold
-3. **🛑 Presents research plan** — waits for human approval before proceeding
-4. **Finds candidate molecules** — searches ChEMBL for known active compounds
-5. **Filters in sandbox** — runs RDKit (Lipinski, PAINS) inside Daytona sandbox
-6. **Scores & ranks** — multi-objective scoring with exposed trade-offs
-7. **🛑 Presents candidates** — waits for human approval of ranked list
-8. **Critiques findings** — searches for contradictory evidence, evaluates weaknesses
-9. **Re-plans if needed** — updates hypotheses and experiments based on results
-10. **Generates report** — full provenance, citations, uncertainty labels
-11. **🛑 Awaits final approval** — before "publishing" results
+### 2. 📚 Live Scientific Search Engine Aggregator
+- Live integration with **Crossref** (peer-reviewed journals from Nature, Science, Cell, IEEE, APS, Elsevier, Springer) and **arXiv** (preprints in Physics, Mathematics, CS, Quantitative Biology).
+- Retrieves real DOIs, authors, publication years, and abstracts in parallel to ground every synthesis.
 
-## Key Design Principles
+### 3. 📐 Rigorous Mathematical & Parameter Formulations
+- **KaTeX Equations**: Derives governing differential equations, thermodynamic relations, and field tensors with LaTeX typography.
+- **Parameter Breakdown**: Tabulates physical attributes, symbols, calculated estimates, SI/cgs units, and physical significance.
 
-- **Evidence typing** — every claim classified as `literature`, `computational_prediction`, or `model_hypothesis`
-- **Provenance** — full chain from API query → raw response → claim → hypothesis
-- **No false certainty** — computational predictions explicitly labeled, never presented as validated results
-- **Multi-objective scoring** — no opaque "best molecule" score; trade-offs are exposed
-- **Human-in-the-loop** — 3 approval gates at scientifically meaningful decision points
-- **Closed-loop iteration** — hypotheses are updated based on evidence, not just generated once
-- **Distributed execution** — containerized services with parallel batch processing
+### 4. 🎮 Multi-Modal Interactive Simulation Engine
+SciLoop automatically matches your research topic to the appropriate real-time simulation:
+- **🧬 3D Molecular Dynamics (Three.js)**: 60-frame trajectory playback of the EGFR kinase domain (PDB: 1M17) with alpha-helices, beta-sheets, kinase inhibitor ligand conformers, hydrogen bonding, steric clashes, orbital controls, and frame scrubbing.
+- **🌌 Relativistic Orbit Simulator**: Simulates relativistic geodesics and perihelion precession in Schwarzschild and Kerr spacetime geometries.
+- **🌊 Quantum Wave Packet Tunneling**: Solves the 1D time-dependent Schrödinger equation across finite potential barriers, computing transmission coefficients ($T$) and reflection probabilities.
+- **📊 PINN Loss Landscape Tracker**: Visualizes Physics-Informed Neural Network convergence, plotting PDE residual loss and boundary conditions over training epochs.
 
-## Project Structure
+### 5. 💻 Custom Scientific ML & PyTorch Architecture
+- Generates complete, syntactically valid PyTorch or NumPy numerical solver code tailored to the inquiry.
+- One-click code copying for immediate execution in Jupyter or Google Colab.
+
+### 6. ⚔️ Adversarial Scientific Critique & Falsification
+- Formulates the rigorous **Null Hypothesis ($H_0$)**.
+- Exposes hidden confounders, experimental artifacts, and observational limitations.
+- Defines explicit, quantitative **Falsification Thresholds** under which the model is refuted.
+
+### 7. 💬 Interactive Follow-Up Dialogue & Publication PDF Export
+- **Conversational Threading**: Ask follow-up questions to probe deeper into specific terms, equations, or boundary conditions with real-time KaTeX rendering.
+- **Publication PDF Export**: One-click export via `html2pdf.js`, generating academic-grade dossiers ready for distribution.
+
+---
+
+## 🏗️ System Architecture
 
 ```
 SciLoop/
-├── core/                      # Closed-loop agent engines
-│   ├── campaign-manager.js        # Orchestrates the full research loop
-│   ├── hypothesis-engine.js       # Hypothesis lifecycle management
-│   ├── belief-updater.js          # Updates confidence from observations
-│   ├── experiment-selector.js     # Picks the next best experiment
-│   ├── policy-engine.js           # Enforces budgets and constraints
-│   └── artifact-store.js          # Object storage for scientific artifacts
-├── mcp-servers/               # MCP tool servers for external APIs
-│   ├── pubmed-server/             # PubMed E-utilities wrapper
-│   ├── protein-db-server/         # PDB + AlphaFold DB
-│   └── chembl-server/             # ChEMBL REST API
-├── workers/                   # Distributed task processing
-│   └── task-queue.js              # Redis-backed task queue with retries
-├── skills/                    # TrueForge SKILL.md files
-│   ├── research-planner/          # Plans campaigns + re-planning
-│   ├── literature-search/
-│   ├── target-biology/
-│   ├── structure-retrieval/
-│   ├── molecule-search/
-│   ├── molecule-filter/
-│   ├── scientific-critic/
-│   ├── report-generator/
-│   ├── experiment-selector/       # Experiment selection guidance
-│   └── hypothesis-manager/        # Hypothesis lifecycle guidance
-├── sandbox-scripts/           # Python scripts for Daytona sandbox
-│   ├── rdkit_filter.py
-│   ├── molecule_score.py
-│   └── requirements.txt
-├── schemas/                   # JSON schemas for data contracts
-│   ├── hypothesis.json
-│   ├── evidence.json
-│   ├── experiment.json
-│   ├── candidate.json
-│   ├── belief-update.json
-│   ├── campaign-state.json
-│   └── policy.json
-├── db/
-│   ├── init.sql                   # PostgreSQL provenance schema
-│   └── migration-phase2.sql       # Closed-loop tables
-├── docker/                    # Container definitions
-│   ├── Dockerfile.mcp-pubmed
-│   ├── Dockerfile.mcp-protein
-│   ├── Dockerfile.mcp-chembl
-│   ├── Dockerfile.sandbox
-│   ├── Dockerfile.core
-│   └── docker-compose.yml         # Local multi-container orchestration
-├── infra/                     # Infrastructure as Code
-│   ├── k8s/                       # Kubernetes manifests
-│   │   ├── namespace.yaml
-│   │   ├── deployments.yaml
-│   │   └── jobs.yaml              # Batch jobs, RBAC, NetworkPolicy
-│   ├── argo/                      # Argo Workflow templates
-│   │   ├── research-campaign-workflow.yaml
-│   │   └── batch-workflows.yaml
-│   ├── helm/sciloop/              # Helm chart
-│   │   ├── Chart.yaml
-│   │   ├── values.yaml
-│   │   └── templates/
-│   └── observability/             # Monitoring
-│       ├── prometheus-config.yaml
-│       └── grafana-dashboard.json
+├── server.js               # High-performance zero-dependency Node.js server
+│                           # - Serves Scite-style frontend at http://localhost:8085/
+│                           # - Aggregates Crossref & arXiv APIs in parallel
+│                           # - Proxies OpenAI GPT-4o completions (/api/research, /api/chat)
+├── package.json            # Node.js project manifest ("npm start")
+├── .env                    # Environment configuration (OPENAI_API_KEY, PORT, MODEL)
+├── simulation-3d/          # Production Research Companion Frontend
+│   ├── index.html          # Scite.ai layout, search hero card, simulation frames
+│   ├── style.css           # Premium Scite design system, KaTeX styling, print rules
+│   ├── app.js              # State machine, PDF.js parser, Three.js 3D viewer, 2D canvases
+│   └── simulation_data.json# 60-frame EGFR kinase MD coordinates & conformations
 └── Doc/
-    └── SciLoop Blueprint.md
+    └── SciLoop Blueprint.md# In-depth system design & mathematical specifications
 ```
 
-## Architecture
+---
 
-### Phase 2: Closed-Loop Agent
+## 🚀 Quickstart & Local Setup
 
-```
-Research Question
-  → Hypotheses (HypothesisEngine)
-    → Evidence Gathering (ExperimentSelector picks best next step)
-      → Observation (MCP tools + sandbox)
-        → Belief Update (BeliefUpdater adjusts confidence)
-          → Critique (Scientific Critic)
-            → Re-Plan? (if improvement possible)
-              → Next Iteration OR Report
-```
+### Prerequisites
+- Node.js (v18 or higher recommended)
 
-### Phase 3: Distributed Execution
-
-```
-┌─────────────────────────────────────────────────────┐
-│                  Argo Workflows                      │
-│  ┌──────────┐  ┌──────────┐  ┌──────────────────┐  │
-│  │Literature │  │ Target   │  │ Structure        │  │
-│  │ Search   │  │Assessment│  │ Retrieval        │  │
-│  └─────┬────┘  └────┬─────┘  └────────┬─────────┘  │
-│        │            │                  │             │
-│        ▼            ▼                  │             │
-│  ┌──────────┐  ┌──────────┐           │             │
-│  │ Compound │  │ Critique │           │             │
-│  │  Search  │  │          │           │             │
-│  └─────┬────┘  └──────────┘           │             │
-│        │                               │             │
-│        ▼                               │             │
-│  ┌──────────────────────┐              │             │
-│  │ Parallel Filtering   │◄─────────────┘             │
-│  │ (5 pods × N batches) │                            │
-│  └─────────┬────────────┘                            │
-│            ▼                                         │
-│  ┌──────────────────────┐                            │
-│  │ Parallel Scoring     │                            │
-│  │ (3 pods × M batches) │                            │
-│  └─────────┬────────────┘                            │
-│            ▼                                         │
-│  ┌──────────────────────┐                            │
-│  │   Report Generation  │                            │
-│  └──────────────────────┘                            │
-└─────────────────────────────────────────────────────┘
-         │              │              │
-    ┌────▼────┐   ┌────▼────┐   ┌────▼────┐
-    │PostgreSQL│   │  Redis  │   │  MinIO  │
-    │Provenance│   │  Queue  │   │Artifacts│
-    └─────────┘   └─────────┘   └─────────┘
-```
-
-### Phase 4: Search & Self-Improvement
-
-```
-┌────────────────────────────────────────────────────────────────────────┐
-│                   Generative Self-Improvement Loop                     │
-│                                                                        │
-│   ┌────────────────────┐          ┌───────────────────────────────┐   │
-│   │ Candidate Pool     │─────────►│ Multi-Objective Evaluation    │   │
-│   │ (ChEMBL / De Novo) │          │ - Primary Target Affinity     │   │
-│   └─────────▲──────────┘          │ - Selectivity vs Antitargets  │   │
-│             │                     │ - ADMET Profile & Traffic Lgt │   │
-│             │                     │ - Synthetic Accessibility     │   │
-│             │                     └───────────────┬───────────────┘   │
-│             │                                     │                   │
-│             │                                     ▼                   │
-│   ┌─────────┴──────────┐          ┌───────────────────────────────┐   │
-│   │ Mutation & Hops    │◄─────────│ Pareto Frontier (NSGA-II)     │   │
-│   │ - Bioisosteres     │ Progenitor│ - Fast Non-dominated Sorting  │   │
-│   │ - Scaffold Hops    │ Selection │ - Crowding Distance Diversity │   │
-│   │ - Solubilizers     │          │ - Trade-off Analysis          │   │
-│   └────────────────────┘          └───────────────────────────────┘   │
-└────────────────────────────────────────────────────────────────────────┘
-```
-
-### Phase 5: Simulation & Rich Computational Experiments
-
-```
-┌────────────────────────────────────────────────────────────────────────┐
-│              Simulation & Hypothesis Discrimination Engine             │
-│                                                                        │
-│   ┌─────────────────────┐             ┌────────────────────────────┐   │
-│   │ Docking Engine      │────────────►│ Molecular Dynamics (MD)    │   │
-│   │ - Grid Box Pocket   │ Conformation│ - AMBER99SB / GAFF2        │   │
-│   │ - Binding Affinity  │ Energy Min  │ - NVT/NPT Equilibration    │   │
-│   │ - Ligand Efficiency │             │ - Production Sampling      │   │
-│   └─────────────────────┘             └─────────────┬──────────────┘   │
-│                                                     │ Trajectory       │
-│                                                     │ Metrics          │
-│                                                     ▼                  │
-│   ┌─────────────────────┐             ┌────────────────────────────┐   │
-│   │ Belief Updater &    │◄────────────│ Hypothesis Discriminator   │   │
-│   │ Hypothesis Engine   │ Verdict &   │ - ΔΔG Free Energy (MM-GBSA)│   │
-│   │ (Supported/Refuted) │ Confidence  │ - RMSD Stability & H-bonds │   │
-│   └─────────────────────┘             │ - Mutational Falsification │   │
-│                                       └────────────────────────────┘   │
-└────────────────────────────────────────────────────────────────────────┘
-```
-
-### Core Engines
-
-| Engine | Purpose |
-|--------|---------|
-| **CampaignManager** | Orchestrates the loop, manages state, enforces gates |
-| **HypothesisEngine** | Creates, updates, and resolves hypotheses |
-| **BeliefUpdater** | Translates evidence into confidence changes |
-| **ExperimentSelector** | Picks the highest-value next experiment |
-| **PolicyEngine** | Enforces budgets, permissions, and scientific constraints |
-| **ArtifactStore** | Content-addressed storage for scientific artifacts |
-| **TaskQueue** | Redis-backed distributed task processing with retries |
-| **CandidateOptimizer** | Generative multi-round modification and self-improvement loop |
-| **ParetoFrontier** | Non-dominated sorting (NSGA-II), crowding distance, and trade-offs |
-| **SelectivityEngine** | Evaluates primary target vs antitarget panels (hERG, CYPs, kinases) |
-| **AdmetEngine** | Predicts ADMET profiles, ESOL solubility, and traffic-light safety |
-| **DockingEngine** | Coordinates receptor-ligand docking, pose clustering, and contacts |
-| **SimulationEngine** | Coordinates physics-based MD trajectories and stability metrics |
-| **HypothesisDiscriminator** | Falsifies and discriminates competing hypotheses via simulation |
-
-## Tech Stack
-
-| Layer | Technology |
-|-------|-----------|
-| Agent Harness | TrueForge |
-| Sandbox | Daytona / Docker |
-| MCP Servers | Node.js (ESM) |
-| Core Engines | Node.js (ESM) |
-| Task Queue | Redis |
-| Object Storage | MinIO (S3-compatible) |
-| Sandbox Scripts | Python 3.11 + RDKit + Biopython |
-| Database | PostgreSQL |
-| Orchestration | Kubernetes + Argo Workflows |
-| Packaging | Helm |
-| Observability | Prometheus + Grafana |
-| External APIs | PubMed, PDB, AlphaFold DB, ChEMBL, UniProt |
-
-## Getting Started
-
-### Local Development (Docker Compose)
-
+### 1. Start the Server
 ```bash
-# Start all services
-cd docker && docker compose up -d
+npm start
+```
+*The server will start on [http://localhost:8085/](http://localhost:8085/)*.
 
-# Verify services
-docker compose ps
+### 2. Configure OpenAI API Key
+The repository is pre-configured with the OpenAI API key in `.env`. You can also configure or update your key anytime in the UI:
+1. Click the **⚙️ Settings** icon in the sidebar or search card.
+2. Enter your OpenAI API key (`sk-proj-...`).
+3. Select your model (`gpt-4o`, `gpt-4o-mini`, `o1-preview`).
+4. Click **Save Settings**.
 
-# View logs
-docker compose logs -f worker
+---
+
+## 📡 API Reference
+
+### `GET /api/config`
+Returns API key connection status and active model.
+
+### `GET /api/search?q={query}`
+Searches real peer-reviewed scientific literature across Crossref and arXiv.
+
+### `POST /api/research`
+Autonomous research synthesis endpoint.
+```json
+{
+  "query": "Kerr Spacetime Geodesics and Ergosphere Frame Dragging",
+  "documentContext": "Optional text extracted from uploaded PDF/MD paper",
+  "model": "gpt-4o"
+}
 ```
 
-### Manual Setup
-
-```bash
-# 1. Start TrueForge
-npx -y @truefoundry/trueforge
-
-# 2. Initialize the database
-psql -f db/init.sql
-psql -f db/migration-phase2.sql
-
-# 3. Install sandbox dependencies (inside Daytona)
-pip install -r sandbox-scripts/requirements.txt
-
-# 4. Start MCP servers
-cd mcp-servers/pubmed-server && npm start
-cd mcp-servers/protein-db-server && npm start
-cd mcp-servers/chembl-server && npm start
+### `POST /api/chat`
+Conversational follow-up endpoint with active dossier grounding.
+```json
+{
+  "message": "What happens if the black hole spin parameter a approaches 1?",
+  "context": "Active dossier title, equations, and attributes",
+  "model": "gpt-4o"
+}
 ```
 
-### Kubernetes Deployment
+---
 
-```bash
-# Using Helm
-helm install sciloop infra/helm/sciloop/ \
-  --namespace sciloop \
-  --create-namespace \
-  -f infra/helm/sciloop/values.yaml
-
-# Or using raw manifests
-kubectl apply -f infra/k8s/namespace.yaml
-kubectl apply -f infra/k8s/deployments.yaml
-kubectl apply -f infra/k8s/jobs.yaml
-
-# Submit an Argo workflow
-argo submit infra/argo/research-campaign-workflow.yaml \
-  -p campaign-id="$(uuidgen)" \
-  -p research-question="Investigate EGFR as a therapeutic target for NSCLC" \
-  -p target-gene="EGFR"
-```
-
-## Phases
-
-| Phase | Description | Status |
-|-------|-------------|--------|
-| Phase 0 | Schemas + Provenance | ✅ Complete |
-| Phase 1 | Single-node Research | ✅ Complete |
-| Phase 2 | Closed-loop Agent | ✅ Complete |
-| Phase 3 | Distributed Execution | ✅ Complete |
-| Phase 4 | Search + Self-improvement | ✅ Complete |
-| Phase 5 | Simulation | ✅ Complete |
-| Phase 6 | Experimental Feedback | ⬜ Planned |
-| Phase 7 | General Scientific Engine | ⬜ Planned |
-
-## License
-
-MIT
+## 📄 License
+MIT License. Built for scientists, researchers, and engineers worldwide.
