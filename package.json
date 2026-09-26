@@ -1,0 +1,27 @@
+{
+  "name": "sciloop",
+  "version": "1.0.0",
+  "description": "SciLoop — Autonomous Scientific Research Campaign Agent",
+  "type": "module",
+  "main": "core/campaign-manager.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "serve": "node server/index.js",
+    "campaign": "node scripts/run-campaign.js",
+    "demo": "node scripts/run-campaign.js --auto-approve",
+    "test": "node --test tests/*.test.js",
+    "test:phase4": "node --test tests/phase4.test.js",
+    "test:phase5": "node --test tests/phase5.test.js",
+    "test:phase6": "node --test tests/phase6.test.js",
+    "test:phase7": "node --test tests/phase7.test.js"
+  },
+  "keywords": [
+    "autonomous-agent",
+    "scientific-discovery",
+    "computational-biology",
+    "drug-discovery",
+    "reproducibility"
+  ],
+  "author": "SciLoop Team",
+  "license": "MIT"
+}
