@@ -106,6 +106,42 @@ const EXPERIMENT_REGISTRY = {
     requires_sandbox: false,
     prerequisite_types: [],
   },
+  selectivity_screening: {
+    description: "Screen candidate molecules against antitargets (hERG, CYPs, homolog kinases)",
+    cost: 4,
+    tools_required: ["sandbox_execute"],
+    produces: ["selectivity_profiles"],
+    uncertainty_reduction: 0.2,
+    requires_sandbox: true,
+    prerequisite_types: ["molecular_scoring"],
+  },
+  admet_profiling: {
+    description: "Compute multi-parameter ADMET profiles and traffic-light safety rating",
+    cost: 4,
+    tools_required: ["sandbox_execute"],
+    produces: ["admet_profiles"],
+    uncertainty_reduction: 0.2,
+    requires_sandbox: true,
+    prerequisite_types: ["molecular_scoring"],
+  },
+  candidate_optimization: {
+    description: "Perform generative self-improvement mutations and scaffold hops on candidates",
+    cost: 6,
+    tools_required: ["sandbox_execute"],
+    produces: ["candidates", "optimizations"],
+    uncertainty_reduction: 0.25,
+    requires_sandbox: true,
+    prerequisite_types: ["selectivity_screening", "admet_profiling"],
+  },
+  pareto_ranking: {
+    description: "Compute multi-objective Pareto frontier and non-dominated sorting",
+    cost: 3,
+    tools_required: [],
+    produces: ["pareto_frontiers"],
+    uncertainty_reduction: 0.15,
+    requires_sandbox: false,
+    prerequisite_types: ["molecular_scoring"],
+  },
 };
 
 export class ExperimentSelector {
@@ -177,6 +213,23 @@ export class ExperimentSelector {
    */
   getExperimentRegistry() {
     return { ...EXPERIMENT_REGISTRY };
+  }
+
+  /**
+   * Get all registered experiment type names.
+   * @returns {string[]}
+   */
+  getAvailableExperimentTypes() {
+    return Object.keys(EXPERIMENT_REGISTRY);
+  }
+
+  /**
+   * Get metadata definition for a specific experiment type.
+   * @param {string} type
+   * @returns {object|null}
+   */
+  getExperimentDefinition(type) {
+    return EXPERIMENT_REGISTRY[type] ? { ...EXPERIMENT_REGISTRY[type] } : null;
   }
 
   /**

@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sciloop.org/schemas/candidate-optimization.json",
+  "title": "CandidateOptimization",
+  "description": "Schema for iterative candidate molecule optimization and self-improvement cycles in SciLoop Phase 4.",
+  "type": "object",
+  "required": [
+    "id",
+    "campaign_id",
+    "generation",
+    "parent_candidate_id",
+    "modification_type",
+    "mutated_smiles",
+    "rationale",
+    "evidence_type",
+    "created_at"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier for this optimization record."
+    },
+    "campaign_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The campaign this optimization belongs to."
+    },
+    "generation": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Generation iteration number in the evolutionary/optimization loop."
+    },
+    "parent_candidate_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "UUID of the progenitor candidate molecule."
+    },
+    "parent_smiles": {
+      "type": "string",
+      "description": "SMILES string of the parent molecule."
+    },
+    "modification_type": {
+      "type": "string",
+      "enum": [
+        "bioisosteric_replacement",
+        "scaffold_hopping",
+        "functional_group_addition",
+        "functional_group_deletion",
+        "ring_modification",
+        "fragment_crossover",
+        "solubilizing_group_addition"
+      ],
+      "description": "The molecular transformation applied."
+    },
+    "transformation_rule": {
+      "type": "string",
+      "description": "Specific reaction or substitution rule applied (e.g., 'carboxylic_acid_to_tetrazole')."
+    },
+    "mutated_smiles": {
+      "type": "string",
+      "description": "Resulting SMILES string after modification."
+    },
+    "rationale": {
+      "type": "string",
+      "description": "Scientific hypothesis or rationale justifying why this modification improves the candidate."
+    },
+    "target_property": {
+      "type": "string",
+      "enum": [
+        "activity",
+        "selectivity",
+        "solubility",
+        "metabolic_stability",
+        "permeability",
+        "toxicity_reduction",
+        "synthetic_accessibility"
+      ],
+      "description": "Primary property targeted for improvement."
+    },
+    "fitness_delta": {
+      "type": "number",
+      "description": "Change in multi-objective fitness relative to parent (positive = improvement)."
+    },
+    "pareto_rank": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Pareto rank assigned to this candidate in its generation (1 = non-dominated frontier)."
+    },
+    "evidence_type": {
+      "type": "string",
+      "const": "computational_prediction",
+      "description": "Always computational_prediction — never experimentally validated."
+    },
+    "provenance": {
+      "type": "object",
+      "properties": {
+        "operator": { "type": "string" },
+        "software": { "type": "string" },
+        "seed": { "type": "integer" },
+        "parameters": { "type": "object" }
+      }
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "additionalProperties": false
+}

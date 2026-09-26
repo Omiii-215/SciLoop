@@ -1,0 +1,121 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sciloop.org/schemas/admet-profile.json",
+  "title": "ADMETProfile",
+  "description": "Comprehensive ADMET (Absorption, Distribution, Metabolism, Excretion, Toxicity) prediction profile with uncertainty bounds.",
+  "type": "object",
+  "required": [
+    "id",
+    "candidate_id",
+    "smiles",
+    "physicochemical",
+    "absorption",
+    "distribution",
+    "metabolism",
+    "excretion",
+    "toxicity",
+    "admet_traffic_light",
+    "evidence_type",
+    "created_at"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "candidate_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "smiles": {
+      "type": "string"
+    },
+    "physicochemical": {
+      "type": "object",
+      "required": ["mw", "logp", "tpsa", "rotatable_bonds", "hbd", "hba", "qed", "sa_score"],
+      "properties": {
+        "mw": { "type": "number" },
+        "logp": { "type": "number" },
+        "tpsa": { "type": "number" },
+        "rotatable_bonds": { "type": "integer" },
+        "hbd": { "type": "integer" },
+        "hba": { "type": "integer" },
+        "qed": { "type": "number", "minimum": 0, "maximum": 1, "description": "Quantitative Estimate of Drug-likeness" },
+        "sa_score": { "type": "number", "minimum": 1, "maximum": 10, "description": "Synthetic Accessibility Score (1=easy, 10=hard)" }
+      }
+    },
+    "absorption": {
+      "type": "object",
+      "required": ["caco2_permeability", "human_intestinal_absorption", "oral_bioavailability_proxy"],
+      "properties": {
+        "caco2_permeability": { "type": "string", "enum": ["low", "moderate", "high"] },
+        "human_intestinal_absorption": { "type": "number", "minimum": 0, "maximum": 1 },
+        "oral_bioavailability_proxy": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    },
+    "distribution": {
+      "type": "object",
+      "required": ["bbb_permeant", "plasma_protein_binding_pct"],
+      "properties": {
+        "bbb_permeant": { "type": "boolean" },
+        "bbb_confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+        "plasma_protein_binding_pct": { "type": "number", "minimum": 0, "maximum": 100 }
+      }
+    },
+    "metabolism": {
+      "type": "object",
+      "required": ["cyp_inhibition_profile", "metabolic_stability"],
+      "properties": {
+        "cyp_inhibition_profile": {
+          "type": "object",
+          "properties": {
+            "cyp1a2": { "type": "boolean" },
+            "cyp2c9": { "type": "boolean" },
+            "cyp2c19": { "type": "boolean" },
+            "cyp2d6": { "type": "boolean" },
+            "cyp3a4": { "type": "boolean" }
+          }
+        },
+        "metabolic_stability": { "type": "string", "enum": ["low", "medium", "high"] }
+      }
+    },
+    "excretion": {
+      "type": "object",
+      "required": ["aqueous_solubility_logs", "solubility_class"],
+      "properties": {
+        "aqueous_solubility_logs": { "type": "number" },
+        "solubility_class": { "type": "string", "enum": ["insoluble", "poorly_soluble", "moderately_soluble", "soluble", "highly_soluble"] }
+      }
+    },
+    "toxicity": {
+      "type": "object",
+      "required": ["herg_liability", "ames_mutagenicity", "structural_alerts"],
+      "properties": {
+        "herg_liability": { "type": "string", "enum": ["low_risk", "medium_risk", "high_risk"] },
+        "ames_mutagenicity": { "type": "boolean" },
+        "structural_alerts": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "admet_traffic_light": {
+      "type": "string",
+      "enum": ["GREEN", "AMBER", "RED"],
+      "description": "Composite traffic-light rating based on overall ADMET safety and developability."
+    },
+    "evidence_type": {
+      "type": "string",
+      "const": "computational_prediction"
+    },
+    "disclaimer": {
+      "type": "string",
+      "description": "Explicit scientific disclaimer that all ADMET metrics are in silico predictions."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "additionalProperties": false
+}

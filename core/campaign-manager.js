@@ -23,6 +23,10 @@ import { PolicyEngine } from "./policy-engine.js";
 import { HypothesisEngine } from "./hypothesis-engine.js";
 import { BeliefUpdater } from "./belief-updater.js";
 import { ExperimentSelector } from "./experiment-selector.js";
+import { CandidateOptimizer } from "./candidate-optimizer.js";
+import { SelectivityEngine } from "./selectivity-engine.js";
+import { AdmetEngine } from "./admet-engine.js";
+import { ParetoFrontier } from "./pareto-frontier.js";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Campaign phases (in typical order, but the loop can revisit any phase)
@@ -35,6 +39,9 @@ const PHASE_ORDER = [
   "candidate_search",
   "candidate_filtering",
   "candidate_scoring",
+  "selectivity_screening",
+  "admet_profiling",
+  "candidate_optimization",
   "criticism",
   "awaiting_approval",
   "re_planning",
@@ -719,6 +726,10 @@ export class CampaignManager {
       compound_search: "candidate_search",
       molecular_filtering: "candidate_filtering",
       molecular_scoring: "candidate_scoring",
+      selectivity_screening: "selectivity_screening",
+      admet_profiling: "admet_profiling",
+      candidate_optimization: "candidate_optimization",
+      pareto_ranking: "candidate_scoring",
       scientific_critique: "criticism",
       contradiction_search: "criticism",
       hypothesis_generation: "planning",

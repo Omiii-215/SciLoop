@@ -10,7 +10,11 @@
     "./hypothesis-engine": "./hypothesis-engine.js",
     "./belief-updater": "./belief-updater.js",
     "./experiment-selector": "./experiment-selector.js",
-    "./policy-engine": "./policy-engine.js"
+    "./policy-engine": "./policy-engine.js",
+    "./pareto-frontier": "./pareto-frontier.js",
+    "./selectivity-engine": "./selectivity-engine.js",
+    "./admet-engine": "./admet-engine.js",
+    "./candidate-optimizer": "./candidate-optimizer.js"
   },
   "scripts": {
     "test": "node --test tests/",

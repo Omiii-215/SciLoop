@@ -152,6 +152,30 @@ Research Question
     └─────────┘   └─────────┘   └─────────┘
 ```
 
+### Phase 4: Search & Self-Improvement
+
+```
+┌────────────────────────────────────────────────────────────────────────┐
+│                   Generative Self-Improvement Loop                     │
+│                                                                        │
+│   ┌────────────────────┐          ┌───────────────────────────────┐   │
+│   │ Candidate Pool     │─────────►│ Multi-Objective Evaluation    │   │
+│   │ (ChEMBL / De Novo) │          │ - Primary Target Affinity     │   │
+│   └─────────▲──────────┘          │ - Selectivity vs Antitargets  │   │
+│             │                     │ - ADMET Profile & Traffic Lgt │   │
+│             │                     │ - Synthetic Accessibility     │   │
+│             │                     └───────────────┬───────────────┘   │
+│             │                                     │                   │
+│             │                                     ▼                   │
+│   ┌─────────┴──────────┐          ┌───────────────────────────────┐   │
+│   │ Mutation & Hops    │◄─────────│ Pareto Frontier (NSGA-II)     │   │
+│   │ - Bioisosteres     │ Progenitor│ - Fast Non-dominated Sorting  │   │
+│   │ - Scaffold Hops    │ Selection │ - Crowding Distance Diversity │   │
+│   │ - Solubilizers     │          │ - Trade-off Analysis          │   │
+│   └────────────────────┘          └───────────────────────────────┘   │
+└────────────────────────────────────────────────────────────────────────┘
+```
+
 ### Core Engines
 
 | Engine | Purpose |
@@ -163,6 +187,10 @@ Research Question
 | **PolicyEngine** | Enforces budgets, permissions, and scientific constraints |
 | **ArtifactStore** | Content-addressed storage for scientific artifacts |
 | **TaskQueue** | Redis-backed distributed task processing with retries |
+| **CandidateOptimizer** | Generative multi-round modification and self-improvement loop |
+| **ParetoFrontier** | Non-dominated sorting (NSGA-II), crowding distance, and trade-offs |
+| **SelectivityEngine** | Evaluates primary target vs antitarget panels (hERG, CYPs, kinases) |
+| **AdmetEngine** | Predicts ADMET profiles, ESOL solubility, and traffic-light safety |
 
 ## Tech Stack
 
@@ -244,7 +272,7 @@ argo submit infra/argo/research-campaign-workflow.yaml \
 | Phase 1 | Single-node Research | ✅ Complete |
 | Phase 2 | Closed-loop Agent | ✅ Complete |
 | Phase 3 | Distributed Execution | ✅ Complete |
-| Phase 4 | Search + Self-improvement | ⬜ Planned |
+| Phase 4 | Search + Self-improvement | ✅ Complete |
 | Phase 5 | Simulation | ⬜ Planned |
 | Phase 6 | Experimental Feedback | ⬜ Planned |
 | Phase 7 | General Scientific Engine | ⬜ Planned |

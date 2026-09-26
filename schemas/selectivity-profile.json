@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sciloop.org/schemas/selectivity-profile.json",
+  "title": "SelectivityProfile",
+  "description": "Schema for selectivity and off-target screening profiles comparing primary target binding vs antitargets.",
+  "type": "object",
+  "required": [
+    "id",
+    "candidate_id",
+    "primary_target",
+    "primary_activity_score",
+    "selectivity_index",
+    "antitarget_profiles",
+    "evidence_type",
+    "created_at"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "candidate_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "smiles": {
+      "type": "string"
+    },
+    "primary_target": {
+      "type": "object",
+      "required": ["gene_name", "target_id", "activity_score"],
+      "properties": {
+        "gene_name": { "type": "string" },
+        "target_id": { "type": "string" },
+        "activity_score": { "type": "number", "minimum": 0, "maximum": 1 },
+        "affinity_estimate_nm": { "type": "number", "minimum": 0 },
+        "metric_type": { "type": "string", "enum": ["pIC50", "Ki_proxy", "docking_proxy", "heuristic_activity"] }
+      }
+    },
+    "antitarget_profiles": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["gene_name", "category", "activity_score", "risk_level"],
+        "properties": {
+          "gene_name": { "type": "string" },
+          "target_id": { "type": "string" },
+          "category": {
+            "type": "string",
+            "enum": ["cardiac_safety", "metabolic_enzyme", "homolog_kinase", "nuclear_receptor", "cns_receptor"]
+          },
+          "activity_score": { "type": "number", "minimum": 0, "maximum": 1 },
+          "selectivity_ratio": { "type": "number", "description": "Primary affinity / Antitarget affinity (higher is more selective)" },
+          "risk_level": { "type": "string", "enum": ["low", "moderate", "high", "critical"] },
+          "alerts": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    },
+    "overall_selectivity_score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "Normalized composite selectivity score where 1.0 is completely selective against all antitargets."
+    },
+    "liability_flags": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "List of flagged toxic or off-target liabilities (e.g., 'hERG_inhibition_risk', 'CYP3A4_inhibition')."
+    },
+    "evidence_type": {
+      "type": "string",
+      "const": "computational_prediction"
+    },
+    "note": {
+      "type": "string",
+      "description": "Mandatory disclaimer stating results are computational predictions, not clinical assay values."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "additionalProperties": false
+}
